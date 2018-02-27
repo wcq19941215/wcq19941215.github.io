@@ -10,10 +10,10 @@
       </categories>
       <tags>
         <tag>保护模式</tag>
-        <tag>FAT12</tag>
-        <tag>Loader</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>FAT12</tag>
+        <tag>Loader</tag>
       </tags>
   </entry>
   <entry>
@@ -57,10 +57,10 @@
       </categories>
       <tags>
         <tag>保护模式</tag>
-        <tag>操作系统</tag>
-        <tag>于渊</tag>
         <tag>Bochs</tag>
         <tag>NASM</tag>
+        <tag>操作系统</tag>
+        <tag>于渊</tag>
       </tags>
   </entry>
   <entry>
@@ -90,10 +90,10 @@
       </categories>
       <tags>
         <tag>保护模式</tag>
-        <tag>操作系统</tag>
-        <tag>于渊</tag>
         <tag>Bochs</tag>
         <tag>NASM</tag>
+        <tag>操作系统</tag>
+        <tag>于渊</tag>
       </tags>
   </entry>
   <entry>
@@ -105,9 +105,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
+        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
-        <tag>NASM</tag>
         <tag>Bochs2.6.9虚拟机</tag>
         <tag>Bochs配置</tag>
       </tags>
@@ -121,9 +121,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
+        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
-        <tag>NASM</tag>
         <tag>虚拟机</tag>
       </tags>
   </entry>

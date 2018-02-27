@@ -13,13 +13,13 @@
         
         <tag>保护模式</tag>
          
-        <tag>FAT12</tag>
-         
-        <tag>Loader</tag>
-         
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
+         
+        <tag>FAT12</tag>
+         
+        <tag>Loader</tag>
          
          
            
@@ -104,13 +104,13 @@
         
         <tag>保护模式</tag>
          
-        <tag>操作系统</tag>
-         
-        <tag>于渊</tag>
-         
         <tag>Bochs</tag>
          
         <tag>NASM</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>于渊</tag>
          
          
            
@@ -167,13 +167,13 @@
         
         <tag>保护模式</tag>
          
-        <tag>操作系统</tag>
-         
-        <tag>于渊</tag>
-         
         <tag>Bochs</tag>
          
         <tag>NASM</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>于渊</tag>
          
          
            
@@ -197,11 +197,11 @@
         <title>《ORANGE's:一个操作系统实现》搭建工作环境（1）</title>
         <pubTime>2018-01-08T04:37:48.000Z</pubTime>
         
+        <tag>NASM</tag>
+         
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
-         
-        <tag>NASM</tag>
          
         <tag>Bochs2.6.9虚拟机</tag>
          
@@ -228,11 +228,11 @@
         <title>《ORANGE's:一个操作系统实现》准备工作（0）</title>
         <pubTime>2018-01-08T04:29:12.000Z</pubTime>
         
+        <tag>NASM</tag>
+         
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
-         
-        <tag>NASM</tag>
          
         <tag>虚拟机</tag>
          
