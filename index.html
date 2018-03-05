@@ -365,6 +365,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/ORANGE-s的学习/" itemprop="url" rel="index">
+                    <span itemprop="name">ORANGE's的学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -416,7 +449,30 @@
       
         
           
-            
+            <a id="more"></a>
+<h1 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h1><p>前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。</p>
+<h2 id="添加一个进程体"><a href="#添加一个进程体" class="headerlink" title="添加一个进程体"></a>添加一个进程体</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestB</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i =<span class="number">0x1000</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        disp_str(<span class="string">"B"</span>);</span><br><span class="line">        disp_int(i++);</span><br><span class="line">        disp_str(<span class="string">"."</span>);</span><br><span class="line">        delay(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="进程表初始化代码扩充"><a href="#进程表初始化代码扩充" class="headerlink" title="进程表初始化代码扩充"></a>进程表初始化代码扩充</h2><p>进程之间的区别真的不大。每一次循环的不同在于，从TASK结构中读取不同的任务入口地址\堆栈栈顶和进程名，然后赋给相应的进程表项。需要注意以下两点：</p>
+<ul>
+<li>由于堆栈是从高地址到低地址生长的，所以在给每一个进程分配堆栈空间的时候，也是从高地址往低地址进行。</li>
+<li>每一个进程都在GDT中分配一个描述符用来对应进程的LDT。<h2 id="LDT"><a href="#LDT" class="headerlink" title="LDT"></a>LDT</h2>因为每一个进程都会在GDT中对应一个LDT描述符。于是在for循环中，我们将每个进程表项中的成员p_proc-&gt;ldt_sel赋值。下面是初始化LDT：<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int i<span class="comment">;</span></span><br><span class="line">	PROCESS* p_proc	= proc_table<span class="comment">;</span></span><br><span class="line">	u16 selector_ldt = INDEX_LDT_FIRST &lt;&lt; <span class="number">3</span><span class="comment">;</span></span><br><span class="line">	for(i=<span class="number">0</span><span class="comment">;i&lt;NR_TASKS;i++)&#123;</span></span><br><span class="line">		init_descriptor(&amp;gdt[selector_ldt&gt;&gt;<span class="number">3</span>],</span><br><span class="line">				vir2phys(seg2phys(SELECTOR_KERNEL_DS),</span><br><span class="line">					proc_table[i].ldts),</span><br><span class="line">				LDT_SIZE * sizeof(DESCRIPTOR) - <span class="number">1</span>,</span><br><span class="line">				DA_LDT)<span class="comment">;</span></span><br><span class="line">		p_proc++<span class="comment">;</span></span><br><span class="line">		selector_ldt += <span class="number">1</span> &lt;&lt; <span class="number">3</span><span class="comment">;</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="修改中断程序"><a href="#修改中断程序" class="headerlink" title="修改中断程序"></a>修改中断程序</h2><p>一个进程由sleep状态变为run状态，无非是将esp指向进程表项的开始处，然后在执行lldt之后精力一系列pop指令恢复各个寄存器的值。一切信息都包含在进程表中，所以，要想恢复不同的进程，只需要将esp指向不同的进程表就可以了。<br>在离开内核栈的时候，执行如下语句：<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">esp</span>,[p_proc_ready]</span><br></pre></td></tr></table></figure></p>
+<p>全局变量p_proc_ready是指向进程表结构的指针，我们只需要在这一句执行之前把它赋予不同的值就可以了。<br>因为这部分即关于时钟中断，又关与进程调度。所以我们可以创建一个clock.c，也可以创建一个proc.c。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">PUBLIC <span class="keyword">void</span> <span class="title">clock_handler</span><span class="params">(<span class="keyword">int</span> irq)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    disp_str(<span class="string">"#"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>make之后，结果如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/H51aAdE348.png?imageslim" alt="mark"><br>接着进行进程切换：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">PUBLIC <span class="keyword">void</span> <span class="title">clock_handler</span><span class="params">(<span class="keyword">int</span> irq)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	disp_str(<span class="string">"#"</span>);</span><br><span class="line">	p_proc_ready++;</span><br><span class="line">	<span class="keyword">if</span> (p_proc_ready &gt;= proc_table + NR_TASKS)</span><br><span class="line">		p_proc_ready = proc_table;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每一次我们让p_proc_ready指向进程表中的下一个表项，如果切换前已经到达进程表结尾则回到第一个表项。然后再make：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/gLFAfE6Cji.png?imageslim" alt="mark"><br>可以看到A和B交替出现。这说明第二个进程运行成。</p>
+<h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p>系统调用和API类似，当应用程序很多事做不了的时候，只能交给操作系统来做。所以一个事情，可能应用程序做了一部分，操作系统做一部分，这就涉及到特权级的问题了。<br>下面是本操作系统的运行过程：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/hl0CfKkie2.png?imageslim" alt="mark"></p>
+<h2 id="实现一个简单的系统调用"><a href="#实现一个简单的系统调用" class="headerlink" title="实现一个简单的系统调用"></a>实现一个简单的系统调用</h2><p>我们通过实现get_tick()得到当前总共发生多少次时钟中断。设置一个全局变量ticks，每次发生一次时钟中断，它就加1.进程可以随时通过get_tick()这个系统调用来得到这个值。代码如下：<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%include</span> <span class="string">"sconst.inc"</span></span><br><span class="line"></span><br><span class="line">_NR_get_ticks       <span class="built_in">equ</span> <span class="number">0</span> <span class="comment">; 要跟 global.c 中 sys_call_table 的定义相对应！</span></span><br><span class="line">INT_VECTOR_SYS_CALL <span class="built_in">equ</span> <span class="number">0x90</span></span><br><span class="line"></span><br><span class="line"><span class="meta">global</span>	get_ticks <span class="comment">; 导出符号</span></span><br><span class="line"></span><br><span class="line"><span class="meta">bits</span> <span class="number">32</span></span><br><span class="line">[<span class="meta">section</span> .text]</span><br><span class="line"></span><br><span class="line"><span class="symbol">get_ticks:</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">eax</span>, _NR_get_ticks</span><br><span class="line">	<span class="keyword">int</span>	INT_VECTOR_SYS_CALL</span><br><span class="line">	<span class="keyword">ret</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="get-ticks的应用"><a href="#get-ticks的应用" class="headerlink" title="get_ticks的应用"></a>get_ticks的应用</h2><p>因为时钟中断发生的时间间隔是一定的，如果我们知道这个实践间隔，就可以用get_ticks函数来写一个判断时间的函数，进而代替delay()</p>
+<h3 id="8253-8254-PIT"><a href="#8253-8254-PIT" class="headerlink" title="8253/8254 PIT"></a>8253/8254 PIT</h3><p>中断的发生实际上是由一个被称为PIT（Programmable Interval Timer）的芯片来触发的。在AT以及以后又Intel 8253换为Intel 8254。<br>8253有三个计数器：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/Kl8lbk2jEg.png?imageslim" alt="mark"><br>从上可知，中断实际是由8253的Counter0产生的。<br>计数器有一个输入频率，在PC上是1193180Hz，在每一个时钟周期，计数器值会减1，当减到0就会触发一个输出。由于计数器是16位的，所以最大值是65535，因此，默认的时钟中断的发生频率是1193180/65536~18.2Hz。<br>我们可以通过编程来控制8253.比如，想让系统每10ms产生一次中断，也就是让输出频率为100Hz，那么需要为计数器赋值为1193180/100~11932.<br>因为控制8253是通过端口的写操作完成的。如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/a83d7E9Dki.png?imageslim" alt="mark"><br>以下是8253模式控制寄存器<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/7I9a6el9KE.png?imageslim" alt="mark"><br>也就是端口43h写入寄存器的格式。下面是计数器模式位：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/k1EG6k1AfE.png?imageslim" alt="mark"><br>下面是读/写/锁位:<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/4l3l5Jl7kk.png?imageslim" alt="mark"><br>下面是计数器选择位：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/1IBI0KlEgI.png?imageslim" alt="mark"><br>make一下，运行结果如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/66klAkE9cA.png?imageslim" alt="mark"></p>
+<h1 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h1><h2 id="避免对称–进程的节奏感"><a href="#避免对称–进程的节奏感" class="headerlink" title="避免对称–进程的节奏感"></a>避免对称–进程的节奏感</h2><p>前面的进程延迟相同，现在将其改变下A、B、C三个的延迟分别为300、900、1500ms，运行结果如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/6L3b4dhc45.png?imageslim" alt="mark"><br>从这个我们可以想到，通过延迟的不同设置不同的优先级。<br>通过“轻重缓急”反应在时间上，来表达优先级调度，最重要的事情应该被赋予更高的优先级，应该给予更多的时间。<br>我们给每一个进程都添加一个变量，在一段时间 的开头，这个变量的值又大又下，进程获得一个运行周期，这个变量就减1，当减到0，此进程就不再获得执行的机会，指导所有进程都为0。<br>由于每一次进程调度的时候只有某一个进程的ticks会减少1，所以总共调度的次数应该是3个进程的ticks之和（150+50+30）=230。所以:</p>
+<ul>
+<li>进程A执行循环的次数为：（100+20x2+30x3）/20=230/20=11.5次</li>
+<li>进程B执行循环的次数为：（0+20x2+30x3）/20=230/20=6.5次</li>
+<li>进程C执行循环的次数为：（0+0x2+30x3）/20=230/20=4.5次<br>将各个进程的延迟时间改为10m后，make一下，运行如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180305/GiBeb7Lcef.png?imageslim" alt="mark"></li>
+</ul>
+
           
         
       
@@ -2230,7 +2286,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
