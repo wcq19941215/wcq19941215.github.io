@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="于渊,系统调用,显示器,TTY," />
 
 
 
@@ -95,17 +95,33 @@
 
 
 
-<meta name="description" content="生命不息，学习不停">
+<meta name="description" content="显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的">
+<meta name="keywords" content="于渊,系统调用,显示器,TTY">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》输入输出系统（5-2）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/03/06/《ORANGE-s-一个操作系统实现》输入输出系统（5-2）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="生命不息，学习不停">
+<meta property="og:description" content="显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-06T02:11:03.826Z">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/G5jE67714i.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/hLcie7G3B1.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/5dE3e6j1eh.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/3CbB2AdK3d.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/CIjLKdgCL4.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/BA0mclK9Af.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/eA02LFamg7.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/IgF8dC2JKI.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/AJm32hJgLF.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/b1mfg6HcfA.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/FkeaLFCf41.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/jfAk5EdG4E.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/K034Hb39cd.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/GgE795K4E4.png?imageslim">
+<meta property="og:updated_time" content="2018-03-06T13:03:06.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》输入输出系统（5-2）">
-<meta name="twitter:description" content="生命不息，学习不停">
+<meta name="twitter:description" content="显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的">
+<meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/G5jE67714i.png?imageslim">
 
 
 
@@ -363,6 +379,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/ORANGE-s的学习/" itemprop="url" rel="index">
+                    <span itemprop="name">ORANGE's的学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -412,7 +461,31 @@
       
 
       
-        
+        <a id="more"></a>
+<h1 id="显示器"><a href="#显示器" class="headerlink" title="显示器"></a>显示器</h1><h2 id="初识TTY"><a href="#初识TTY" class="headerlink" title="初识TTY"></a>初识TTY</h2><p>TTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/G5jE67714i.png?imageslim" alt="mark"><br>虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。<br>既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的瞬间，让屏幕显示显存中某个位置的内容。<br>屏幕上每一个字符对应的2字节的定义如下所示：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/hLcie7G3B1.png?imageslim" alt="mark"><br>可以看到，第字节表示的是字符本身，高字节用来定义字符的颜色。<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/5dE3e6j1eh.png?imageslim" alt="mark"></p>
+<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p>VGA视频子系统的寄存器如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/3CbB2AdK3d.png?imageslim" alt="mark"><br>这么多的寄存器，只有一个端口0X3D5，然后配合Address Register。下图中每一个寄存器都对应一个索引值，当想要访问其中一个的时候，只需要先向Adress Register写对应的索引值，然后在通过端口0x3D5进程的操作就是针对索引值对应的寄存器了。<br>![mark](<a href="http://p29pmm8g4.bkt.clouddn.com/blog/180306/6aKGfjHmCk" target="_blank" rel="noopener">http://p29pmm8g4.bkt.clouddn.com/blog/180306/6aKGfjHmCk</a><br>下面我们让光标跟随我们敲入的字符，设置光标位置：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">disable_int()<span class="comment">;</span></span><br><span class="line">		out_byte(<span class="name">CRTC_ADDR_REG</span>, CURSOR_H)<span class="comment">;</span></span><br><span class="line">		out_byte(<span class="name">CRTC_DATA_REG</span>, ((<span class="name">disp_pos/2</span>)&gt;&gt;8)&amp;0xFF)<span class="comment">;</span></span><br><span class="line">		out_byte(<span class="name">CRTC_ADDR_REG</span>, CURSOR_L)<span class="comment">;</span></span><br><span class="line">		out_byte(<span class="name">CRTC_DATA_REG</span>, (<span class="name">disp_pos/2</span>)&amp;0xFF)<span class="comment">;</span></span><br><span class="line">		enable_int()<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>make运行结果如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/CIjLKdgCL4.png?imageslim" alt="mark"><br>接着，我们通过设置Start Adressb High Register和Start Adress Low Register来重新设置显示开始地址，从而实现滚屏的功能。当我们按下shift+上箭头时，则卷动屏幕向上15行<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/BA0mclK9Af.png?imageslim" alt="mark"></p>
+<h1 id="TTY任务"><a href="#TTY任务" class="headerlink" title="TTY任务"></a>TTY任务</h1><p>在TTY任务中执行一个循环，这个循环将轮询每一个TTY，处理它的事件，包括从键盘缓冲区读取数据、显示字符等。它的运行方式如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/eA02LFamg7.png?imageslim" alt="mark"><br>其实轮询到每一个TTY时，不外乎做两件事：</p>
+<ul>
+<li>处理输入：查看是不是当前TTY，如果是则从键盘缓冲区读取数据。</li>
+<li>处理输出：如果有要显示的内容则显示它。<br>下面要做的TTY任务不再简单，主要表现为：</li>
+<li>每一个TTY都应该有自己的读和写的动作。所以在keyboard_read（）内部，函数需要了解自己是被哪一个TTY调用。我们通过为函数传入一个参数来做到这一点，这个参数是指向当前TTY的指针。</li>
+<li>为了让输入输出分离，被keyboard_read（）调用的in_process()不应该再直接回显示符，而应该将回显的任务交给TTY来完成，这样我们就需要为每个TTY建立一块缓冲区，用以放置将被回显的字符。</li>
+<li>每个TTY回显字符时操作的console是不同的，所以每个TTY都应该有个成员来记载其对应的console信息。<h2 id="TTY任务框架的搭建"><a href="#TTY任务框架的搭建" class="headerlink" title="TTY任务框架的搭建"></a>TTY任务框架的搭建</h2>TTY结构如下：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TTY_IN_BYTES	256	<span class="comment">/* tty input queue size */</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s_console</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* TTY */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_tty</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	u32	in_buf[TTY_IN_BYTES];	<span class="comment">/* TTY 输入缓冲区 */</span></span><br><span class="line">	u32*	p_inbuf_head;		<span class="comment">/* 指向缓冲区中下一个空闲位置 */</span></span><br><span class="line">	u32*	p_inbuf_tail;		<span class="comment">/* 指向键盘任务应处理的键值 */</span></span><br><span class="line">	<span class="keyword">int</span>	inbuf_count;		<span class="comment">/* 缓冲区中已经填充了多少 */</span></span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">s_console</span> *	<span class="title">p_console</span>;</span></span><br><span class="line">&#125;TTY;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>CONSOLE结构如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_console</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span>	current_start_addr;	<span class="comment">/* 当前显示到了什么位置	  */</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span>	original_addr;		<span class="comment">/* 当前控制台对应显存位置 */</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span>	v_mem_limit;		<span class="comment">/* 当前控制台占的显存大小 */</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span>	cursor;			<span class="comment">/* 当前光标位置 */</span></span><br><span class="line">&#125;CONSOLE;</span><br></pre></td></tr></table></figure></p>
+<p>整个程序的流程如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/IgF8dC2JKI.png?imageslim" alt="mark"><br>在task_tty()中，通过循环来处理每一个TTY的读和写操作，读写操作都放在了tty_do_read()和tty_do_write()两个函数中，这样就让taske_tty()很简洁，而且逻辑清晰。读操作会调用keyboard_read()，当然此时已经多了一个参数；写操作会调用out_char()，它会将字符写入指定的CONSOLE。，当TTY任务开始运行时，所有TTY都将被初始化，并且全局变量nr_current_console会被赋值为0.然后循环开始并一直进行下去。对于每一个TTY，首先执行tty_do_read（），它将调用kerboard_read()并将读入的字符交给函数in_process（）来处理，如果是需要输出的字符，会被in_process（）放入当前接受处理的TTY的缓冲区中。然后tty_do_write()会接着执行，如果缓冲区中有数据，就被送入out_char显示出来。</p>
+<h2 id="多控制台"><a href="#多控制台" class="headerlink" title="多控制台"></a>多控制台</h2><p>下面是多控制台示意图：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/AJm32hJgLF.png?imageslim" alt="mark"><br>表示了某时刻显存的使用情况。其中灰色框表示当前屏幕，黑色小方格显示显存已经写入的字符。<br>运行结果如下:<br>在控制台0按下数次shift+箭头上<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/b1mfg6HcfA.png?imageslim" alt="mark"></p>
+<h2 id="完善键盘处理"><a href="#完善键盘处理" class="headerlink" title="完善键盘处理"></a>完善键盘处理</h2><h3 id="回车键和退格键"><a href="#回车键和退格键" class="headerlink" title="回车键和退格键"></a>回车键和退格键</h3><p>当敲击回车键和退格键时，我们王TTY缓冲区中写入“\n”和“\b”，然后在out_char中做出相应的处理，如下：<br><figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">PUBLIC</span> void in_process(TTY* p_tty, u32 key)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">char</span> output[<span class="number">2</span>] = &#123;<span class="string">'\0'</span>, <span class="string">'\0'</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!(key &amp; FLAG_EXT)) &#123;</span><br><span class="line">		put_key(p_tty, key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> raw_code = key &amp; MASK_RAW;</span><br><span class="line">                <span class="keyword">switch</span>(raw_code) &#123;</span><br><span class="line">                <span class="keyword">case</span> ENTER:</span><br><span class="line">			put_key(p_tty, <span class="string">'\n'</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> BACKSPACE:</span><br><span class="line">			put_key(p_tty, <span class="string">'\b'</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">			</span><br><span class="line">。。。。。。</span><br><span class="line"><span class="keyword">PRIVATE</span> void put_key(TTY* p_tty, u32 key)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (p_tty-&gt;inbuf_count &lt; TTY_IN_BYTES) &#123;</span><br><span class="line">		*(p_tty-&gt;p_inbuf_head) = key;</span><br><span class="line">		p_tty-&gt;p_inbuf_head++;</span><br><span class="line">		<span class="keyword">if</span> (p_tty-&gt;p_inbuf_head == p_tty-&gt;in_buf + TTY_IN_BYTES) &#123;</span><br><span class="line">			p_tty-&gt;p_inbuf_head = p_tty-&gt;in_buf;</span><br><span class="line">		&#125;</span><br><span class="line">		p_tty-&gt;inbuf_count++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后修改out_char：<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">PUBLIC void out_char(CONSOLE* p_con, char ch)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="title">u8</span>* p_vmem = (u8*)(V_MEM_BASE + p_con-&gt;</span>cursor * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	switch(ch) &#123;</span><br><span class="line">	case <span class="string">'\n'</span>:</span><br><span class="line">		<span class="function"><span class="title">if</span> (p_con-&gt;</span><span class="function"><span class="title">cursor</span> &lt; p_con-&gt;</span>original_addr +</span><br><span class="line">		    <span class="function"><span class="title">p_con</span>-&gt;</span>v_mem_limit - SCREEN_WIDTH) &#123;</span><br><span class="line">			<span class="function"><span class="title">p_con</span>-&gt;</span><span class="function"><span class="title">cursor</span> = p_con-&gt;</span>original_addr + SCREEN_WIDTH * </span><br><span class="line">				((<span class="function"><span class="title">p_con</span>-&gt;</span><span class="function"><span class="title">cursor</span> - p_con-&gt;</span>original_addr) /</span><br><span class="line">				 SCREEN_WIDTH + <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		break;</span><br><span class="line">	case <span class="string">'\b'</span>:</span><br><span class="line">		<span class="function"><span class="title">if</span> (p_con-&gt;</span><span class="function"><span class="title">cursor</span> &gt; p_con-&gt;</span>original_addr) &#123;</span><br><span class="line">			<span class="function"><span class="title">p_con</span>-&gt;</span>cursor--;</span><br><span class="line">			*(p_vmem-<span class="number">2</span>) = <span class="string">' '</span>;</span><br><span class="line">			*(p_vmem-<span class="number">1</span>) = DEFAULT_CHAR_COLOR;</span><br><span class="line">		&#125;</span><br><span class="line">		break;</span><br><span class="line">	default:</span><br><span class="line">		<span class="function"><span class="title">if</span> (p_con-&gt;</span>cursor &lt;</span><br><span class="line">		    <span class="function"><span class="title">p_con</span>-&gt;</span><span class="function"><span class="title">original_addr</span> + p_con-&gt;</span>v_mem_limit - <span class="number">1</span>) &#123;</span><br><span class="line">			*p_vmem++ = ch;</span><br><span class="line">			*p_vmem++ = DEFAULT_CHAR_COLOR;</span><br><span class="line">			<span class="function"><span class="title">p_con</span>-&gt;</span>cursor++;</span><br><span class="line">		&#125;</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="title">while</span> (p_con-&gt;</span><span class="function"><span class="title">cursor</span> &gt;= p_con-&gt;</span>current_start_addr + SCREEN_SIZE) &#123;</span><br><span class="line">		scroll_screen(p_con, SCR_DN);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	flush(p_con);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*======================================================================*</span></span><br><span class="line"><span class="comment">                           flush</span></span><br><span class="line"><span class="comment">*======================================================================*/</span></span><br><span class="line">PRIVATE void flush(CONSOLE* p_con)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="function"><span class="title">set_cursor</span>(p_con-&gt;</span>cursor);</span><br><span class="line">        <span class="function"><span class="title">set_video_start_addr</span>(p_con-&gt;</span>current_start_addr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到回车键直接把光标挪到了下一行的开头，而退格键则把光标挪到上一个字符的位置，并在那里写一个空格，以便清除原来的字符。<br>由于不断的回车会让光标快速的移动到屏幕的底端。所以在这里还要判断光标是否已经移出了屏幕，如果是的话将会触发屏幕滚动。<br>另外，输出的任何类型的字符时，都做了边界检验，以防止影响到别的控制台，甚至试图写到显存之外的内存。<br>运行结果如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/FkeaLFCf41.png?imageslim" alt="mark"></p>
+<h1 id="区分任务和用户进程"><a href="#区分任务和用户进程" class="headerlink" title="区分任务和用户进程"></a>区分任务和用户进程</h1><p>前面的TTY我们称之为任务，A、B、C则为用户进程。在具体的实现上，让用户进程运行在ring3，任务继续留在ring1。如下图：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/jfAk5EdG4E.png?imageslim" alt="mark"></p>
+<h1 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h1><h2 id="为进程指定TTY"><a href="#为进程指定TTY" class="headerlink" title="为进程指定TTY"></a>为进程指定TTY</h2><p>当某个进程调用printf时，操作系统必须知道往哪个控制台输出才行。而当系统调用发生,ring3跳入ring0时，系统只能知道当前系统调用是由哪个进程触发的。所以我们必须为每个进程指定一个与之相对应的TTY，这可以通过在进程表中增加一个成员来实现。</p>
+<h2 id="printf（）的实现"><a href="#printf（）的实现" class="headerlink" title="printf（）的实现"></a>printf（）的实现</h2><p>printf()的实现并不简单，首先是它的参数个数和类型都可变，而且其表示格式的参数形式多样，在printf()中。都要加以识别。<br>下面我们先实现printf（）只支持%X一种格式。如下：<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> printf(const <span class="built_in">char</span> *<span class="keyword">fmt</span>,...)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span> i;</span><br><span class="line">    <span class="built_in">char</span> buf[<span class="number">256</span>];</span><br><span class="line">    va_list arg=(va_list)((<span class="built_in">char</span>*)(&amp;<span class="keyword">fmt</span>)+<span class="number">4</span>);</span><br><span class="line">    i=vsprintf(buf,<span class="keyword">fmt</span>,arg);</span><br><span class="line">    <span class="built_in">write</span>(buf,i);</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p>增加一个系统调用的过程如下所示：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/K034Hb39cd.png?imageslim" alt="mark"></p>
+<h2 id="使用print分（）"><a href="#使用print分（）" class="headerlink" title="使用print分（）"></a>使用print分（）</h2><p>make运行结果如下图：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/GgE795K4E4.png?imageslim" alt="mark"></p>
+
       
     </div>
     
@@ -455,6 +528,18 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/于渊/" rel="tag"># 于渊</a>
+          
+            <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
+          
+            <a href="/tags/显示器/" rel="tag"># 显示器</a>
+          
+            <a href="/tags/TTY/" rel="tag"># TTY</a>
+          
+        </div>
       
 
       
@@ -556,8 +641,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -598,7 +692,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -649,6 +743,22 @@ var jiathis_config={
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#显示器"><span class="nav-number">1.</span> <span class="nav-text">显示器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初识TTY"><span class="nav-number">1.1.</span> <span class="nav-text">初识TTY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器"><span class="nav-number">1.2.</span> <span class="nav-text">寄存器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TTY任务"><span class="nav-number">2.</span> <span class="nav-text">TTY任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TTY任务框架的搭建"><span class="nav-number">2.1.</span> <span class="nav-text">TTY任务框架的搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多控制台"><span class="nav-number">2.2.</span> <span class="nav-text">多控制台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完善键盘处理"><span class="nav-number">2.3.</span> <span class="nav-text">完善键盘处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回车键和退格键"><span class="nav-number">2.3.1.</span> <span class="nav-text">回车键和退格键</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区分任务和用户进程"><span class="nav-number">3.</span> <span class="nav-text">区分任务和用户进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#printf"><span class="nav-number">4.</span> <span class="nav-text">printf</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为进程指定TTY"><span class="nav-number">4.1.</span> <span class="nav-text">为进程指定TTY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#printf（）的实现"><span class="nav-number">4.2.</span> <span class="nav-text">printf（）的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用"><span class="nav-number">4.3.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用print分（）"><span class="nav-number">4.4.</span> <span class="nav-text">使用print分（）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -3,12 +3,32 @@
   <entry>
     <title><![CDATA[《ORANGE-s-一个操作系统实现》输入输出系统（5-2）]]></title>
     <url>%2F2018%2F03%2F06%2F%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-2%EF%BC%89%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的瞬间，让屏幕显示显存中某个位置的内容。屏幕上每一个字符对应的2字节的定义如下所示：可以看到，第字节表示的是字符本身，高字节用来定义字符的颜色。 寄存器VGA视频子系统的寄存器如下：这么多的寄存器，只有一个端口0X3D5，然后配合Address Register。下图中每一个寄存器都对应一个索引值，当想要访问其中一个的时候，只需要先向Adress Register写对应的索引值，然后在通过端口0x3D5进程的操作就是针对索引值对应的寄存器了。![mark](http://p29pmm8g4.bkt.clouddn.com/blog/180306/6aKGfjHmCk下面我们让光标跟随我们敲入的字符，设置光标位置：123456disable_int(); out_byte(CRTC_ADDR_REG, CURSOR_H); out_byte(CRTC_DATA_REG, ((disp_pos/2)&gt;&gt;8)&amp;0xFF); out_byte(CRTC_ADDR_REG, CURSOR_L); out_byte(CRTC_DATA_REG, (disp_pos/2)&amp;0xFF); enable_int(); make运行结果如下：接着，我们通过设置Start Adressb High Register和Start Adress Low Register来重新设置显示开始地址，从而实现滚屏的功能。当我们按下shift+上箭头时，则卷动屏幕向上15行 TTY任务在TTY任务中执行一个循环，这个循环将轮询每一个TTY，处理它的事件，包括从键盘缓冲区读取数据、显示字符等。它的运行方式如下：其实轮询到每一个TTY时，不外乎做两件事： 处理输入：查看是不是当前TTY，如果是则从键盘缓冲区读取数据。 处理输出：如果有要显示的内容则显示它。下面要做的TTY任务不再简单，主要表现为： 每一个TTY都应该有自己的读和写的动作。所以在keyboard_read（）内部，函数需要了解自己是被哪一个TTY调用。我们通过为函数传入一个参数来做到这一点，这个参数是指向当前TTY的指针。 为了让输入输出分离，被keyboard_read（）调用的in_process()不应该再直接回显示符，而应该将回显的任务交给TTY来完成，这样我们就需要为每个TTY建立一块缓冲区，用以放置将被回显的字符。 每个TTY回显字符时操作的console是不同的，所以每个TTY都应该有个成员来记载其对应的console信息。TTY任务框架的搭建TTY结构如下：1234567891011121314#define TTY_IN_BYTES 256 /* tty input queue size */struct s_console;/* TTY */typedef struct s_tty&#123; u32 in_buf[TTY_IN_BYTES]; /* TTY 输入缓冲区 */ u32* p_inbuf_head; /* 指向缓冲区中下一个空闲位置 */ u32* p_inbuf_tail; /* 指向键盘任务应处理的键值 */ int inbuf_count; /* 缓冲区中已经填充了多少 */ struct s_console * p_console;&#125;TTY; CONSOLE结构如下：1234567typedef struct s_console&#123; unsigned int current_start_addr; /* 当前显示到了什么位置 */ unsigned int original_addr; /* 当前控制台对应显存位置 */ unsigned int v_mem_limit; /* 当前控制台占的显存大小 */ unsigned int cursor; /* 当前光标位置 */&#125;CONSOLE; 整个程序的流程如下：在task_tty()中，通过循环来处理每一个TTY的读和写操作，读写操作都放在了tty_do_read()和tty_do_write()两个函数中，这样就让taske_tty()很简洁，而且逻辑清晰。读操作会调用keyboard_read()，当然此时已经多了一个参数；写操作会调用out_char()，它会将字符写入指定的CONSOLE。，当TTY任务开始运行时，所有TTY都将被初始化，并且全局变量nr_current_console会被赋值为0.然后循环开始并一直进行下去。对于每一个TTY，首先执行tty_do_read（），它将调用kerboard_read()并将读入的字符交给函数in_process（）来处理，如果是需要输出的字符，会被in_process（）放入当前接受处理的TTY的缓冲区中。然后tty_do_write()会接着执行，如果缓冲区中有数据，就被送入out_char显示出来。 多控制台下面是多控制台示意图：表示了某时刻显存的使用情况。其中灰色框表示当前屏幕，黑色小方格显示显存已经写入的字符。运行结果如下:在控制台0按下数次shift+箭头上 完善键盘处理回车键和退格键当敲击回车键和退格键时，我们王TTY缓冲区中写入“\n”和“\b”，然后在out_char中做出相应的处理，如下：1234567891011121314151617181920212223242526272829PUBLIC void in_process(TTY* p_tty, u32 key)&#123; char output[2] = &#123;'\0', '\0'&#125;; if (!(key &amp; FLAG_EXT)) &#123; put_key(p_tty, key); &#125; else &#123; int raw_code = key &amp; MASK_RAW; switch(raw_code) &#123; case ENTER: put_key(p_tty, '\n'); break; case BACKSPACE: put_key(p_tty, '\b'); break; 。。。。。。PRIVATE void put_key(TTY* p_tty, u32 key)&#123; if (p_tty-&gt;inbuf_count &lt; TTY_IN_BYTES) &#123; *(p_tty-&gt;p_inbuf_head) = key; p_tty-&gt;p_inbuf_head++; if (p_tty-&gt;p_inbuf_head == p_tty-&gt;in_buf + TTY_IN_BYTES) &#123; p_tty-&gt;p_inbuf_head = p_tty-&gt;in_buf; &#125; p_tty-&gt;inbuf_count++; &#125;&#125; 然后修改out_char：123456789101112131415161718192021222324252627282930313233343536373839404142434445PUBLIC void out_char(CONSOLE* p_con, char ch)&#123; u8* p_vmem = (u8*)(V_MEM_BASE + p_con-&gt;cursor * 2); switch(ch) &#123; case '\n': if (p_con-&gt;cursor &lt; p_con-&gt;original_addr + p_con-&gt;v_mem_limit - SCREEN_WIDTH) &#123; p_con-&gt;cursor = p_con-&gt;original_addr + SCREEN_WIDTH * ((p_con-&gt;cursor - p_con-&gt;original_addr) / SCREEN_WIDTH + 1); &#125; break; case '\b': if (p_con-&gt;cursor &gt; p_con-&gt;original_addr) &#123; p_con-&gt;cursor--; *(p_vmem-2) = ' '; *(p_vmem-1) = DEFAULT_CHAR_COLOR; &#125; break; default: if (p_con-&gt;cursor &lt; p_con-&gt;original_addr + p_con-&gt;v_mem_limit - 1) &#123; *p_vmem++ = ch; *p_vmem++ = DEFAULT_CHAR_COLOR; p_con-&gt;cursor++; &#125; break; &#125; while (p_con-&gt;cursor &gt;= p_con-&gt;current_start_addr + SCREEN_SIZE) &#123; scroll_screen(p_con, SCR_DN); &#125; flush(p_con);&#125;/*======================================================================* flush*======================================================================*/PRIVATE void flush(CONSOLE* p_con)&#123; set_cursor(p_con-&gt;cursor); set_video_start_addr(p_con-&gt;current_start_addr);&#125; 可以看到回车键直接把光标挪到了下一行的开头，而退格键则把光标挪到上一个字符的位置，并在那里写一个空格，以便清除原来的字符。由于不断的回车会让光标快速的移动到屏幕的底端。所以在这里还要判断光标是否已经移出了屏幕，如果是的话将会触发屏幕滚动。另外，输出的任何类型的字符时，都做了边界检验，以防止影响到别的控制台，甚至试图写到显存之外的内存。运行结果如下： 区分任务和用户进程前面的TTY我们称之为任务，A、B、C则为用户进程。在具体的实现上，让用户进程运行在ring3，任务继续留在ring1。如下图： printf为进程指定TTY当某个进程调用printf时，操作系统必须知道往哪个控制台输出才行。而当系统调用发生,ring3跳入ring0时，系统只能知道当前系统调用是由哪个进程触发的。所以我们必须为每个进程指定一个与之相对应的TTY，这可以通过在进程表中增加一个成员来实现。 printf（）的实现printf()的实现并不简单，首先是它的参数个数和类型都可变，而且其表示格式的参数形式多样，在printf()中。都要加以识别。下面我们先实现printf（）只支持%X一种格式。如下：123456789int printf(const char *fmt,...)&#123; int i; char buf[256]; va_list arg=(va_list)((char*)(&amp;fmt)+4); i=vsprintf(buf,fmt,arg); write(buf,i); return i;&#125; 系统调用增加一个系统调用的过程如下所示： 使用print分（）make运行结果如下图：]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>ORANGE&#39;s的学习</category>
+      </categories>
+      <tags>
+        <tag>于渊</tag>
+        <tag>系统调用</tag>
+        <tag>显示器</tag>
+        <tag>TTY</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[《ORANGE-s-一个操作系统实现》输入输出系统（5-1）]]></title>
     <url>%2F2018%2F03%2F06%2F%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-1%EF%BC%89%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[键盘操作系统需要交互，首先就是键盘 从中断开始：键盘的初体验因为8259A的IRQ1就是键盘，现在我们写一个键盘的处理程序：1234PUBLIC void keyboard_handler(int irq)&#123; disp_str("*");&#125; 这个结果就是每按一次键盘，就会打印一个星号。然后添加中断处理程序，并打开键盘中断：12345PUBLIC void init_keyboard()&#123; put_irq_handler(KEYBOARD_IRD,keyboard_handler);/*设定键盘中断程序*/ enable_irq(KEYBOARD_IRQ);/*开键盘中断*/&#125; 然后在proto.h中声明init_keyboard()并调用它。make之后，运行结果如下。然后问题出现了，按了一次以后就没法再按出星号了。 AT、PS/2键盘下图左边是PS/2键盘的接口，右边是AT键盘的接口，现在主流的都是USB的了。 键盘敲击的过程在键盘中存在一个叫做键盘编码器的芯片，它通常是Intel 8048以及兼容芯片，作用是监视键盘的输入，并把适当的数据传送给计算机。另外在计算机主板上还有一个键盘控制器，用来接受和解码来自键盘的数据，并与8259A以及软件等进行通信。如下图：敲击键盘有两个方面的含义：动作和内容。动作有三类:按下、保持按下以及放开；内容则是键盘上的不同的键.8048既要反应“哪个”安检产生动作，还要反映产生了什么内容。敲击键盘产生的编码被称为扫描码，当一个键被按下或者保持按下时，将会产生Make Code，当弹起时，产生Break Code。当8048检测到一个键的动作，会把相应的扫描码发送给8042，8042会把它转换成相应的扫描码，并将其放置在缓冲区，然后8042告诉8259A产生中断（IRQ1）。如果此时键盘又有新的键被按下，8042将不再接受，一直到缓冲区被清空。所以我们只能按下一次就没有反应了，因为缓冲区的内容没有被取走。为了了解如何从缓冲区中读取扫描码，我们要学习8042：对于输入和输出缓冲区，可以用in和out指令来进行相应的读取操作。如下，在keyboard_handler中添加：1in_byte(0x60); 运行结果如下：我们发现结果是16进制数，所以我们用如下表格建立对应关系，即可看到想要的结果了： 用数组表示扫描码扫描码是一些数字，我们建立一个数组，以扫描码为下标，对应的元素就是相应的字符。数组是3个值一组，三个值是单独按某键、Shift+某键和有0xE0前缀扫描码对应的字符。Esc、Enter被定义成不冲突的宏即可：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133u32 keymap[NR_SCAN_CODES * MAP_COLS] = &#123;/* scan-code !Shift Shift E0 XX *//* ==================================================================== *//* 0x00 - none */ 0, 0, 0,/* 0x01 - ESC */ ESC, ESC, 0,/* 0x02 - '1' */ '1', '!', 0,/* 0x03 - '2' */ '2', '@', 0,/* 0x04 - '3' */ '3', '#', 0,/* 0x05 - '4' */ '4', '$', 0,/* 0x06 - '5' */ '5', '%', 0,/* 0x07 - '6' */ '6', '^', 0,/* 0x08 - '7' */ '7', '&amp;', 0,/* 0x09 - '8' */ '8', '*', 0,/* 0x0A - '9' */ '9', '(', 0,/* 0x0B - '0' */ '0', ')', 0,/* 0x0C - '-' */ '-', '_', 0,/* 0x0D - '=' */ '=', '+', 0,/* 0x0E - BS */ BACKSPACE, BACKSPACE, 0,/* 0x0F - TAB */ TAB, TAB, 0,/* 0x10 - 'q' */ 'q', 'Q', 0,/* 0x11 - 'w' */ 'w', 'W', 0,/* 0x12 - 'e' */ 'e', 'E', 0,/* 0x13 - 'r' */ 'r', 'R', 0,/* 0x14 - 't' */ 't', 'T', 0,/* 0x15 - 'y' */ 'y', 'Y', 0,/* 0x16 - 'u' */ 'u', 'U', 0,/* 0x17 - 'i' */ 'i', 'I', 0,/* 0x18 - 'o' */ 'o', 'O', 0,/* 0x19 - 'p' */ 'p', 'P', 0,/* 0x1A - '[' */ '[', '&#123;', 0,/* 0x1B - ']' */ ']', '&#125;', 0,/* 0x1C - CR/LF */ ENTER, ENTER, PAD_ENTER,/* 0x1D - l. Ctrl */ CTRL_L, CTRL_L, CTRL_R,/* 0x1E - 'a' */ 'a', 'A', 0,/* 0x1F - 's' */ 's', 'S', 0,/* 0x20 - 'd' */ 'd', 'D', 0,/* 0x21 - 'f' */ 'f', 'F', 0,/* 0x22 - 'g' */ 'g', 'G', 0,/* 0x23 - 'h' */ 'h', 'H', 0,/* 0x24 - 'j' */ 'j', 'J', 0,/* 0x25 - 'k' */ 'k', 'K', 0,/* 0x26 - 'l' */ 'l', 'L', 0,/* 0x27 - ';' */ ';', ':', 0,/* 0x28 - '\'' */ '\'', '"', 0,/* 0x29 - '`' */ '`', '~', 0,/* 0x2A - l. SHIFT */ SHIFT_L, SHIFT_L, 0,/* 0x2B - '\' */ '\\', '|', 0,/* 0x2C - 'z' */ 'z', 'Z', 0,/* 0x2D - 'x' */ 'x', 'X', 0,/* 0x2E - 'c' */ 'c', 'C', 0,/* 0x2F - 'v' */ 'v', 'V', 0,/* 0x30 - 'b' */ 'b', 'B', 0,/* 0x31 - 'n' */ 'n', 'N', 0,/* 0x32 - 'm' */ 'm', 'M', 0,/* 0x33 - ',' */ ',', '&lt;', 0,/* 0x34 - '.' */ '.', '&gt;', 0,/* 0x35 - '/' */ '/', '?', PAD_SLASH,/* 0x36 - r. SHIFT */ SHIFT_R, SHIFT_R, 0,/* 0x37 - '*' */ '*', '*', 0,/* 0x38 - ALT */ ALT_L, ALT_L, ALT_R,/* 0x39 - ' ' */ ' ', ' ', 0,/* 0x3A - CapsLock */ CAPS_LOCK, CAPS_LOCK, 0,/* 0x3B - F1 */ F1, F1, 0,/* 0x3C - F2 */ F2, F2, 0,/* 0x3D - F3 */ F3, F3, 0,/* 0x3E - F4 */ F4, F4, 0,/* 0x3F - F5 */ F5, F5, 0,/* 0x40 - F6 */ F6, F6, 0,/* 0x41 - F7 */ F7, F7, 0,/* 0x42 - F8 */ F8, F8, 0,/* 0x43 - F9 */ F9, F9, 0,/* 0x44 - F10 */ F10, F10, 0,/* 0x45 - NumLock */ NUM_LOCK, NUM_LOCK, 0,/* 0x46 - ScrLock */ SCROLL_LOCK, SCROLL_LOCK, 0,/* 0x47 - Home */ PAD_HOME, '7', HOME,/* 0x48 - CurUp */ PAD_UP, '8', UP,/* 0x49 - PgUp */ PAD_PAGEUP, '9', PAGEUP,/* 0x4A - '-' */ PAD_MINUS, '-', 0,/* 0x4B - Left */ PAD_LEFT, '4', LEFT,/* 0x4C - MID */ PAD_MID, '5', 0,/* 0x4D - Right */ PAD_RIGHT, '6', RIGHT,/* 0x4E - '+' */ PAD_PLUS, '+', 0,/* 0x4F - End */ PAD_END, '1', END,/* 0x50 - Down */ PAD_DOWN, '2', DOWN,/* 0x51 - PgDown */ PAD_PAGEDOWN, '3', PAGEDOWN,/* 0x52 - Insert */ PAD_INS, '0', INSERT,/* 0x53 - Delete */ PAD_DOT, '.', DELETE,/* 0x54 - Enter */ 0, 0, 0,/* 0x55 - ??? */ 0, 0, 0,/* 0x56 - ??? */ 0, 0, 0,/* 0x57 - F11 */ F11, F11, 0, /* 0x58 - F12 */ F12, F12, 0, /* 0x59 - ??? */ 0, 0, 0, /* 0x5A - ??? */ 0, 0, 0, /* 0x5B - ??? */ 0, 0, GUI_L, /* 0x5C - ??? */ 0, 0, GUI_R, /* 0x5D - ??? */ 0, 0, APPS, /* 0x5E - ??? */ 0, 0, 0, /* 0x5F - ??? */ 0, 0, 0,/* 0x60 - ??? */ 0, 0, 0,/* 0x61 - ??? */ 0, 0, 0, /* 0x62 - ??? */ 0, 0, 0, /* 0x63 - ??? */ 0, 0, 0, /* 0x64 - ??? */ 0, 0, 0, /* 0x65 - ??? */ 0, 0, 0, /* 0x66 - ??? */ 0, 0, 0, /* 0x67 - ??? */ 0, 0, 0, /* 0x68 - ??? */ 0, 0, 0, /* 0x69 - ??? */ 0, 0, 0, /* 0x6A - ??? */ 0, 0, 0, /* 0x6B - ??? */ 0, 0, 0, /* 0x6C - ??? */ 0, 0, 0, /* 0x6D - ??? */ 0, 0, 0, /* 0x6E - ??? */ 0, 0, 0, /* 0x6F - ??? */ 0, 0, 0, /* 0x70 - ??? */ 0, 0, 0, /* 0x71 - ??? */ 0, 0, 0, /* 0x72 - ??? */ 0, 0, 0, /* 0x73 - ??? */ 0, 0, 0, /* 0x74 - ??? */ 0, 0, 0, /* 0x75 - ??? */ 0, 0, 0, /* 0x76 - ??? */ 0, 0, 0, /* 0x77 - ??? */ 0, 0, 0, /* 0x78 - ??? */ 0, 0, 0, /* 0x78 - ??? */ 0, 0, 0, /* 0x7A - ??? */ 0, 0, 0, /* 0x7B - ??? */ 0, 0, 0, /* 0x7C - ??? */ 0, 0, 0, /* 0x7D - ??? */ 0, 0, 0, /* 0x7E - ??? */ 0, 0, 0,/* 0x7F - ??? */ 0, 0, 0&#125;; 键盘输入缓冲区这个是用来放置中断例程接受到的扫描码。为了解决当扫描码不止一个字符时的问题。它的用法如图所示：白色框表示空闲字节，灰色框表示已用字节。 用新加的任务处理键盘操作终端任务是要处理屏幕输出等内容的，为了简化我们现在只是不停的调用keyboard_read()：123456PUBLIC void task_tty()&#123; while(1)&#123; keyboard_read(); &#125;&#125; keyboard_read()首先判断kb_in.count是否为0，如果不为0表明缓冲区中有扫描码，就开始读取。 解析扫描码显示字符因为键盘的键的功能是不一样的，有的是一种功能不是一个ASCII。我们先处理可以打印的123456789101112131415161718192021222324252627282930313233343536373839PUBLIC void keyboard_read()&#123; u8 scan_code; char output[2]; int make; /* TRUE: make; FALSE: break. */ memset(output, 0, 2); if(kb_in.count &gt; 0)&#123; disable_int(); scan_code = *(kb_in.p_tail); kb_in.p_tail++; if (kb_in.p_tail == kb_in.buf + KB_IN_BYTES) &#123; kb_in.p_tail = kb_in.buf; &#125; kb_in.count--; enable_int(); /* 下面开始解析扫描码 */ if (scan_code == 0xE1) &#123; /* 暂时不做任何操作 */ &#125; else if (scan_code == 0xE0) &#123; /* 暂时不做任何操作 */ &#125; else &#123; /* 下面处理可打印字符 */ /* 首先判断Make Code 还是 Break Code */ make = (scan_code &amp; FLAG_BREAK ? FALSE : TRUE); /* 如果是Make Code 就打印，是 Break Code 则不做处理 */ if(make) &#123; output[0] = keymap[(scan_code&amp;0x7F)*MAP_COLS]; disp_str(output); &#125; &#125; /* disp_int(scan_code); */ &#125;&#125; 上面的总体思想是0xE0和0xE1单独处理，其余都是单字节的，运行结果如下： 处理shift、alt、ctrl先对这三个按键的状态进行判断，因为有左右之分，所以有6个键，当按下shift_l时，相应的变量就变为TRUE,如果立即释放则变为FALSE。如果if(shift_l||shift_r)成立，则表示左shift被按下且未被释放，此时colum值变为1。运行一下：对于其他功能键，我们统一放在in_process()中，并在不可打印的字符的定义中，都加一个FLAG_EXT。运行结果如下：]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>ORANGE&#39;s的学习</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+        <tag>键盘交互</tag>
+        <tag>AT、PS/2键盘</tag>
+        <tag>键盘扫描码</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[《ORANGE-s-一个操作系统实现》进程（4-2）]]></title>
@@ -49,9 +69,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
+        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
-        <tag>NASM</tag>
         <tag>内核</tag>
         <tag>ELF</tag>
       </tags>
@@ -65,9 +85,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
+        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
-        <tag>NASM</tag>
         <tag>内核</tag>
         <tag>ELF</tag>
       </tags>
@@ -113,10 +133,10 @@
       </categories>
       <tags>
         <tag>保护模式</tag>
-        <tag>页式存储</tag>
-        <tag>中断和异常</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>页式存储</tag>
+        <tag>中断和异常</tag>
       </tags>
   </entry>
   <entry>
@@ -129,10 +149,10 @@
       </categories>
       <tags>
         <tag>保护模式</tag>
-        <tag>操作系统</tag>
-        <tag>于渊</tag>
         <tag>Bochs</tag>
         <tag>NASM</tag>
+        <tag>操作系统</tag>
+        <tag>于渊</tag>
       </tags>
   </entry>
   <entry>
@@ -162,10 +182,10 @@
       </categories>
       <tags>
         <tag>保护模式</tag>
-        <tag>操作系统</tag>
-        <tag>于渊</tag>
         <tag>Bochs</tag>
         <tag>NASM</tag>
+        <tag>操作系统</tag>
+        <tag>于渊</tag>
       </tags>
   </entry>
   <entry>
@@ -177,9 +197,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
+        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
-        <tag>NASM</tag>
         <tag>Bochs2.6.9虚拟机</tag>
         <tag>Bochs配置</tag>
       </tags>
@@ -193,9 +213,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
+        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
-        <tag>NASM</tag>
         <tag>虚拟机</tag>
       </tags>
   </entry>
