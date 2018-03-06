@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[《ORANGE-s-一个操作系统实现》输入输出系统（5-2）]]></title>
+    <url>%2F2018%2F03%2F06%2F%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-2%EF%BC%89%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[《ORANGE-s-一个操作系统实现》输入输出系统（5-1）]]></title>
+    <url>%2F2018%2F03%2F06%2F%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-1%EF%BC%89%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[《ORANGE-s-一个操作系统实现》进程（4-2）]]></title>
     <url>%2F2018%2F03%2F04%2F%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BF%9B%E7%A8%8B%EF%BC%884-2%EF%BC%89%2F</url>
     <content type="text"><![CDATA[多进程前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。 添加一个进程体12345678910void TestB()&#123; int i =0x1000; while(1)&#123; disp_str("B"); disp_int(i++); disp_str("."); delay(1); &#125;&#125; 进程表初始化代码扩充进程之间的区别真的不大。每一次循环的不同在于，从TASK结构中读取不同的任务入口地址\堆栈栈顶和进程名，然后赋给相应的进程表项。需要注意以下两点： 由于堆栈是从高地址到低地址生长的，所以在给每一个进程分配堆栈空间的时候，也是从高地址往低地址进行。 每一个进程都在GDT中分配一个描述符用来对应进程的LDT。LDT因为每一个进程都会在GDT中对应一个LDT描述符。于是在for循环中，我们将每个进程表项中的成员p_proc-&gt;ldt_sel赋值。下面是初始化LDT：123456789101112int i; PROCESS* p_proc = proc_table; u16 selector_ldt = INDEX_LDT_FIRST &lt;&lt; 3; for(i=0;i&lt;NR_TASKS;i++)&#123; init_descriptor(&amp;gdt[selector_ldt&gt;&gt;3], vir2phys(seg2phys(SELECTOR_KERNEL_DS), proc_table[i].ldts), LDT_SIZE * sizeof(DESCRIPTOR) - 1, DA_LDT); p_proc++; selector_ldt += 1 &lt;&lt; 3; &#125; 修改中断程序一个进程由sleep状态变为run状态，无非是将esp指向进程表项的开始处，然后在执行lldt之后精力一系列pop指令恢复各个寄存器的值。一切信息都包含在进程表中，所以，要想恢复不同的进程，只需要将esp指向不同的进程表就可以了。在离开内核栈的时候，执行如下语句：1mov esp,[p_proc_ready] 全局变量p_proc_ready是指向进程表结构的指针，我们只需要在这一句执行之前把它赋予不同的值就可以了。因为这部分即关于时钟中断，又关与进程调度。所以我们可以创建一个clock.c，也可以创建一个proc.c。1234PUBLIC void clock_handler(int irq)&#123; disp_str("#");&#125; make之后，结果如下：接着进行进程切换：1234567PUBLIC void clock_handler(int irq)&#123; disp_str("#"); p_proc_ready++; if (p_proc_ready &gt;= proc_table + NR_TASKS) p_proc_ready = proc_table;&#125; 每一次我们让p_proc_ready指向进程表中的下一个表项，如果切换前已经到达进程表结尾则回到第一个表项。然后再make：可以看到A和B交替出现。这说明第二个进程运行成。 系统调用系统调用和API类似，当应用程序很多事做不了的时候，只能交给操作系统来做。所以一个事情，可能应用程序做了一部分，操作系统做一部分，这就涉及到特权级的问题了。下面是本操作系统的运行过程： 实现一个简单的系统调用我们通过实现get_tick()得到当前总共发生多少次时钟中断。设置一个全局变量ticks，每次发生一次时钟中断，它就加1.进程可以随时通过get_tick()这个系统调用来得到这个值。代码如下：1234567891011121314%include "sconst.inc"_NR_get_ticks equ 0 ; 要跟 global.c 中 sys_call_table 的定义相对应！INT_VECTOR_SYS_CALL equ 0x90global get_ticks ; 导出符号bits 32[section .text]get_ticks: mov eax, _NR_get_ticks int INT_VECTOR_SYS_CALL ret get_ticks的应用因为时钟中断发生的时间间隔是一定的，如果我们知道这个实践间隔，就可以用get_ticks函数来写一个判断时间的函数，进而代替delay() 8253/8254 PIT中断的发生实际上是由一个被称为PIT（Programmable Interval Timer）的芯片来触发的。在AT以及以后又Intel 8253换为Intel 8254。8253有三个计数器：从上可知，中断实际是由8253的Counter0产生的。计数器有一个输入频率，在PC上是1193180Hz，在每一个时钟周期，计数器值会减1，当减到0就会触发一个输出。由于计数器是16位的，所以最大值是65535，因此，默认的时钟中断的发生频率是1193180/65536~18.2Hz。我们可以通过编程来控制8253.比如，想让系统每10ms产生一次中断，也就是让输出频率为100Hz，那么需要为计数器赋值为1193180/100~11932.因为控制8253是通过端口的写操作完成的。如下：以下是8253模式控制寄存器也就是端口43h写入寄存器的格式。下面是计数器模式位：下面是读/写/锁位:下面是计数器选择位：make一下，运行结果如下： 进程调度避免对称–进程的节奏感前面的进程延迟相同，现在将其改变下A、B、C三个的延迟分别为300、900、1500ms，运行结果如下：从这个我们可以想到，通过延迟的不同设置不同的优先级。通过“轻重缓急”反应在时间上，来表达优先级调度，最重要的事情应该被赋予更高的优先级，应该给予更多的时间。我们给每一个进程都添加一个变量，在一段时间 的开头，这个变量的值又大又下，进程获得一个运行周期，这个变量就减1，当减到0，此进程就不再获得执行的机会，指导所有进程都为0。由于每一次进程调度的时候只有某一个进程的ticks会减少1，所以总共调度的次数应该是3个进程的ticks之和（150+50+30）=230。所以: 进程A执行循环的次数为：（100+20x2+30x3）/20=230/20=11.5次 进程B执行循环的次数为：（0+20x2+30x3）/20=230/20=6.5次 进程C执行循环的次数为：（0+0x2+30x3）/20=230/20=4.5次将各个进程的延迟时间改为10m后，make一下，运行如下：]]></content>
@@ -39,9 +49,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
-        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>NASM</tag>
         <tag>内核</tag>
         <tag>ELF</tag>
       </tags>
@@ -55,9 +65,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
-        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>NASM</tag>
         <tag>内核</tag>
         <tag>ELF</tag>
       </tags>
@@ -103,10 +113,10 @@
       </categories>
       <tags>
         <tag>保护模式</tag>
-        <tag>操作系统</tag>
-        <tag>于渊</tag>
         <tag>页式存储</tag>
         <tag>中断和异常</tag>
+        <tag>操作系统</tag>
+        <tag>于渊</tag>
       </tags>
   </entry>
   <entry>
@@ -119,10 +129,10 @@
       </categories>
       <tags>
         <tag>保护模式</tag>
-        <tag>Bochs</tag>
-        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>Bochs</tag>
+        <tag>NASM</tag>
       </tags>
   </entry>
   <entry>
@@ -152,10 +162,10 @@
       </categories>
       <tags>
         <tag>保护模式</tag>
-        <tag>Bochs</tag>
-        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>Bochs</tag>
+        <tag>NASM</tag>
       </tags>
   </entry>
   <entry>
@@ -167,9 +177,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
-        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>NASM</tag>
         <tag>Bochs2.6.9虚拟机</tag>
         <tag>Bochs配置</tag>
       </tags>
@@ -183,9 +193,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
-        <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>NASM</tag>
         <tag>虚拟机</tag>
       </tags>
   </entry>

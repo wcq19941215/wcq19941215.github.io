@@ -4,6 +4,36 @@
 
     
   <url>
+    <loc>http://www.wcqwolflow.com/2018/03/06/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-2%EF%BC%89/</loc>
+    <lastmod>2018-03-06T02:11:03.826Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》输入输出系统（5-2）</title>
+        <pubTime>2018-03-06T02:11:03.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/03/06/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-1%EF%BC%89/</loc>
+    <lastmod>2018-03-06T02:10:52.075Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》输入输出系统（5-1）</title>
+        <pubTime>2018-03-06T02:10:52.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.wcqwolflow.com/2018/03/04/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BF%9B%E7%A8%8B%EF%BC%884-2%EF%BC%89/</loc>
     <lastmod>2018-03-05T15:21:09.993Z</lastmod>
     <data>
@@ -69,11 +99,11 @@
         <title>《ORANGE-s-一个操作系统实现》内核雏形（3-2）</title>
         <pubTime>2018-02-28T10:04:31.000Z</pubTime>
         
-        <tag>NASM</tag>
-         
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
+         
+        <tag>NASM</tag>
          
         <tag>内核</tag>
          
@@ -100,11 +130,11 @@
         <title>《ORANGE-s-一个操作系统实现》内核雏形（3-1）</title>
         <pubTime>2018-02-28T02:42:13.000Z</pubTime>
         
-        <tag>NASM</tag>
-         
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
+         
+        <tag>NASM</tag>
          
         <tag>内核</tag>
          
@@ -192,13 +222,13 @@
         
         <tag>保护模式</tag>
          
-        <tag>操作系统</tag>
-         
-        <tag>于渊</tag>
-         
         <tag>页式存储</tag>
          
         <tag>中断和异常</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>于渊</tag>
          
          
            
@@ -224,13 +254,13 @@
         
         <tag>保护模式</tag>
          
-        <tag>Bochs</tag>
-         
-        <tag>NASM</tag>
-         
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
+         
+        <tag>Bochs</tag>
+         
+        <tag>NASM</tag>
          
          
            
@@ -287,13 +317,13 @@
         
         <tag>保护模式</tag>
          
-        <tag>Bochs</tag>
-         
-        <tag>NASM</tag>
-         
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
+         
+        <tag>Bochs</tag>
+         
+        <tag>NASM</tag>
          
          
            
@@ -317,11 +347,11 @@
         <title>《ORANGE's:一个操作系统实现》搭建工作环境（1）</title>
         <pubTime>2018-01-08T04:37:48.000Z</pubTime>
         
-        <tag>NASM</tag>
-         
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
+         
+        <tag>NASM</tag>
          
         <tag>Bochs2.6.9虚拟机</tag>
          
@@ -348,11 +378,11 @@
         <title>《ORANGE's:一个操作系统实现》准备工作（0）</title>
         <pubTime>2018-01-08T04:29:12.000Z</pubTime>
         
-        <tag>NASM</tag>
-         
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
+         
+        <tag>NASM</tag>
          
         <tag>虚拟机</tag>
          
