@@ -1,3 +1,5 @@
+http://www.wcqwolflow.com/2018/03/07/《ORANGE-s-一个操作系统实现》进程间通信（6-1）/
+http://www.wcqwolflow.com/2018/03/07/《ORANGE-s-一个操作系统实现》进程间通信（6）/
 http://www.wcqwolflow.com/2018/03/06/《ORANGE-s-一个操作系统实现》输入输出系统（5-2）/
 http://www.wcqwolflow.com/2018/03/06/《ORANGE-s-一个操作系统实现》输入输出系统（5-1）/
 http://www.wcqwolflow.com/2018/03/04/《ORANGE-s-一个操作系统实现》进程（4-2）/
