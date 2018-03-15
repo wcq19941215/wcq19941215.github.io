@@ -323,6 +323,558 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王超群">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/jegddfAhH2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang的宝库">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/" itemprop="url">《ORANGE-s-一个操作系统实现》保护模式（2-4）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-27T10:29:00+08:00">
+                2018-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/ORANGE-s的学习/" itemprop="url" rel="index">
+                    <span itemprop="name">ORANGE's的学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.wcqwolflow.com/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/" class="cy_cmt_count" data-xid="2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/" class="leancloud_visitors" data-flag-title="《ORANGE-s-一个操作系统实现》保护模式（2-4）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="突破512字节的限制"><a href="#突破512字节的限制" class="headerlink" title="突破512字节的限制"></a>突破512字节的限制</h1><p>前面我们的工作是完成了一个简陋的引导扇区，虽然感觉没做啥，但是我们实际上积累了很多代码，熟悉了保护模式。并且对存储管理、特权级控制等有了一个整体的认识<br>。下面，我们要想办法将自己的OS进入到保护模式，虽然进入保护模式不难，但是总会收到引导扇区512字节的限制，所以下面，我们再建立一个文件，将其通过引导扇区加载入内存，然后将控制权交给它。<br>首先，我们先理清楚一个问题，是不是被引导扇区加载到内存的就是操作系统的内核呢，我们先看看一个操作系统从开机到开始运行要经过一个怎样的过程：引导-&gt;加载内核入内存-&gt;跳入保护模式-&gt;开始执行内核。<br>所以，很明显，在内核开始执行前，不仅仅要加载内核，还有跳入保护模式等等，而这些工作都由引导扇区来做，很有可能不止512字节，所以我们把这个过程交给叫做Loader的模块来做。引导扇区负责把Loader加载到内存，并把控制权交给它，然后其他工作都由Loader来做，而它就没有512字节的限制了。</p>
+<h2 id="FAT12"><a href="#FAT12" class="headerlink" title="FAT12"></a>FAT12</h2><p>FAT12是DOS时代就开始使用的文件系统，直到现在还在使用。几乎所有的文件系统都会把磁盘划分为若干层次（扇区：磁盘上的最小数据单元；簇：一个或者多个扇区；分区：通常指整个文件系统）以方便组织和管理，所以我们将软盘做成FAT12格式，以方便Kernel的操作。<br>引导扇区是整个软盘的第0个扇区，在这个扇区中有一个很重要的数据结构叫做BPB(BIOS Parameter Block)，引导扇区的格式如下图：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180227/bmEkJIldf9.png?imageslim" alt="mark"><br>其中，名称以BPB开头的域输入BPB,以BS_开头的域只是引导扇区的一部分。以下是整个软盘的结构图：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180227/L924A4fH0k.png?imageslim" alt="mark"><br>接下来，我们试着把Loader复制到软盘上，并引导扇区找到并加载它。为简单起见，我们规定Loader只能放在根目录中，而根目录信息存放在FAT2后面的根目录区中。所以先研究根目录区。<br>根目录区位于第二个FAT表之后，开始的扇区号为19，它有若干个目录条目组成，条目最多有BPB_RootEntCnt个。由于根目录的大小依赖BPB_RootEntCnt的，所以长度不固定。<br>根目录区中的条目格式：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180227/k4Kh5dIHg9.png?imageslim" alt="mark"><br>当我们寻找Loader时，只要发现文件名正确就认为它是我们要找的那一个文件。其中最重要的信息是DIR_FstClus，即文件开始簇号，它会告诉我们文件存放在磁盘的什么位置，从而让我们可以找到它。由于一簇只包含一个扇区，所以简化起见，下面都用扇区来替代簇。，需要注意的是，数据区的第一个簇号是2。所以，我们必须计算根目录区所占的扇区数才能知道数据区的第一个簇在哪里。假设根目录区总共有RootDirSectors个扇区，则有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RootDirSectors = ((BPB_RootEntCnt*32)+(BPB_BytsPerSec-1))/BPB_BytsPerSec</span><br></pre></td></tr></table></figure>
+<p>有了以上公式，可以通过根目录区找到文件并看到内容，而FAT的作用在于，如果文件大于512字节，我们需要FAT表来找到所有的簇。</p>
+<h2 id="DOS可以识别的引导盘"><a href="#DOS可以识别的引导盘" class="headerlink" title="DOS可以识别的引导盘"></a>DOS可以识别的引导盘</h2><p>既然引导扇区需要有BPB等头信息才能被微软识别，我们就先加上它，让程序开头变成下面的形式：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jmp </span><span class="keyword">short </span>LABEL_START		<span class="comment">; Start to boot.</span></span><br><span class="line">	<span class="keyword">nop	</span>			<span class="comment">; 这个 nop 不可少</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">; 下面是 FAT12 磁盘的头</span></span><br><span class="line">	<span class="keyword">BS_OEMName	</span>DB <span class="string">'ForrestY'</span>	<span class="comment">; OEM String, 必须 8 个字节</span></span><br><span class="line">	<span class="keyword">BPB_BytsPerSec	</span>DW <span class="number">512</span>		<span class="comment">; 每扇区字节数</span></span><br><span class="line">	<span class="keyword">BPB_SecPerClus	</span>DB <span class="number">1</span>		<span class="comment">; 每簇多少扇区</span></span><br><span class="line">	<span class="keyword">BPB_RsvdSecCnt	</span>DW <span class="number">1</span>		<span class="comment">; Boot 记录占用多少扇区</span></span><br><span class="line">	<span class="keyword">BPB_NumFATs	</span>DB <span class="number">2</span>		<span class="comment">; 共有多少 FAT 表</span></span><br><span class="line">	<span class="keyword">BPB_RootEntCnt	</span>DW <span class="number">224</span>		<span class="comment">; 根目录文件数最大值</span></span><br><span class="line">	<span class="keyword">BPB_TotSec16	</span>DW <span class="number">2880</span>		<span class="comment">; 逻辑扇区总数</span></span><br><span class="line">	<span class="keyword">BPB_Media	</span>DB <span class="number">0xF0</span>		<span class="comment">; 媒体描述符</span></span><br><span class="line">	<span class="keyword">BPB_FATSz16	</span>DW <span class="number">9</span>		<span class="comment">; 每FAT扇区数</span></span><br><span class="line">	<span class="keyword">BPB_SecPerTrk	</span>DW <span class="number">18</span>		<span class="comment">; 每磁道扇区数</span></span><br><span class="line">	<span class="keyword">BPB_NumHeads	</span>DW <span class="number">2</span>		<span class="comment">; 磁头数(面数)</span></span><br><span class="line">	<span class="keyword">BPB_HiddSec	</span>DD <span class="number">0</span>		<span class="comment">; 隐藏扇区数</span></span><br><span class="line">	<span class="keyword">BPB_TotSec32	</span>DD <span class="number">0</span>		<span class="comment">; wTotalSectorCount为0时这个值记录扇区数</span></span><br><span class="line">	<span class="keyword">BS_DrvNum	</span>DB <span class="number">0</span>		<span class="comment">; 中断 13 的驱动器号</span></span><br><span class="line">	<span class="keyword">BS_Reserved1	</span>DB <span class="number">0</span>		<span class="comment">; 未使用</span></span><br><span class="line">	<span class="keyword">BS_BootSig	</span>DB <span class="number">29</span>h		<span class="comment">; 扩展引导标记 (29h)</span></span><br><span class="line">	<span class="keyword">BS_VolID	</span>DD <span class="number">0</span>		<span class="comment">; 卷序列号</span></span><br><span class="line">	<span class="keyword">BS_VolLab	</span>DB <span class="string">'OrangeS0.02'</span><span class="comment">; 卷标, 必须 11 个字节</span></span><br><span class="line">	<span class="keyword">BS_FileSysType	</span>DB <span class="string">'FAT12   '</span>	<span class="comment">; 文件系统类型, 必须 8个字节</span></span><br></pre></td></tr></table></figure></p>
+<p>把生成的Boot.bin写入磁盘引导扇区，运行的效果没有变。说明我们现在的软盘已经能被DOS以及Linux识别了，我们已经可以方便地往上添加或删除文件了。</p>
+<h2 id="一个最简单的Loader"><a href="#一个最简单的Loader" class="headerlink" title="一个最简单的Loader"></a>一个最简单的Loader</h2><p>我们先写一个最小的，让其显示一个字符，然后进入死循环。<br>新建一个loader.asm，其代码如下：<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">org	<span class="number">0100h</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">ax</span>, <span class="number">0B800h</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">gs</span>, <span class="built_in">ax</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="number">ah</span>, <span class="number">0Fh</span>				<span class="comment">; 0000: 黑底    1111: 白字</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">al</span>, <span class="string">'L'</span></span><br><span class="line">	<span class="keyword">mov</span>	[<span class="built_in">gs</span>:((<span class="number">80</span> * <span class="number">0</span> + <span class="number">39</span>) * <span class="number">2</span>)], <span class="built_in">ax</span>	<span class="comment">; 屏幕第 0 行, 第 39 列。</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">jmp</span>	$				<span class="comment">; 到此停住</span></span><br></pre></td></tr></table></figure></p>
+<p>我们将其编译,命令如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nasm</span> <span class="selector-tag">loader</span><span class="selector-class">.asm</span> <span class="selector-tag">-o</span> <span class="selector-tag">loader</span><span class="selector-class">.bin</span></span><br></pre></td></tr></table></figure></p>
+<p>为了以后扩展不出问题，我们将编译后的二进制文件放在某个段内偏移0x100的位置。</p>
+<h2 id="加载Loader如内存"><a href="#加载Loader如内存" class="headerlink" title="加载Loader如内存"></a>加载Loader如内存</h2><p>要加载一个文件如内存，免不了要读软盘，这时就要用到BIOS中断int 13h。它的用法如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180227/hfIaF1Jjl8.png?imageslim" alt="mark">。<br>从上可知，中断需要的参数不是原来提到的从第0扇区开始的扇区号，而是柱面号、磁头号以及在当前柱面上的扇区号3个分量，所以需要我们自己来转换一下。对于1.44MB的软盘来说，总共有两面，每面80个磁道，每个磁道有18个扇区。下面的公式就是软盘容量的由来：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">2 </span>x <span class="number">80</span> x <span class="number">18</span> x <span class="number">512</span> =<span class="number">1.44</span>MB</span><br></pre></td></tr></table></figure></p>
+<p>于是，磁头号、柱面号和起始扇区号可以用下图方法来计算：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180227/ifaIbHjIF9.png?imageslim" alt="mark"><br>下面，我们先写一个读软盘区的函数：<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span>	<span class="built_in">bp</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">bp</span>, <span class="built_in">sp</span></span><br><span class="line">	<span class="keyword">sub</span>	<span class="built_in">esp</span>, <span class="number">2</span> <span class="comment">; 辟出两个字节的堆栈区域保存要读的扇区数: byte [bp-2]</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">byte</span> [<span class="built_in">bp</span>-<span class="number">2</span>], <span class="built_in">cl</span></span><br><span class="line">	<span class="keyword">push</span>	<span class="built_in">bx</span>			<span class="comment">; 保存 bx</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">bl</span>, [BPB_SecPerTrk]	<span class="comment">; bl: 除数</span></span><br><span class="line">	<span class="keyword">div</span>	<span class="built_in">bl</span>			<span class="comment">; y 在 al 中, z 在 ah 中</span></span><br><span class="line">	<span class="keyword">inc</span>	<span class="number">ah</span>			<span class="comment">; z ++</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">cl</span>, <span class="number">ah</span>			<span class="comment">; cl &lt;- 起始扇区号</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="number">dh</span>, <span class="built_in">al</span>			<span class="comment">; dh &lt;- y</span></span><br><span class="line">	<span class="keyword">shr</span>	<span class="built_in">al</span>, <span class="number">1</span>			<span class="comment">; y &gt;&gt; 1 (y/BPB_NumHeads)</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="number">ch</span>, <span class="built_in">al</span>			<span class="comment">; ch &lt;- 柱面号</span></span><br><span class="line">	<span class="keyword">and</span>	<span class="number">dh</span>, <span class="number">1</span>			<span class="comment">; dh &amp; 1 = 磁头号</span></span><br><span class="line">	<span class="keyword">pop</span>	<span class="built_in">bx</span>			<span class="comment">; 恢复 bx</span></span><br><span class="line">	<span class="comment">; 至此, "柱面号, 起始扇区, 磁头号" 全部得到</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">dl</span>, [BS_DrvNum]		<span class="comment">; 驱动器号 (0 表示 A 盘)</span></span><br><span class="line"><span class="symbol">.GoOnReading:</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="number">ah</span>, <span class="number">2</span>			<span class="comment">; 读</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">al</span>, <span class="built_in">byte</span> [<span class="built_in">bp</span>-<span class="number">2</span>]		<span class="comment">; 读 al 个扇区</span></span><br><span class="line">	<span class="keyword">int</span>	<span class="number">13h</span></span><br><span class="line">	<span class="keyword">jc</span>	.GoOnReading		<span class="comment">; 如果读取错误 CF 会被置为 1, </span></span><br><span class="line">					<span class="comment">; 这时就不停地读, 直到正确为止</span></span><br><span class="line">	<span class="keyword">add</span>	<span class="built_in">esp</span>, <span class="number">2</span></span><br><span class="line">	<span class="keyword">pop</span>	<span class="built_in">bp</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">ret</span></span><br></pre></td></tr></table></figure></p>
+<p>因为这段代码中用到了堆栈，要在程序开头初始化ss和esp<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BaseOfStack		<span class="built_in">equ</span>	<span class="number">07c00h</span>	<span class="comment">; 堆栈基地址(栈底, 从这个位置向低地址生长)</span></span><br><span class="line">....</span><br><span class="line"><span class="keyword">mov</span>	<span class="built_in">ax</span>, <span class="built_in">cs</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">ds</span>, <span class="built_in">ax</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">es</span>, <span class="built_in">ax</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">ss</span>, <span class="built_in">ax</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">sp</span>, BaseOfStack</span><br></pre></td></tr></table></figure></p>
+<p>读扇区的函数写好了，下面我们就开始在软盘中寻找Loader.bin<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">xor</span>	<span class="number">ah</span>, <span class="number">ah</span>	<span class="comment">; `.</span></span><br><span class="line">	<span class="keyword">xor</span>	<span class="built_in">dl</span>, <span class="built_in">dl</span>	<span class="comment">;  |  软驱复位</span></span><br><span class="line">	<span class="keyword">int</span>	<span class="number">13h</span>	<span class="comment">; /</span></span><br><span class="line">	</span><br><span class="line"><span class="comment">; 下面在 A 盘的根目录寻找 LOADER.BIN</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">word</span> [wSectorNo], SectorNoOfRootDirectory</span><br><span class="line"><span class="symbol">LABEL_SEARCH_IN_ROOT_DIR_BEGIN:</span></span><br><span class="line">	<span class="keyword">cmp</span>	<span class="built_in">word</span> [wRootDirSizeForLoop], <span class="number">0</span>	<span class="comment">;  `. 判断根目录区是不是已经读完</span></span><br><span class="line"><span class="symbol">	jz	LABEL</span>_NO_LOADERBIN		<span class="comment">;  /  如果读完表示没有找到 LOADER.BIN</span></span><br><span class="line">	<span class="keyword">dec</span>	<span class="built_in">word</span> [wRootDirSizeForLoop]	<span class="comment">; /</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">ax</span>, BaseOfLoader</span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">es</span>, <span class="built_in">ax</span>			<span class="comment">; es &lt;- BaseOfLoader</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">bx</span>, OffsetOfLoader	<span class="comment">; bx &lt;- OffsetOfLoader</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">ax</span>, [wSectorNo]		<span class="comment">; ax &lt;- Root Directory 中的某 Sector 号</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">cl</span>, <span class="number">1</span></span><br><span class="line">	<span class="keyword">call</span>	ReadSector</span><br><span class="line"></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">si</span>, LoaderFileName	<span class="comment">; ds:si -&gt; "LOADER  BIN"</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">di</span>, OffsetOfLoader	<span class="comment">; es:di -&gt; BaseOfLoader:0100</span></span><br><span class="line">	<span class="keyword">cld</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">dx</span>, <span class="number">10h</span></span><br><span class="line"><span class="symbol">LABEL_SEARCH_FOR_LOADERBIN:</span></span><br><span class="line">	<span class="keyword">cmp</span>	<span class="built_in">dx</span>, <span class="number">0</span>				   <span class="comment">; `. 循环次数控制,</span></span><br><span class="line"><span class="symbol">	jz	LABEL</span>_GOTO_NEXT_SECTOR_IN_ROOT_DIR <span class="comment">;  / 如果已经读完了一个 Sector,</span></span><br><span class="line">	<span class="keyword">dec</span>	<span class="built_in">dx</span>				   <span class="comment">; /  就跳到下一个 Sector</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">cx</span>, <span class="number">11</span></span><br><span class="line"><span class="symbol">LABEL_CMP_FILENAME:</span></span><br><span class="line">	<span class="keyword">cmp</span>	<span class="built_in">cx</span>, <span class="number">0</span></span><br><span class="line"><span class="symbol">	jz	LABEL</span>_FILENAME_FOUND	<span class="comment">; 如果比较了 11 个字符都相等, 表示找到</span></span><br><span class="line">	<span class="keyword">dec</span>	<span class="built_in">cx</span></span><br><span class="line">	<span class="keyword">lodsb</span>				<span class="comment">; ds:si -&gt; al</span></span><br><span class="line">	<span class="keyword">cmp</span>	<span class="built_in">al</span>, <span class="built_in">byte</span> [<span class="built_in">es</span>:<span class="built_in">di</span>]</span><br><span class="line"><span class="symbol">	jz	LABEL</span>_GO_ON</span><br><span class="line"><span class="symbol">	jmp	LABEL</span>_DIFFERENT		<span class="comment">; 只要发现不一样的字符就表明本 DirectoryEntry</span></span><br><span class="line">					<span class="comment">; 不是我们要找的 LOADER.BIN</span></span><br><span class="line"><span class="symbol">LABEL_GO_ON:</span></span><br><span class="line">	<span class="keyword">inc</span>	<span class="built_in">di</span></span><br><span class="line"><span class="symbol">	jmp	LABEL</span>_CMP_FILENAME	<span class="comment">; 继续循环</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">LABEL_DIFFERENT:</span></span><br><span class="line">	<span class="keyword">and</span>	<span class="built_in">di</span>, <span class="number">0FFE0h</span>		<span class="comment">; else `. di &amp;= E0 为了让它指向本条目开头</span></span><br><span class="line">	<span class="keyword">add</span>	<span class="built_in">di</span>, <span class="number">20h</span>			<span class="comment">;       |</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">si</span>, LoaderFileName	<span class="comment">;       | di += 20h  下一个目录条目</span></span><br><span class="line"><span class="symbol">	jmp	LABEL</span>_SEARCH_FOR_LOADERBIN<span class="comment">;    /</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">LABEL_GOTO_NEXT_SECTOR_IN_ROOT_DIR:</span></span><br><span class="line">	<span class="keyword">add</span>	<span class="built_in">word</span> [wSectorNo], <span class="number">1</span></span><br><span class="line"><span class="symbol">	jmp	LABEL</span>_SEARCH_IN_ROOT_DIR_BEGIN</span><br><span class="line"></span><br><span class="line"><span class="symbol">LABEL_NO_LOADERBIN:</span></span><br><span class="line">	<span class="keyword">mov</span>	<span class="number">dh</span>, <span class="number">2</span>			<span class="comment">; "No LOADER."</span></span><br><span class="line">	<span class="keyword">call</span>	DispStr			<span class="comment">; 显示字符串</span></span><br><span class="line">%ifdef	_BOOT_DEBUG_</span><br><span class="line">	<span class="keyword">mov</span>	<span class="built_in">ax</span>, <span class="number">4c00h</span>		<span class="comment">; `.</span></span><br><span class="line">	<span class="keyword">int</span>	<span class="number">21h</span>			<span class="comment">; /  没有找到 LOADER.BIN, 回到 DOS</span></span><br><span class="line"><span class="meta">%else</span></span><br><span class="line">	<span class="keyword">jmp</span>	$			<span class="comment">; 没有找到 LOADER.BIN, 死循环在这里</span></span><br><span class="line"><span class="meta">%endif</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">LABEL_FILENAME_FOUND:</span>			<span class="comment">; 找到 LOADER.BIN 后便来到这里继续</span></span><br><span class="line">	<span class="keyword">jmp</span>	$			<span class="comment">; 代码暂时停在这里</span></span><br></pre></td></tr></table></figure></p>
+<p>这段代码就是遍历根目录区所有的扇区，将每一个扇区加载入内存，然后从中寻找文件名为Loader.bin的条目，直到找到为止。找到的那一刻，es:di是指向条目中字母N后面的那个字符。<br>接着我们编译出boot.bin<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nasm</span> <span class="selector-tag">boot</span><span class="selector-class">.asm</span> <span class="selector-tag">-o</span> <span class="selector-tag">boot</span><span class="selector-class">.bin</span></span><br></pre></td></tr></table></figure></p>
+<p>,然后在bximage生成一个软盘映像，然后在Linux下输入命令：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nasm loader<span class="selector-class">.asm</span> -o loader.bin</span><br><span class="line"><span class="selector-tag">dd</span> <span class="keyword">if</span>=boot<span class="selector-class">.bin</span> of=<span class="selector-tag">a</span><span class="selector-class">.img</span> bs=<span class="number">512</span> count=<span class="number">1</span> conv=notrunc</span><br><span class="line">sudo mount -o loop <span class="selector-tag">a</span><span class="selector-class">.img</span> /mnt/floppy</span><br><span class="line">sudo cp loader<span class="selector-class">.bin</span> /mnt/floppy/ -v </span><br><span class="line">sudo umount /mnt/floppy</span><br></pre></td></tr></table></figure></p>
+<h2 id="向Loader交出控制权"><a href="#向Loader交出控制权" class="headerlink" title="向Loader交出控制权"></a>向Loader交出控制权</h2><p>上面代码调试通过后，我i门就已经成功的将Loader加载入内存了，接着我们加上一个跳转。开始执行Loader<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jmp	</span><span class="keyword">BaseOfLoader:OffsetOfLoader	</span><span class="comment">; 这一句正式跳转到已加载到内</span></span><br><span class="line">						<span class="comment">; 存中的 LOADER.BIN 的开始处，</span></span><br><span class="line">						<span class="comment">; 开始执行 LOADER.BIN 的代码。</span></span><br><span class="line">						<span class="comment">; Boot Sector 的使命到此结束。</span></span><br></pre></td></tr></table></figure></p>
+<p>最后的结果如下<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180227/2icjEELJIa.png?imageslim" alt="mark"></p>
+<h1 id="保护下的“操作系统”"><a href="#保护下的“操作系统”" class="headerlink" title="保护下的“操作系统”"></a>保护下的“操作系统”</h1><p>为了让自己的操作系统内核至少应该可以在Linux下用GCC编译链接，所以我们假设已经有了一个内核，Loader肯定要加载它乳内存，而且内核开始执行对的时候肯定已经在保护模式下了，所以Loader要做的只要有两件事：</p>
+<ul>
+<li>加载内核如内存</li>
+<li>跳入保护模式<br>将来的内核是在Linux下编译链接出的ELF格式文件，直接放进内存肯定不行，下一章就会开始研究ELF格式。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/02/25/财富之路-2018最容易赚钱的调查问卷平台/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王超群">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/jegddfAhH2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang的宝库">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/25/财富之路-2018最容易赚钱的调查问卷平台/" itemprop="url">财富之路-2018最容易赚钱的调查问卷平台</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T21:36:18+08:00">
+                2018-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/财富之路/" itemprop="url" rel="index">
+                    <span itemprop="name">财富之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/02/25/财富之路-2018最容易赚钱的调查问卷平台/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.wcqwolflow.com/2018/02/25/财富之路-2018最容易赚钱的调查问卷平台/" class="cy_cmt_count" data-xid="2018/02/25/财富之路-2018最容易赚钱的调查问卷平台/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/02/25/财富之路-2018最容易赚钱的调查问卷平台/" class="leancloud_visitors" data-flag-title="财富之路-2018最容易赚钱的调查问卷平台">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="91问问调查"><a href="#91问问调查" class="headerlink" title="91问问调查"></a>91问问调查</h1><p><a href="https://www.91wenwen.net/event/invite/hn1XX9NE0Ks%253D" target="_blank" rel="noopener">https://www.91wenwen.net/event/invite/hn1XX9NE0Ks%253D</a></p>
+<pre><code>1、注册送积分。注册的时候送50积分=0.5元，等你完善个人信息的时候再送200积分=2.5元。
+
+2、调查赚钱。登陆账户后，进入调查中心，里面有适合你的调查问卷，认真参与，即可获得奖励。每参加一次调查，获得2-10元。
+
+3、有奖出题。参加快速问答（也就是投票）的设计，设计的问答被网站选用即可获取200积分
+</code></pre><h1 id="投吧"><a href="#投吧" class="headerlink" title="投吧"></a>投吧</h1><p><a href="http://www.votebar.com/r.aspx?r=572819231769001075" target="_blank" rel="noopener">http://www.votebar.com/r.aspx?r=572819231769001075</a></p>
+<p>老牌网站，操作简单，内容丰富，成功率高，二十四小时更新，奖励会即时到账户里，满10元可提现；每天签到就有奖，最大的缺点是有时有点卡，一旦出现卡顿，成功机率就会下降，这时就下线吧，等下次再答。这个网站是我的最爱，因为第一个注册的就是它，从开始到现在，已经过万字头。</p>
+<h1 id="第一调查网"><a href="#第一调查网" class="headerlink" title="第一调查网"></a>第一调查网</h1><p><a href="http://www.1diaocha.com/user/Register.aspx?account=wcq19941215" target="_blank" rel="noopener">http://www.1diaocha.com/user/Register.aspx?account=wcq19941215</a><br>应该说国内最早开始的调查网站，内容丰富</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/01/24/《ORANGE-s-一个操作系统实现》保护模式（2-3）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王超群">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/jegddfAhH2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang的宝库">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/24/《ORANGE-s-一个操作系统实现》保护模式（2-3）/" itemprop="url">《ORANGE-s-一个操作系统实现》保护模式（2-3）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T17:03:36+08:00">
+                2018-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/ORANGE-s的学习/" itemprop="url" rel="index">
+                    <span itemprop="name">ORANGE's的学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/01/24/《ORANGE-s-一个操作系统实现》保护模式（2-3）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.wcqwolflow.com/2018/01/24/《ORANGE-s-一个操作系统实现》保护模式（2-3）/" class="cy_cmt_count" data-xid="2018/01/24/《ORANGE-s-一个操作系统实现》保护模式（2-3）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/01/24/《ORANGE-s-一个操作系统实现》保护模式（2-3）/" class="leancloud_visitors" data-flag-title="《ORANGE-s-一个操作系统实现》保护模式（2-3）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="页式存储"><a href="#页式存储" class="headerlink" title="页式存储"></a>页式存储</h1><p>说到这个，应该不会太陌生，但是对它可能值停留在理论学习阶段，没法像数据结构那样，理性的认识，下面我们先从几个问题出发</p>
+<ul>
+<li>什么叫做“页”<br>所谓“页”，就是一块内存，在80386中，页的大小是固定的4096字节。而后来，页的大小还可以是2MB或者4MB，并且可以访问多于4GB的内存。</li>
+<li>逻辑地址、线性地址、物理地址<br>在未打开分页机制时，线性地址等同于物理地址。当分页开启时，分段机制将逻辑地址转换成线性地址，然后在通过分页机制变为物理地址。</li>
+<li>为什么分页
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/24/《ORANGE-s-一个操作系统实现》保护模式（2-3）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/01/20/《ORANGE-s-一个操作系统实现》保护模式（2-2）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1407,7 +1959,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1429,7 +1981,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
