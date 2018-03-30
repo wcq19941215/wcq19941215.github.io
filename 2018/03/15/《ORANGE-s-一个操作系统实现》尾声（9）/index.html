@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="域名,Hexo,DNS解析,百度抓取成功 (有跳转),谷歌收录,Coding,GitHub," />
+  <meta name="keywords" content="硬盘启动,grub," />
 
 
 
@@ -95,34 +95,21 @@
 
 
 
-<meta name="description" content="这篇博文主要是写搭建好博客以后，想要自己的网站能被其他人看到，那么最起码能在百度或者谷歌中搜索出来。">
-<meta name="keywords" content="域名,Hexo,DNS解析,百度抓取成功 (有跳转),谷歌收录,Coding,GitHub">
+<meta name="description" content="让mkfs()只执行一次目前我们的操作系统每次启动都是“全新的”，因为每一次init_fs()都会调用mkfs()刷新硬盘，每次启动时可以保证文件系统是一样，但它也存在明细的坏处，那就是上次建立的文件到下一次启动时就不见了。下面就来改变现状：1234567891011121314151617181920212223242526272829303132PRIVATE void init_fs()&amp;">
+<meta name="keywords" content="硬盘启动,grub">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo+Github+Coding+万网域名建站教学--如何被百度谷歌收录">
-<meta property="og:url" content="http://www.wcqwolflow.com/2018/01/18/Hexo-Github-Coding-万网域名建站教学-如何被百度谷歌收录/index.html">
+<meta property="og:title" content="《ORANGE-s-一个操作系统实现》尾声（9）">
+<meta property="og:url" content="http://www.wcqwolflow.com/2018/03/15/《ORANGE-s-一个操作系统实现》尾声（9）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="这篇博文主要是写搭建好博客以后，想要自己的网站能被其他人看到，那么最起码能在百度或者谷歌中搜索出来。">
+<meta property="og:description" content="让mkfs()只执行一次目前我们的操作系统每次启动都是“全新的”，因为每一次init_fs()都会调用mkfs()刷新硬盘，每次启动时可以保证文件系统是一样，但它也存在明细的坏处，那就是上次建立的文件到下一次启动时就不见了。下面就来改变现状：1234567891011121314151617181920212223242526272829303132PRIVATE void init_fs()&amp;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/dl6F3fBJf5.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/m7iG2bFADl.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/egLBga0aFh.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/4d26KE7J1j.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/4FgIcf5275.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/Iih6cCkfBE.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/eaJGmd6Bm9.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/LGkcDbmb97.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/L5E69k1cFf.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/D0laH6FbBe.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/DJhL2c1j03.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/BbA6a5Ii9i.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/iF1G54Aecb.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/bBiHb8Lf43.png?imageslim">
-<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/j2J4gaKa2d.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:47:30.730Z">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180315/fBCFE49ffG.png?imageslim">
+<meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180315/gA13hbGhjF.png?imageslim">
+<meta property="og:updated_time" content="2018-03-15T14:57:40.578Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo+Github+Coding+万网域名建站教学--如何被百度谷歌收录">
-<meta name="twitter:description" content="这篇博文主要是写搭建好博客以后，想要自己的网站能被其他人看到，那么最起码能在百度或者谷歌中搜索出来。">
-<meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180118/dl6F3fBJf5.png?imageslim">
+<meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》尾声（9）">
+<meta name="twitter:description" content="让mkfs()只执行一次目前我们的操作系统每次启动都是“全新的”，因为每一次init_fs()都会调用mkfs()刷新硬盘，每次启动时可以保证文件系统是一样，但它也存在明细的坏处，那就是上次建立的文件到下一次启动时就不见了。下面就来改变现状：1234567891011121314151617181920212223242526272829303132PRIVATE void init_fs()&amp;">
+<meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180315/fBCFE49ffG.png?imageslim">
 
 
 
@@ -152,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://www.wcqwolflow.com/2018/01/18/Hexo-Github-Coding-万网域名建站教学-如何被百度谷歌收录/"/>
+  <link rel="canonical" href="http://www.wcqwolflow.com/2018/03/15/《ORANGE-s-一个操作系统实现》尾声（9）/"/>
 
 
 
 
 
-  <title>Hexo+Github+Coding+万网域名建站教学--如何被百度谷歌收录 | Wang的宝库</title>
+  <title>《ORANGE-s-一个操作系统实现》尾声（9） | Wang的宝库</title>
   
 
 
@@ -340,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/01/18/Hexo-Github-Coding-万网域名建站教学-如何被百度谷歌收录/">
+    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/03/15/《ORANGE-s-一个操作系统实现》尾声（9）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王超群">
@@ -357,7 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo+Github+Coding+万网域名建站教学--如何被百度谷歌收录</h1>
+          <h1 class="post-title" itemprop="name headline">《ORANGE-s-一个操作系统实现》尾声（9）</h1>
         
 
         <div class="post-meta">
@@ -369,8 +356,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T17:01:20+08:00">
-                2018-01-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T12:44:52+08:00">
+                2018-03-15
               </time>
             
 
@@ -392,8 +379,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/博客搭建遇到的坑/" itemprop="url" rel="index">
-                    <span itemprop="name">博客搭建遇到的坑</span>
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/ORANGE-s的学习/" itemprop="url" rel="index">
+                    <span itemprop="name">ORANGE's的学习</span>
                   </a>
                 </span>
 
@@ -411,8 +409,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/01/18/Hexo-Github-Coding-万网域名建站教学-如何被百度谷歌收录/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/01/18/Hexo-Github-Coding-万网域名建站教学-如何被百度谷歌收录/" itemprop="commentsCount"></span>
+                <a href="/2018/03/15/《ORANGE-s-一个操作系统实现》尾声（9）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/15/《ORANGE-s-一个操作系统实现》尾声（9）/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -420,7 +418,7 @@
 
           
           
-             <span id="/2018/01/18/Hexo-Github-Coding-万网域名建站教学-如何被百度谷歌收录/" class="leancloud_visitors" data-flag-title="Hexo+Github+Coding+万网域名建站教学--如何被百度谷歌收录">
+             <span id="/2018/03/15/《ORANGE-s-一个操作系统实现》尾声（9）/" class="leancloud_visitors" data-flag-title="《ORANGE-s-一个操作系统实现》尾声（9）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -451,19 +449,19 @@
       
 
       
-        <p>这篇博文主要是写搭建好博客以后，想要自己的网站能被其他人看到，那么最起码能在百度或者谷歌中搜索出来。<br><a id="more"></a></p>
-<h1 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1.准备工作"></a>1.准备工作</h1><p>首先必须得满足以下条件才能用我的方法：</p>
-<ul>
-<li>一个备案过了的域名比如wcqwolflow.com,域名可以在<a href="https://wanwang.aliyun.com/" target="_blank" rel="noopener">万网</a>上买</li>
-<li>在Github上部署好的博客</li>
-<li>在Coding部署好的博客<br>被谷歌收录特别简单，但是被百度收录巨麻烦，Coding可以看成是国内的Github，因为Github嫌弃百度蜘蛛爬取的太频繁，所以屏蔽的百度。<br>所以我的思路就是，通过对我的域名的解析操作，<br>让国内的域名解析到Yourname.Coding.me<br>让国外的域名解析到Yourname.github.io<br>最后的成果就是可以通过<a href="http://tool.chinaz.com/dns/" target="_blank" rel="noopener">China.com</a>解析到如下图：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/dl6F3fBJf5.png?imageslim" alt="mark"><h1 id="2-具体步骤"><a href="#2-具体步骤" class="headerlink" title="2.具体步骤"></a>2.具体步骤</h1><h3 id="第一步：在Github和Coding上同时部署和发布你的小站"><a href="#第一步：在Github和Coding上同时部署和发布你的小站" class="headerlink" title="第一步：在Github和Coding上同时部署和发布你的小站"></a>第一步：在Github和Coding上同时部署和发布你的小站</h3>这个网上教程一大堆，最后的结果就是执行命令<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo clean</span></span><br><span class="line"><span class="attribute">hexo g</span></span><br><span class="line"><span class="attribute">hexo d</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>后，在Coding和Github上都可以看到自己的博客文件<br>如下：<br>Coding：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/m7iG2bFADl.png?imageslim" alt="mark"><br>Github：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/egLBga0aFh.png?imageslim" alt="mark"></p>
-<h3 id="第二步：在Github和Coding上都绑定自己的域名"><a href="#第二步：在Github和Coding上都绑定自己的域名" class="headerlink" title="第二步：在Github和Coding上都绑定自己的域名"></a>第二步：在Github和Coding上都绑定自己的域名</h3><p>其中要在Coding的Page服务里修改成如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/4d26KE7J1j.png?imageslim" alt="mark"><br>在Github的Setting里修改成如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/4FgIcf5275.png?imageslim" alt="mark"><br>第三步：注册DNSPOD，并在购买域名的商家处修改DNS服务器为图中记录类型为NS的地方：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/Iih6cCkfBE.png?imageslim" alt="mark"><br>在这里解释下为什么选择DNSPOD，我在万网买的一年的域名，但是万网的线路类型选择了世界以后，在DNS解析时，还是没法将海外的解析成wcq19941215.github.io，所以换成了DNSPOD图中的参数设置：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/eaJGmd6Bm9.png?imageslim" alt="mark"><br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/LGkcDbmb97.png?imageslim" alt="mark"></p>
-<p>到此，域名设置都完成了，我们可以在百度和谷歌里输入site:你的域名。<br>会显示类似下图的样子：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/L5E69k1cFf.png?imageslim" alt="mark"><br>我们点击<strong>提交网址</strong><br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/D0laH6FbBe.png?imageslim" alt="mark"><br>可以看到上面的图片，具体怎么提交给百度和谷歌的方式有一大堆，可以自己去看看。</p>
-<h1 id="3-最关键的地方"><a href="#3-最关键的地方" class="headerlink" title="3.最关键的地方"></a>3.最关键的地方</h1><p>你如果按照我的做了，你在如图画圈的地方应该看到的是<strong>抓取成功 (有跳转)</strong>，那么意味着，百度蜘蛛永远无法爬取到你的网站：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/DJhL2c1j03.png?imageslim" alt="mark"><br>这是因为Coding的银牌会员默认是跳转首页，然后再跳转到你的仓库的，解决办法如下：<br>首先在Coding的Page服务页面找到这个<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/BbA6a5Ii9i.png?imageslim" alt="mark"><br>然后在你网站首页加上这个：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/iF1G54Aecb.png?imageslim" alt="mark"><br>加这个的方法是，在你本地找到hexo放置的地方themes\next\layout_partials\footer.swig 加上下面代码如图：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/bBiHb8Lf43.png?imageslim" alt="mark"><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">  Hosted by <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://pages.coding.me"</span> <span class="attr">style</span>=<span class="string">"font-weight: bold"</span>&gt;</span>Coding Pages<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>两天左右，等DNS迭代递归全球服务器解析完成和Coding首页审核完成，你就会在百度中看到这个：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180118/j2J4gaKa2d.png?imageslim" alt="mark"></p>
+        <a id="more"></a>
+<h1 id="让mkfs-只执行一次"><a href="#让mkfs-只执行一次" class="headerlink" title="让mkfs()只执行一次"></a>让mkfs()只执行一次</h1><p>目前我们的操作系统每次启动都是“全新的”，因为每一次init_fs()都会调用mkfs()刷新硬盘，每次启动时可以保证文件系统是一样，但它也存在明细的坏处，那就是上次建立的文件到下一次启动时就不见了。下面就来改变现状：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">PRIVATE void init_fs()</span><br><span class="line">&#123;</span><br><span class="line">	int i<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* f_desc_table[] */</span></span><br><span class="line">	for (i = <span class="number">0</span><span class="comment">; i &lt; NR_FILE_DESC; i++)</span></span><br><span class="line">		memset(&amp;f_desc_table[i], <span class="number">0</span>, sizeof(struct file_desc))<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* inode_table[] */</span></span><br><span class="line">	for (i = <span class="number">0</span><span class="comment">; i &lt; NR_INODE; i++)</span></span><br><span class="line">		memset(&amp;inode_table[i], <span class="number">0</span>, sizeof(struct inode))<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* super_block[] */</span></span><br><span class="line">	struct super_block * <span class="keyword">sb </span>= super_block<span class="comment">;</span></span><br><span class="line">	for (<span class="comment">; sb &lt; &amp;super_block[NR_SUPER_BLOCK]; sb++)</span></span><br><span class="line">		<span class="keyword">sb-&gt;sb_dev </span>= NO_DEV<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* open the device: hard disk */</span></span><br><span class="line">	MESSAGE driver_msg<span class="comment">;</span></span><br><span class="line">	driver_msg.type = DEV_OPEN<span class="comment">;</span></span><br><span class="line">	driver_msg.DEVICE = MINOR(ROOT_DEV)<span class="comment">;</span></span><br><span class="line">	assert(dd_map[MAJOR(ROOT_DEV)].driver_nr != INVALID_DRIVER)<span class="comment">;</span></span><br><span class="line">	send_recv(<span class="keyword">BOTH, </span>dd_map[MAJOR(ROOT_DEV)].driver_nr, &amp;driver_msg)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* read the super block of ROOT DEVICE */</span></span><br><span class="line">	RD_SECT(ROOT_DEV, <span class="number">1</span>)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">sb </span>= (struct super_block *)fsbuf<span class="comment">;</span></span><br><span class="line">	if (<span class="keyword">sb-&gt;magic </span>!= MAGIC_V1) &#123;</span><br><span class="line">		printl(<span class="string">"&#123;FS&#125; mkfs\n"</span>)<span class="comment">;</span></span><br><span class="line">		mkfs()<span class="comment">; /* make FS */</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>只需要每次先读取超级块，如果发现魔数，则认为分区已经操作系统，否则调用mkfs()。<br>然后在untar()上留下记号，让它不再一股脑的解压了。<br>运行结果如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180315/fBCFE49ffG.png?imageslim" alt="mark"></p>
+<h1 id="从硬盘引导"><a href="#从硬盘引导" class="headerlink" title="从硬盘引导"></a>从硬盘引导</h1><p>前面都是从软盘引导的，现在我们从硬盘引导，先看看软盘引导的过程：</p>
+<ol>
+<li>BIOS将引导扇区读入内存0000：7c00处</li>
+<li>跳转到0000:7c00处开始执行引导代码</li>
+<li>引导代码从软盘中找到loader.bin，并将其读入内存</li>
+<li>跳转到loader.bin开始执行</li>
+<li>loader.bin从软盘中找到kernel.bin，并将其读入内存</li>
+<li>跳转到kernel.bin开始执行，到此可认为启动过程结束</li>
+<li>系统运行<br>硬盘启动和软盘的启动的区别在于第一步，BIOS到底是读谁，由CMOS设置决定，通常可以找到一个叫做Boot Sequence的选项，从中选择首选启动设备。在第3步和第5步中，对于软盘启动，代码将在软盘中寻找loader.bin和kernel.bin，对应硬盘启动，我们需要让引导扇区代码从硬盘中寻找loader.bin和kernel.bin。<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180315/gA13hbGhjF.png?imageslim" alt="mark"><h1 id="grub"><a href="#grub" class="headerlink" title="grub"></a>grub</h1>将引导扇区安装到我们的操作系统分区的引导扇区，而不是整块硬盘的引导扇区，这样操作系统就可以和硬盘上其他操作系统和平共处了。只需要安装一个grub就可以了<h1 id="将OS安装到真实的计算机"><a href="#将OS安装到真实的计算机" class="headerlink" title="将OS安装到真实的计算机"></a>将OS安装到真实的计算机</h1></li>
+</ol>
 
       
     </div>
@@ -510,19 +508,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/域名/" rel="tag"># 域名</a>
+            <a href="/tags/硬盘启动/" rel="tag"># 硬盘启动</a>
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-          
-            <a href="/tags/DNS解析/" rel="tag"># DNS解析</a>
-          
-            <a href="/tags/百度抓取成功-有跳转/" rel="tag"># 百度抓取成功 (有跳转)</a>
-          
-            <a href="/tags/谷歌收录/" rel="tag"># 谷歌收录</a>
-          
-            <a href="/tags/Coding/" rel="tag"># Coding</a>
-          
-            <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+            <a href="/tags/grub/" rel="tag"># grub</a>
           
         </div>
       
@@ -535,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/16/《ORANGE-s-一个操作系统实现》保护模式（2-1）/" rel="next" title="《ORANGE-s-一个操作系统实现》保护模式（2.1）">
-                <i class="fa fa-chevron-left"></i> 《ORANGE-s-一个操作系统实现》保护模式（2.1）
+              <a href="/2018/03/14/《ORANGE-s-一个操作系统实现》内存管理（8）/" rel="next" title="《ORANGE-s-一个操作系统实现》内存管理（8）">
+                <i class="fa fa-chevron-left"></i> 《ORANGE-s-一个操作系统实现》内存管理（8）
               </a>
             
           </div>
@@ -544,10 +532,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/20/《ORANGE-s-一个操作系统实现》保护模式（2-2）/" rel="prev" title="《ORANGE-s-一个操作系统实现》保护模式（2-2）">
-                《ORANGE-s-一个操作系统实现》保护模式（2-2） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -742,7 +726,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-准备工作"><span class="nav-number">1.</span> <span class="nav-text">1.准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-具体步骤"><span class="nav-number">2.</span> <span class="nav-text">2.具体步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：在Github和Coding上同时部署和发布你的小站"><span class="nav-number">2.0.1.</span> <span class="nav-text">第一步：在Github和Coding上同时部署和发布你的小站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：在Github和Coding上都绑定自己的域名"><span class="nav-number">2.0.2.</span> <span class="nav-text">第二步：在Github和Coding上都绑定自己的域名</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-最关键的地方"><span class="nav-number">3.</span> <span class="nav-text">3.最关键的地方</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#让mkfs-只执行一次"><span class="nav-number">1.</span> <span class="nav-text">让mkfs()只执行一次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从硬盘引导"><span class="nav-number">2.</span> <span class="nav-text">从硬盘引导</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grub"><span class="nav-number">3.</span> <span class="nav-text">grub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将OS安装到真实的计算机"><span class="nav-number">4.</span> <span class="nav-text">将OS安装到真实的计算机</span></a></li></ol></div>
             
 
           </div>

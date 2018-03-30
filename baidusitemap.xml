@@ -4,151 +4,41 @@
 
     
   <url>
-    <loc>http://www.wcqwolflow.com/2018/03/14/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%888%EF%BC%89/</loc>
-    <lastmod>2018-03-15T04:41:14.076Z</lastmod>
+    <loc>http://www.wcqwolflow.com/2018/01/04/%E7%8E%8B%E8%B6%85%E7%BE%A4%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%B8%96%E7%95%8C/</loc>
+    <lastmod>2018-03-30T03:47:59.963Z</lastmod>
     <data>
         <display>
-        <title>《ORANGE-s-一个操作系统实现》内存管理（8）</title>
-        <pubTime>2018-03-14T03:21:27.000Z</pubTime>
+        <title>王超群的博客世界</title>
+        <pubTime>2018-01-04T12:30:22.000Z</pubTime>
         
-        <tag>Shell</tag>
+        <tag>江汉大学</tag>
          
-        <tag>内存管理</tag>
+        <tag>HEXO</tag>
+         
+        <tag>Orange S：一个操作系统的实现(有光盘)</tag>
          
          
            
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
         </display>
     </data>
     </url>
 
     
   <url>
-    <loc>http://www.wcqwolflow.com/2018/03/10/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%EF%BC%887-2%EF%BC%89/</loc>
-    <lastmod>2018-03-13T07:44:01.950Z</lastmod>
+    <loc>http://www.wcqwolflow.com/2018/01/08/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%880%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:47:52.482Z</lastmod>
     <data>
         <display>
-        <title>《ORANGE-s-一个操作系统实现》文件管理（7-2）</title>
-        <pubTime>2018-03-10T06:50:05.000Z</pubTime>
+        <title>《ORANGE's:一个操作系统实现》准备工作（0）</title>
+        <pubTime>2018-01-08T04:29:12.000Z</pubTime>
         
-        <tag>文件读写</tag>
+        <tag>NASM</tag>
          
-        <tag>文件描述符</tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/03/10/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%EF%BC%887-1%EF%BC%89/</loc>
-    <lastmod>2018-03-10T12:01:38.346Z</lastmod>
-    <data>
-        <display>
-        <title>《ORANGE-s-一个操作系统实现》文件管理（7-1）</title>
-        <pubTime>2018-03-10T06:49:47.000Z</pubTime>
-        
-        <tag>文件管理</tag>
-         
-        <tag>设备号</tag>
-         
-        <tag>硬盘驱动程序</tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/03/07/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%886%EF%BC%89/</loc>
-    <lastmod>2018-03-07T07:54:10.422Z</lastmod>
-    <data>
-        <display>
-        <title>《ORANGE-s-一个操作系统实现》进程间通信（6-1）</title>
-        <pubTime>2018-03-07T01:29:39.000Z</pubTime>
-        
-        <tag>系统调用</tag>
-         
-        <tag>IPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/03/06/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-2%EF%BC%89/</loc>
-    <lastmod>2018-03-06T13:03:06.057Z</lastmod>
-    <data>
-        <display>
-        <title>《ORANGE-s-一个操作系统实现》输入输出系统（5-2）</title>
-        <pubTime>2018-03-06T02:11:03.000Z</pubTime>
-        
-        <tag>于渊</tag>
-         
-        <tag>系统调用</tag>
-         
-        <tag>显示器</tag>
-         
-        <tag>TTY</tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/03/06/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-1%EF%BC%89/</loc>
-    <lastmod>2018-03-06T03:26:01.633Z</lastmod>
-    <data>
-        <display>
-        <title>《ORANGE-s-一个操作系统实现》输入输出系统（5-1）</title>
-        <pubTime>2018-03-06T02:10:52.000Z</pubTime>
-        
         <tag>操作系统</tag>
          
-        <tag>键盘交互</tag>
+        <tag>于渊</tag>
          
-        <tag>AT、PS/2键盘</tag>
-         
-        <tag>键盘扫描码</tag>
+        <tag>虚拟机</tag>
          
          
            
@@ -164,20 +54,209 @@
 
     
   <url>
-    <loc>http://www.wcqwolflow.com/2018/03/04/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BF%9B%E7%A8%8B%EF%BC%884-2%EF%BC%89/</loc>
-    <lastmod>2018-03-05T15:21:09.993Z</lastmod>
+    <loc>http://www.wcqwolflow.com/2018/01/16/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%EF%BC%882-1%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:47:38.155Z</lastmod>
     <data>
         <display>
-        <title>《ORANGE-s-一个操作系统实现》进程（4-2）</title>
-        <pubTime>2018-03-04T03:44:50.000Z</pubTime>
+        <title>《ORANGE-s-一个操作系统实现》保护模式（2.1）</title>
+        <pubTime>2018-01-16T05:18:52.000Z</pubTime>
         
-        <tag>进程调度</tag>
+        <tag>保护模式</tag>
          
-        <tag>多进程</tag>
+        <tag>Bochs</tag>
          
-        <tag>8253/8254</tag>
+        <tag>NASM</tag>
          
-        <tag>PIT</tag>
+        <tag>操作系统</tag>
+         
+        <tag>于渊</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/01/18/Hexo-Github-Coding-%E4%B8%87%E7%BD%91%E5%9F%9F%E5%90%8D%E5%BB%BA%E7%AB%99%E6%95%99%E5%AD%A6-%E5%A6%82%E4%BD%95%E8%A2%AB%E7%99%BE%E5%BA%A6%E8%B0%B7%E6%AD%8C%E6%94%B6%E5%BD%95/</loc>
+    <lastmod>2018-03-30T03:47:30.730Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo+Github+Coding+万网域名建站教学--如何被百度谷歌收录</title>
+        <pubTime>2018-01-18T09:01:20.000Z</pubTime>
+        
+        <tag>域名</tag>
+         
+        <tag>Hexo</tag>
+         
+        <tag>DNS解析</tag>
+         
+        <tag>百度抓取成功 (有跳转)</tag>
+         
+        <tag>谷歌收录</tag>
+         
+        <tag>Coding</tag>
+         
+        <tag>GitHub</tag>
+         
+         
+           
+             
+              <breadCrumb title="博客搭建遇到的坑" url="http://www.wcqwolflow.com/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/01/20/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%EF%BC%882-2%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:47:23.469Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》保护模式（2-2）</title>
+        <pubTime>2018-01-20T07:27:03.000Z</pubTime>
+        
+        <tag>保护模式</tag>
+         
+        <tag>Bochs</tag>
+         
+        <tag>NASM</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>于渊</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/01/24/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%EF%BC%882-3%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:47:01.423Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》保护模式（2-3）</title>
+        <pubTime>2018-01-24T09:03:36.000Z</pubTime>
+        
+        <tag>保护模式</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>于渊</tag>
+         
+        <tag>页式存储</tag>
+         
+        <tag>中断和异常</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/02/27/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%EF%BC%882-4%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:46:45.241Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》保护模式（2-4）</title>
+        <pubTime>2018-02-27T02:29:00.000Z</pubTime>
+        
+        <tag>保护模式</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>于渊</tag>
+         
+        <tag>FAT12</tag>
+         
+        <tag>Loader</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/02/28/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%86%85%E6%A0%B8%E9%9B%8F%E5%BD%A2%EF%BC%883-1%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:46:36.720Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》内核雏形（3-1）</title>
+        <pubTime>2018-02-28T02:42:13.000Z</pubTime>
+        
+        <tag>NASM</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>于渊</tag>
+         
+        <tag>内核</tag>
+         
+        <tag>ELF</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/02/28/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%86%85%E6%A0%B8%E9%9B%8F%E5%BD%A2%EF%BC%883-2%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:46:30.397Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》内核雏形（3-2）</title>
+        <pubTime>2018-02-28T10:04:31.000Z</pubTime>
+        
+        <tag>NASM</tag>
+         
+        <tag>操作系统</tag>
+         
+        <tag>于渊</tag>
+         
+        <tag>内核</tag>
+         
+        <tag>ELF</tag>
          
          
            
@@ -194,7 +273,7 @@
     
   <url>
     <loc>http://www.wcqwolflow.com/2018/03/04/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BF%9B%E7%A8%8B%EF%BC%884-1%EF%BC%89/</loc>
-    <lastmod>2018-03-04T12:09:50.018Z</lastmod>
+    <lastmod>2018-03-30T03:46:22.260Z</lastmod>
     <data>
         <display>
         <title>《ORANGE-s-一个操作系统实现》进程（4-1）</title>
@@ -222,22 +301,20 @@
 
     
   <url>
-    <loc>http://www.wcqwolflow.com/2018/02/28/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%86%85%E6%A0%B8%E9%9B%8F%E5%BD%A2%EF%BC%883-2%EF%BC%89/</loc>
-    <lastmod>2018-03-01T12:44:50.523Z</lastmod>
+    <loc>http://www.wcqwolflow.com/2018/03/04/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BF%9B%E7%A8%8B%EF%BC%884-2%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:46:13.260Z</lastmod>
     <data>
         <display>
-        <title>《ORANGE-s-一个操作系统实现》内核雏形（3-2）</title>
-        <pubTime>2018-02-28T10:04:31.000Z</pubTime>
+        <title>《ORANGE-s-一个操作系统实现》进程（4-2）</title>
+        <pubTime>2018-03-04T03:44:50.000Z</pubTime>
         
-        <tag>操作系统</tag>
+        <tag>进程调度</tag>
          
-        <tag>于渊</tag>
+        <tag>多进程</tag>
          
-        <tag>NASM</tag>
+        <tag>8253/8254</tag>
          
-        <tag>内核</tag>
-         
-        <tag>ELF</tag>
+        <tag>PIT</tag>
          
          
            
@@ -253,22 +330,20 @@
 
     
   <url>
-    <loc>http://www.wcqwolflow.com/2018/02/28/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%86%85%E6%A0%B8%E9%9B%8F%E5%BD%A2%EF%BC%883-1%EF%BC%89/</loc>
-    <lastmod>2018-02-28T10:04:03.556Z</lastmod>
+    <loc>http://www.wcqwolflow.com/2018/03/06/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-1%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:46:07.416Z</lastmod>
     <data>
         <display>
-        <title>《ORANGE-s-一个操作系统实现》内核雏形（3-1）</title>
-        <pubTime>2018-02-28T02:42:13.000Z</pubTime>
+        <title>《ORANGE-s-一个操作系统实现》输入输出系统（5-1）</title>
+        <pubTime>2018-03-06T02:10:52.000Z</pubTime>
         
         <tag>操作系统</tag>
          
-        <tag>于渊</tag>
+        <tag>键盘交互</tag>
          
-        <tag>NASM</tag>
+        <tag>AT、PS/2键盘</tag>
          
-        <tag>内核</tag>
-         
-        <tag>ELF</tag>
+        <tag>键盘扫描码</tag>
          
          
            
@@ -284,22 +359,178 @@
 
     
   <url>
-    <loc>http://www.wcqwolflow.com/2018/02/27/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%EF%BC%882-4%EF%BC%89/</loc>
-    <lastmod>2018-02-27T11:39:57.317Z</lastmod>
+    <loc>http://www.wcqwolflow.com/2018/03/06/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F%EF%BC%885-2%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:46:01.557Z</lastmod>
     <data>
         <display>
-        <title>《ORANGE-s-一个操作系统实现》保护模式（2-4）</title>
-        <pubTime>2018-02-27T02:29:00.000Z</pubTime>
+        <title>《ORANGE-s-一个操作系统实现》输入输出系统（5-2）</title>
+        <pubTime>2018-03-06T02:11:03.000Z</pubTime>
         
-        <tag>保护模式</tag>
+        <tag>于渊</tag>
+         
+        <tag>系统调用</tag>
+         
+        <tag>显示器</tag>
+         
+        <tag>TTY</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/03/07/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%886%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:45:53.530Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》进程间通信（6-1）</title>
+        <pubTime>2018-03-07T01:29:39.000Z</pubTime>
+        
+        <tag>系统调用</tag>
+         
+        <tag>IPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/03/10/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%EF%BC%887-1%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:45:45.292Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》文件管理（7-1）</title>
+        <pubTime>2018-03-10T06:49:47.000Z</pubTime>
+        
+        <tag>文件管理</tag>
+         
+        <tag>设备号</tag>
+         
+        <tag>硬盘驱动程序</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/03/10/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%EF%BC%887-2%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:45:37.177Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》文件管理（7-2）</title>
+        <pubTime>2018-03-10T06:50:05.000Z</pubTime>
+        
+        <tag>文件读写</tag>
+         
+        <tag>文件描述符</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/03/14/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%888%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:45:30.042Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》内存管理（8）</title>
+        <pubTime>2018-03-14T03:21:27.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+        <tag>内存管理</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/01/08/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E6%90%AD%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%EF%BC%881%EF%BC%89/</loc>
+    <lastmod>2018-03-30T03:45:19.112Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE's:一个操作系统实现》搭建工作环境（1）</title>
+        <pubTime>2018-01-08T04:37:48.000Z</pubTime>
+        
+        <tag>NASM</tag>
          
         <tag>操作系统</tag>
          
         <tag>于渊</tag>
          
-        <tag>FAT12</tag>
+        <tag>Bochs2.6.9虚拟机</tag>
          
-        <tag>Loader</tag>
+        <tag>Bochs配置</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+             
+              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wcqwolflow.com/2018/03/15/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%B0%BE%E5%A3%B0%EF%BC%889%EF%BC%89/</loc>
+    <lastmod>2018-03-15T14:57:40.578Z</lastmod>
+    <data>
+        <display>
+        <title>《ORANGE-s-一个操作系统实现》尾声（9）</title>
+        <pubTime>2018-03-15T04:44:52.000Z</pubTime>
+        
+        <tag>硬盘启动</tag>
+         
+        <tag>grub</tag>
          
          
            
@@ -342,214 +573,8 @@
     </url>
 
     
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/01/24/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%EF%BC%882-3%EF%BC%89/</loc>
-    <lastmod>2018-01-27T10:57:44.659Z</lastmod>
-    <data>
-        <display>
-        <title>《ORANGE-s-一个操作系统实现》保护模式（2-3）</title>
-        <pubTime>2018-01-24T09:03:36.000Z</pubTime>
-        
-        <tag>保护模式</tag>
-         
-        <tag>页式存储</tag>
-         
-        <tag>中断和异常</tag>
-         
-        <tag>操作系统</tag>
-         
-        <tag>于渊</tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
     
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/01/20/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%EF%BC%882-2%EF%BC%89/</loc>
-    <lastmod>2018-01-24T08:59:58.416Z</lastmod>
-    <data>
-        <display>
-        <title>《ORANGE-s-一个操作系统实现》保护模式（2-2）</title>
-        <pubTime>2018-01-20T07:27:03.000Z</pubTime>
-        
-        <tag>保护模式</tag>
-         
-        <tag>操作系统</tag>
-         
-        <tag>于渊</tag>
-         
-        <tag>Bochs</tag>
-         
-        <tag>NASM</tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/01/18/Hexo-Github-Coding-%E4%B8%87%E7%BD%91%E5%9F%9F%E5%90%8D%E5%BB%BA%E7%AB%99%E6%95%99%E5%AD%A6-%E5%A6%82%E4%BD%95%E8%A2%AB%E7%99%BE%E5%BA%A6%E8%B0%B7%E6%AD%8C%E6%94%B6%E5%BD%95/</loc>
-    <lastmod>2018-01-18T13:08:32.021Z</lastmod>
-    <data>
-        <display>
-        <title>Hexo+Github+Coding+万网域名建站教学--如何被百度谷歌收录</title>
-        <pubTime>2018-01-18T09:01:20.000Z</pubTime>
-        
-        <tag>域名</tag>
-         
-        <tag>Hexo</tag>
-         
-        <tag>DNS解析</tag>
-         
-        <tag>百度抓取成功 (有跳转)</tag>
-         
-        <tag>谷歌收录</tag>
-         
-        <tag>Coding</tag>
-         
-        <tag>GitHub</tag>
-         
-         
-           
-             
-              <breadCrumb title="博客搭建遇到的坑" url="http://www.wcqwolflow.com/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/01/16/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%EF%BC%882-1%EF%BC%89/</loc>
-    <lastmod>2018-01-18T08:45:35.356Z</lastmod>
-    <data>
-        <display>
-        <title>《ORANGE-s-一个操作系统实现》保护模式（2.1）</title>
-        <pubTime>2018-01-16T05:18:52.000Z</pubTime>
-        
-        <tag>保护模式</tag>
-         
-        <tag>操作系统</tag>
-         
-        <tag>于渊</tag>
-         
-        <tag>Bochs</tag>
-         
-        <tag>NASM</tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/01/08/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E6%90%AD%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%EF%BC%881%EF%BC%89/</loc>
-    <lastmod>2018-01-10T12:29:11.916Z</lastmod>
-    <data>
-        <display>
-        <title>《ORANGE's:一个操作系统实现》搭建工作环境（1）</title>
-        <pubTime>2018-01-08T04:37:48.000Z</pubTime>
-        
-        <tag>操作系统</tag>
-         
-        <tag>于渊</tag>
-         
-        <tag>NASM</tag>
-         
-        <tag>Bochs2.6.9虚拟机</tag>
-         
-        <tag>Bochs配置</tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/01/08/%E3%80%8AORANGE-s-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%880%EF%BC%89/</loc>
-    <lastmod>2018-01-09T11:27:34.476Z</lastmod>
-    <data>
-        <display>
-        <title>《ORANGE's:一个操作系统实现》准备工作（0）</title>
-        <pubTime>2018-01-08T04:29:12.000Z</pubTime>
-        
-        <tag>操作系统</tag>
-         
-        <tag>于渊</tag>
-         
-        <tag>NASM</tag>
-         
-        <tag>虚拟机</tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="ORANGE&#39;s的学习" url="http://www.wcqwolflow.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ORANGE-s%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
-    <loc>http://www.wcqwolflow.com/2018/01/04/%E7%8E%8B%E8%B6%85%E7%BE%A4%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%B8%96%E7%95%8C/</loc>
-    <lastmod>2018-01-08T07:56:46.689Z</lastmod>
-    <data>
-        <display>
-        <title>王超群的博客世界</title>
-        <pubTime>2018-01-04T12:30:22.000Z</pubTime>
-        
-        <tag>江汉大学</tag>
-         
-        <tag>HEXO</tag>
-         
-        <tag>Orange S：一个操作系统的实现(有光盘)</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
     
     
 </urlset>

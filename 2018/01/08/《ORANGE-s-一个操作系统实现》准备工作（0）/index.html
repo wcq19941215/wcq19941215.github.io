@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="操作系统,于渊,NASM,虚拟机," />
+  <meta name="keywords" content="NASM,操作系统,于渊,虚拟机," />
 
 
 
@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="马上开始动手写最小的一个“操作系统” 1.准备的工具 具有Window或者Linux的计算机 汇编编译器NASM下载地址：http://www.nasm.us/ VM虚拟机（11.1.3） MASM2015当作汇编的编辑器">
-<meta name="keywords" content="操作系统,于渊,NASM,虚拟机">
+<meta name="description" content="马上开始动手写最小的一个“操作系统” 1.准备的工具 具有Window或者Linux的计算机 汇编编译器NASM下载地址：http://www.nasm.us/ VM虚拟机（11.1.3） MASM2015当作汇编的编辑器 2.操作系统源码123456789101112131415161718	org   07c00h ;告诉编译器程序加载到7c00处	mov   ax,cs  	mov   d">
+<meta name="keywords" content="NASM,操作系统,于渊,虚拟机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE&#39;s:一个操作系统实现》准备工作（0）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/01/08/《ORANGE-s-一个操作系统实现》准备工作（0）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="马上开始动手写最小的一个“操作系统” 1.准备的工具 具有Window或者Linux的计算机 汇编编译器NASM下载地址：http://www.nasm.us/ VM虚拟机（11.1.3） MASM2015当作汇编的编辑器">
+<meta property="og:description" content="马上开始动手写最小的一个“操作系统” 1.准备的工具 具有Window或者Linux的计算机 汇编编译器NASM下载地址：http://www.nasm.us/ VM虚拟机（11.1.3） MASM2015当作汇编的编辑器 2.操作系统源码123456789101112131415161718	org   07c00h ;告诉编译器程序加载到7c00处	mov   ax,cs  	mov   d">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180109/BCkJ6F151e.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180109/5KG10BH2cK.png?imageslim">
@@ -113,10 +113,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180109/aAbgGgg08h.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180109/4hDBeIEhl2.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180109/LEB5778Fa8.png?imageslim">
-<meta property="og:updated_time" content="2018-01-09T11:27:34.476Z">
+<meta property="og:updated_time" content="2018-03-30T03:47:52.482Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE&#39;s:一个操作系统实现》准备工作（0）">
-<meta name="twitter:description" content="马上开始动手写最小的一个“操作系统” 1.准备的工具 具有Window或者Linux的计算机 汇编编译器NASM下载地址：http://www.nasm.us/ VM虚拟机（11.1.3） MASM2015当作汇编的编辑器">
+<meta name="twitter:description" content="马上开始动手写最小的一个“操作系统” 1.准备的工具 具有Window或者Linux的计算机 汇编编译器NASM下载地址：http://www.nasm.us/ VM虚拟机（11.1.3） MASM2015当作汇编的编辑器 2.操作系统源码123456789101112131415161718	org   07c00h ;告诉编译器程序加载到7c00处	mov   ax,cs  	mov   d">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180109/BCkJ6F151e.png?imageslim">
 
 
@@ -457,12 +457,13 @@
       
 
       
-        <p>马上开始动手写最小的一个“操作系统”</p>
+        <a id="more"></a>
+<p>马上开始动手写最小的一个“操作系统”</p>
 <h1 id="1-准备的工具"><a href="#1-准备的工具" class="headerlink" title="1.准备的工具"></a>1.准备的工具</h1><ul>
 <li>具有Window或者Linux的计算机</li>
 <li>汇编编译器NASM下载地址：<a href="http://www.nasm.us/" target="_blank" rel="noopener">http://www.nasm.us/</a></li>
 <li>VM虚拟机（11.1.3）</li>
-<li>MASM2015当作汇编的编辑器<a id="more"></a>
+<li>MASM2015当作汇编的编辑器<!-- more -->
 <h1 id="2-操作系统源码"><a href="#2-操作系统源码" class="headerlink" title="2.操作系统源码"></a>2.操作系统源码</h1><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">	org   <span class="number">07c00h</span> <span class="comment">;告诉编译器程序加载到7c00处</span></span><br><span class="line">	<span class="keyword">mov</span>   <span class="built_in">ax</span>,<span class="built_in">cs</span>  </span><br><span class="line">	<span class="keyword">mov</span>   <span class="built_in">ds</span>,<span class="built_in">ax</span></span><br><span class="line">	<span class="keyword">mov</span>   <span class="built_in">es</span>,<span class="built_in">ax</span></span><br><span class="line">	<span class="keyword">call</span>  DispStr <span class="comment">;调用显示字符串例程</span></span><br><span class="line">	<span class="keyword">jmp</span>   $        <span class="comment">;无限循环</span></span><br><span class="line"><span class="symbol">DispStr:</span></span><br><span class="line">	<span class="keyword">mov</span>   <span class="built_in">ax</span>,  BootMessage</span><br><span class="line">	<span class="keyword">mov</span>   <span class="built_in">bp</span>, <span class="built_in">ax</span>    <span class="comment">;ES:BP=串地址</span></span><br><span class="line">	<span class="keyword">mov</span>   <span class="built_in">cx</span>, <span class="number">16</span>    <span class="comment">;CX=串长度</span></span><br><span class="line">	<span class="keyword">mov</span>   <span class="built_in">ax</span>, <span class="number">01301h</span> <span class="comment">;AH=13,AL=01h</span></span><br><span class="line">	<span class="keyword">mov</span>   <span class="built_in">bx</span>, <span class="number">000ch</span>  <span class="comment">;页号为0（BH=0）黑底红字（Bl=OCh，高亮）</span></span><br><span class="line">	<span class="keyword">mov</span>	  <span class="built_in">dl</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">int</span>	  <span class="number">10h</span>          <span class="comment">;10h号中断</span></span><br><span class="line">	<span class="keyword">ret</span></span><br><span class="line"><span class="symbol">BootMessage:</span>		<span class="built_in">db</span>	<span class="string">"His World dwj!"</span> </span><br><span class="line"><span class="built_in">times</span> 	<span class="number">510</span>-($-$$)	<span class="built_in">db</span>	<span class="number">0</span>	<span class="comment">; 填充剩下的空间，使生成的二进制代码恰好为512字节</span></span><br><span class="line"><span class="built_in">dw</span> 	<span class="number">0xaa55</span>				<span class="comment">; 结束标志</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -525,11 +526,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/NASM/" rel="tag"># NASM</a>
+          
             <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
             <a href="/tags/于渊/" rel="tag"># 于渊</a>
-          
-            <a href="/tags/NASM/" rel="tag"># NASM</a>
           
             <a href="/tags/虚拟机/" rel="tag"># 虚拟机</a>
           
@@ -668,7 +669,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -690,7 +691,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
