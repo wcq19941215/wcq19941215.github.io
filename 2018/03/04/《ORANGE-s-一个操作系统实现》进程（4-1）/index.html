@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="进程概述进程介绍系统中运行的若干进程可以类比成一个人在一天内要做的若干样工作：总体看来，每样工作相对独立，并可产生某种结果；从细节上看，每样工作都具有自己的办法、工具和需要的资源；从时间上看，每一个时刻只能有一项工作正在处理中，各项工作可以轮换来做，这对于最终结果没有影响。进程类似，从宏观上看，它有自己的目标，或者说功能，同时又能受控于进程调度模块，从微观来看，她可以利用系统的资源，有自己的代码">
+<meta name="description" content="进程概述进程介绍系统中运行的若干进程可以类比成一个人在一天内要做的若干样工作：总体看来，每样工作相对独立，并可产生某种结果；从细节上看，每样工作都具有自己的办法、工具和需要的资源；从时间上看，每一个时刻只能有一项工作正在处理中，各项工作可以轮换来做，这对于最终结果没有影响。进程类似，从宏观上看，它有自己的目标，或者说功能，同时又能受控于进程调度模块，从微观来看，她可以利用系统的资源，有自己的代码和">
 <meta name="keywords" content="操作系统,于渊,进程,中断重入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》进程（4-1）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/03/04/《ORANGE-s-一个操作系统实现》进程（4-1）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="进程概述进程介绍系统中运行的若干进程可以类比成一个人在一天内要做的若干样工作：总体看来，每样工作相对独立，并可产生某种结果；从细节上看，每样工作都具有自己的办法、工具和需要的资源；从时间上看，每一个时刻只能有一项工作正在处理中，各项工作可以轮换来做，这对于最终结果没有影响。进程类似，从宏观上看，它有自己的目标，或者说功能，同时又能受控于进程调度模块，从微观来看，她可以利用系统的资源，有自己的代码">
+<meta property="og:description" content="进程概述进程介绍系统中运行的若干进程可以类比成一个人在一天内要做的若干样工作：总体看来，每样工作相对独立，并可产生某种结果；从细节上看，每样工作都具有自己的办法、工具和需要的资源；从时间上看，每一个时刻只能有一项工作正在处理中，各项工作可以轮换来做，这对于最终结果没有影响。进程类似，从宏观上看，它有自己的目标，或者说功能，同时又能受控于进程调度模块，从微观来看，她可以利用系统的资源，有自己的代码和">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180304/bh7mml4L4m.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180304/aID0CgLFCF.png?imageslim">
@@ -112,10 +112,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180304/GbKcmjGH0d.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180304/97fg5aCG34.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180304/2gei9B2Gfa.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:46:22.260Z">
+<meta property="og:updated_time" content="2018-04-06T04:23:06.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》进程（4-1）">
-<meta name="twitter:description" content="进程概述进程介绍系统中运行的若干进程可以类比成一个人在一天内要做的若干样工作：总体看来，每样工作相对独立，并可产生某种结果；从细节上看，每样工作都具有自己的办法、工具和需要的资源；从时间上看，每一个时刻只能有一项工作正在处理中，各项工作可以轮换来做，这对于最终结果没有影响。进程类似，从宏观上看，它有自己的目标，或者说功能，同时又能受控于进程调度模块，从微观来看，她可以利用系统的资源，有自己的代码">
+<meta name="twitter:description" content="进程概述进程介绍系统中运行的若干进程可以类比成一个人在一天内要做的若干样工作：总体看来，每样工作相对独立，并可产生某种结果；从细节上看，每样工作都具有自己的办法、工具和需要的资源；从时间上看，每一个时刻只能有一项工作正在处理中，各项工作可以轮换来做，这对于最终结果没有影响。进程类似，从宏观上看，它有自己的目标，或者说功能，同时又能受控于进程调度模块，从微观来看，她可以利用系统的资源，有自己的代码和">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180304/bh7mml4L4m.png?imageslim">
 
 
@@ -456,8 +456,7 @@
       
 
       
-        <a id="more"></a>
-<h1 id="进程概述"><a href="#进程概述" class="headerlink" title="进程概述"></a>进程概述</h1><h2 id="进程介绍"><a href="#进程介绍" class="headerlink" title="进程介绍"></a>进程介绍</h2><p>系统中运行的若干进程可以类比成一个人在一天内要做的若干样工作：总体看来，每样工作相对独立，并可产生某种结果；从细节上看，每样工作都具有自己的办法、工具和需要的资源；从时间上看，每一个时刻只能有一项工作正在处理中，各项工作可以轮换来做，这对于最终结果没有影响。<br>进程类似，从宏观上看，它有自己的目标，或者说功能，同时又能受控于进程调度模块，从微观来看，她可以利用系统的资源，有自己的代码和数据，同时拥有自己的堆栈；进程需要被调度，就好比一个人轮换做不同的工作。示意图如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180304/bh7mml4L4m.png?imageslim" alt="mark"></p>
+        <h1 id="进程概述"><a href="#进程概述" class="headerlink" title="进程概述"></a>进程概述</h1><h2 id="进程介绍"><a href="#进程介绍" class="headerlink" title="进程介绍"></a>进程介绍</h2><p>系统中运行的若干进程可以类比成一个人在一天内要做的若干样工作：总体看来，每样工作相对独立，并可产生某种结果；从细节上看，每样工作都具有自己的办法、工具和需要的资源；从时间上看，每一个时刻只能有一项工作正在处理中，各项工作可以轮换来做，这对于最终结果没有影响。<br>进程类似，从宏观上看，它有自己的目标，或者说功能，同时又能受控于进程调度模块，从微观来看，她可以利用系统的资源，有自己的代码和数据，同时拥有自己的堆栈；进程需要被调度，就好比一个人轮换做不同的工作。<br><a id="more"></a><br>示意图如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180304/bh7mml4L4m.png?imageslim" alt="mark"></p>
 <h2 id="形成进程的必要考虑"><a href="#形成进程的必要考虑" class="headerlink" title="形成进程的必要考虑"></a>形成进程的必要考虑</h2><p>因为进程数是多余CPU数的，于是在同一时刻，总是有“正在运行的”和“正在休息的”进程。所以，对于“正在休息的”进程，我们需要让它在重新醒来的时候记住自己挂起之前的状态，以便让原来的任务继续执行下去。<br>所以，我们要一个数据结构记录一个进程的状态，在进程要被挂起的时候，进程信息就被写入这个数据结构，等到进程重新启动的时候，这个信息重新被读出来。如下图：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180304/aID0CgLFCF.png?imageslim" alt="mark"></p>
 <h2 id="最简单的进程"><a href="#最简单的进程" class="headerlink" title="最简单的进程"></a>最简单的进程</h2><p>我们设想，当一个进程运行的时候，突然发生了时钟中断，特权级从ring1跳到ring0，开始执行时钟中断处理程序，中断处理程序这时调用进程调度模块，指定下一个应该运行的程序，当中断处理程序结束时，下一个进程准备就绪并开始运行，特权级又从ring0跳回ring1。我们把这个过程按照时间顺序整理如下：</p>
 <ol>

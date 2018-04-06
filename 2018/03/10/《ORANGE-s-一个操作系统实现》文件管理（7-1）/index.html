@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="在本部分，将通过硬盘驱动程序直接操作硬盘。在编写这个文件系统的过程中，通过几个消息、用户进程、文件系统和驱动程序之间就可以方便的协同工作。 硬盘操作的I/O端口和键盘控制器、VGA控制器等类似，对硬盘控制器的操作仍然是通过I/O端口来进行，这些端口分为两组，它们对应命令块寄存器和控制块寄存器，如下表：对硬盘的操作并不复杂，只需要往命令块寄存器写入正确的值，再通过控制块寄存器发送命令就可以了。 硬">
+<meta name="description" content="在本部分，将通过硬盘驱动程序直接操作硬盘。在编写这个文件系统的过程中，通过几个消息、用户进程、文件系统和驱动程序之间就可以方便的协同工作。">
 <meta name="keywords" content="文件管理,设备号,硬盘驱动程序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》文件管理（7-1）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/03/10/《ORANGE-s-一个操作系统实现》文件管理（7-1）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="在本部分，将通过硬盘驱动程序直接操作硬盘。在编写这个文件系统的过程中，通过几个消息、用户进程、文件系统和驱动程序之间就可以方便的协同工作。 硬盘操作的I/O端口和键盘控制器、VGA控制器等类似，对硬盘控制器的操作仍然是通过I/O端口来进行，这些端口分为两组，它们对应命令块寄存器和控制块寄存器，如下表：对硬盘的操作并不复杂，只需要往命令块寄存器写入正确的值，再通过控制块寄存器发送命令就可以了。 硬">
+<meta property="og:description" content="在本部分，将通过硬盘驱动程序直接操作硬盘。在编写这个文件系统的过程中，通过几个消息、用户进程、文件系统和驱动程序之间就可以方便的协同工作。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180310/4h9jEJ5adf.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180310/3Gl3C8IdHL.png?imageslim">
@@ -112,10 +112,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180310/kH04b78Kg7.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180310/imghLd462H.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180310/6Fj161594D.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:45:45.292Z">
+<meta property="og:updated_time" content="2018-04-06T04:23:45.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》文件管理（7-1）">
-<meta name="twitter:description" content="在本部分，将通过硬盘驱动程序直接操作硬盘。在编写这个文件系统的过程中，通过几个消息、用户进程、文件系统和驱动程序之间就可以方便的协同工作。 硬盘操作的I/O端口和键盘控制器、VGA控制器等类似，对硬盘控制器的操作仍然是通过I/O端口来进行，这些端口分为两组，它们对应命令块寄存器和控制块寄存器，如下表：对硬盘的操作并不复杂，只需要往命令块寄存器写入正确的值，再通过控制块寄存器发送命令就可以了。 硬">
+<meta name="twitter:description" content="在本部分，将通过硬盘驱动程序直接操作硬盘。在编写这个文件系统的过程中，通过几个消息、用户进程、文件系统和驱动程序之间就可以方便的协同工作。">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180310/4h9jEJ5adf.png?imageslim">
 
 
@@ -456,8 +456,7 @@
       
 
       
-        <a id="more"></a>
-<p>在本部分，将通过硬盘驱动程序直接操作硬盘。在编写这个文件系统的过程中，通过几个消息、用户进程、文件系统和驱动程序之间就可以方便的协同工作。</p>
+        <p>在本部分，将通过硬盘驱动程序直接操作硬盘。在编写这个文件系统的过程中，通过几个消息、用户进程、文件系统和驱动程序之间就可以方便的协同工作。<br><a id="more"></a></p>
 <h1 id="硬盘操作的I-O端口"><a href="#硬盘操作的I-O端口" class="headerlink" title="硬盘操作的I/O端口"></a>硬盘操作的I/O端口</h1><p>和键盘控制器、VGA控制器等类似，对硬盘控制器的操作仍然是通过I/O端口来进行，这些端口分为两组，它们对应命令块寄存器和控制块寄存器，如下表：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180310/4h9jEJ5adf.png?imageslim" alt="mark"><br>对硬盘的操作并不复杂，只需要往命令块寄存器写入正确的值，再通过控制块寄存器发送命令就可以了。</p>
 <h1 id="硬盘驱动程序"><a href="#硬盘驱动程序" class="headerlink" title="硬盘驱动程序"></a>硬盘驱动程序</h1><p>驱动程序的作用在于隐藏硬件细节，向上层提供统一的接口。由于进程通过收发消息来相互通信，那么驱动程序的接口自然也是消息了。所以只要定义了驱动程序可以接受的消息，也就定义了驱动程序的接口。首先想硬盘驱动器发送一个IDENTIFY命令，这个命令可用来获取硬盘参数。<br>下面是Device寄存器的格式：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180310/3Gl3C8IdHL.png?imageslim" alt="mark"><br>可以看到寄存器主要有LBA模式位、DRV位和低四位。DRV用于指定主盘或从盘，0表示主盘，1表示从盘。LBA模式位用于指定操作模式，当此位为0时，对磁盘的操作使用CHS模式；当为1时，对磁盘使用LBA模式。<br>我们使用函数hd_cmd_out()来进行实际的向硬件驱动器发送命令的工作，因为今后我们还会用到它。当发送命令之后，我们用interrupt_wait()来等待中断的发生。<br>驱动程序获知中断发生的情形如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180310/mB57am1f90.png?imageslim" alt="mark"><br>建立如下文件系统进程：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">PUBLIC void task_fs()</span><br><span class="line">&#123;</span><br><span class="line">	printl(<span class="string">"Task FS begins.\n"</span>)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* open the device: hard disk */</span></span><br><span class="line">	MESSAGE driver_msg<span class="comment">;</span></span><br><span class="line">	driver_msg.type = DEV_OPEN<span class="comment">;</span></span><br><span class="line">	send_recv(<span class="keyword">BOTH, </span>TASK_HD, &amp;driver_msg)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	spin(<span class="string">"FS"</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>make运行，结果如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180310/LGCiLGeLhh.png?imageslim" alt="mark"></p>

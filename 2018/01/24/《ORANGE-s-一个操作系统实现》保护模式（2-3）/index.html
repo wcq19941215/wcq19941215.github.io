@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="页式存储说到这个，应该不会太陌生，但是对它可能值停留在理论学习阶段，没法像数据结构那样，理性的认识，下面我们先从几个问题出发  什么叫做“页”所谓“页”，就是一块内存，在80386中，页的大小是固定的4096字节。而后来，页的大小还可以是2MB或者4MB，并且可以访问多于4GB的内存。 逻辑地址、线性地址、物理地址在未打开分页机制时，线性地址等同于物理地址。当分页开启时，分段机制将逻辑地址转换成">
+<meta name="description" content="页式存储说到这个，应该不会太陌生，但是对它可能值停留在理论学习阶段，没法像数据结构那样，理性的认识，下面我们先从几个问题出发">
 <meta name="keywords" content="保护模式,操作系统,于渊,页式存储,中断和异常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》保护模式（2-3）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/01/24/《ORANGE-s-一个操作系统实现》保护模式（2-3）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="页式存储说到这个，应该不会太陌生，但是对它可能值停留在理论学习阶段，没法像数据结构那样，理性的认识，下面我们先从几个问题出发  什么叫做“页”所谓“页”，就是一块内存，在80386中，页的大小是固定的4096字节。而后来，页的大小还可以是2MB或者4MB，并且可以访问多于4GB的内存。 逻辑地址、线性地址、物理地址在未打开分页机制时，线性地址等同于物理地址。当分页开启时，分段机制将逻辑地址转换成">
+<meta property="og:description" content="页式存储说到这个，应该不会太陌生，但是对它可能值停留在理论学习阶段，没法像数据结构那样，理性的认识，下面我们先从几个问题出发">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/hA35m7j963.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/00aBD7D55j.png?imageslim">
@@ -120,10 +120,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180126/8CElG4EK19.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180126/f7gd74icm1.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180126/ikd32HbKcL.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:47:01.423Z">
+<meta property="og:updated_time" content="2018-04-06T04:20:54.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》保护模式（2-3）">
-<meta name="twitter:description" content="页式存储说到这个，应该不会太陌生，但是对它可能值停留在理论学习阶段，没法像数据结构那样，理性的认识，下面我们先从几个问题出发  什么叫做“页”所谓“页”，就是一块内存，在80386中，页的大小是固定的4096字节。而后来，页的大小还可以是2MB或者4MB，并且可以访问多于4GB的内存。 逻辑地址、线性地址、物理地址在未打开分页机制时，线性地址等同于物理地址。当分页开启时，分段机制将逻辑地址转换成">
+<meta name="twitter:description" content="页式存储说到这个，应该不会太陌生，但是对它可能值停留在理论学习阶段，没法像数据结构那样，理性的认识，下面我们先从几个问题出发">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/hA35m7j963.png?imageslim">
 
 
@@ -464,8 +464,7 @@
       
 
       
-        <a id="more"></a>
-<h1 id="页式存储"><a href="#页式存储" class="headerlink" title="页式存储"></a>页式存储</h1><p>说到这个，应该不会太陌生，但是对它可能值停留在理论学习阶段，没法像数据结构那样，理性的认识，下面我们先从几个问题出发</p>
+        <h1 id="页式存储"><a href="#页式存储" class="headerlink" title="页式存储"></a>页式存储</h1><p>说到这个，应该不会太陌生，但是对它可能值停留在理论学习阶段，没法像数据结构那样，理性的认识，下面我们先从几个问题出发<br><a id="more"></a></p>
 <ul>
 <li>什么叫做“页”<br>所谓“页”，就是一块内存，在80386中，页的大小是固定的4096字节。而后来，页的大小还可以是2MB或者4MB，并且可以访问多于4GB的内存。</li>
 <li>逻辑地址、线性地址、物理地址<br>在未打开分页机制时，线性地址等同于物理地址。当分页开启时，分段机制将逻辑地址转换成线性地址，然后在通过分页机制变为物理地址。</li>

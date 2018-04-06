@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的">
+<meta name="description" content="显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：">
 <meta name="keywords" content="于渊,系统调用,显示器,TTY">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》输入输出系统（5-2）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/03/06/《ORANGE-s-一个操作系统实现》输入输出系统（5-2）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的">
+<meta property="og:description" content="显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/G5jE67714i.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/hLcie7G3B1.png?imageslim">
@@ -117,10 +117,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/jfAk5EdG4E.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/K034Hb39cd.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/GgE795K4E4.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:46:01.557Z">
+<meta property="og:updated_time" content="2018-04-06T04:24:09.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》输入输出系统（5-2）">
-<meta name="twitter:description" content="显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的">
+<meta name="twitter:description" content="显示器初识TTYTTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/G5jE67714i.png?imageslim">
 
 
@@ -461,8 +461,7 @@
       
 
       
-        <a id="more"></a>
-<h1 id="显示器"><a href="#显示器" class="headerlink" title="显示器"></a>显示器</h1><h2 id="初识TTY"><a href="#初识TTY" class="headerlink" title="初识TTY"></a>初识TTY</h2><p>TTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/G5jE67714i.png?imageslim" alt="mark"><br>虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。<br>既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的瞬间，让屏幕显示显存中某个位置的内容。<br>屏幕上每一个字符对应的2字节的定义如下所示：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/hLcie7G3B1.png?imageslim" alt="mark"><br>可以看到，第字节表示的是字符本身，高字节用来定义字符的颜色。<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/5dE3e6j1eh.png?imageslim" alt="mark"></p>
+        <h1 id="显示器"><a href="#显示器" class="headerlink" title="显示器"></a>显示器</h1><h2 id="初识TTY"><a href="#初识TTY" class="headerlink" title="初识TTY"></a>初识TTY</h2><p>TTY在Linux中就是终端。当按下ALT+F1、ALT+F2、ALT+F3等组合键时，会切换到不同的屏幕。对于不同的TTY可以理解成下面：<br><a id="more"></a><br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/G5jE67714i.png?imageslim" alt="mark"><br>虽然不同的TTY对应的输入设备是同一个键盘，但是输出却好比是在不同的显示器上，因为不同的TTY对应的屏幕画面可能不同。实际上，画面的不同，仅仅是显示了显存的不同位置罢了。<br>既然3个CONSOLE公用一块显存，那就有一种方式在切换CONSOLE的瞬间，让屏幕显示显存中某个位置的内容。<br>屏幕上每一个字符对应的2字节的定义如下所示：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/hLcie7G3B1.png?imageslim" alt="mark"><br>可以看到，第字节表示的是字符本身，高字节用来定义字符的颜色。<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/5dE3e6j1eh.png?imageslim" alt="mark"></p>
 <h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p>VGA视频子系统的寄存器如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/3CbB2AdK3d.png?imageslim" alt="mark"><br>这么多的寄存器，只有一个端口0X3D5，然后配合Address Register。下图中每一个寄存器都对应一个索引值，当想要访问其中一个的时候，只需要先向Adress Register写对应的索引值，然后在通过端口0x3D5进程的操作就是针对索引值对应的寄存器了。<br>![mark](<a href="http://p29pmm8g4.bkt.clouddn.com/blog/180306/6aKGfjHmCk" target="_blank" rel="noopener">http://p29pmm8g4.bkt.clouddn.com/blog/180306/6aKGfjHmCk</a><br>下面我们让光标跟随我们敲入的字符，设置光标位置：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">disable_int()<span class="comment">;</span></span><br><span class="line">		out_byte(<span class="name">CRTC_ADDR_REG</span>, CURSOR_H)<span class="comment">;</span></span><br><span class="line">		out_byte(<span class="name">CRTC_DATA_REG</span>, ((<span class="name">disp_pos/2</span>)&gt;&gt;8)&amp;0xFF)<span class="comment">;</span></span><br><span class="line">		out_byte(<span class="name">CRTC_ADDR_REG</span>, CURSOR_L)<span class="comment">;</span></span><br><span class="line">		out_byte(<span class="name">CRTC_DATA_REG</span>, (<span class="name">disp_pos/2</span>)&amp;0xFF)<span class="comment">;</span></span><br><span class="line">		enable_int()<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
 <p>make运行结果如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/CIjLKdgCL4.png?imageslim" alt="mark"><br>接着，我们通过设置Start Adressb High Register和Start Adress Low Register来重新设置显示开始地址，从而实现滚屏的功能。当我们按下shift+上箭头时，则卷动屏幕向上15行<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/BA0mclK9Af.png?imageslim" alt="mark"></p>
 <h1 id="TTY任务"><a href="#TTY任务" class="headerlink" title="TTY任务"></a>TTY任务</h1><p>在TTY任务中执行一个循环，这个循环将轮询每一个TTY，处理它的事件，包括从键盘缓冲区读取数据、显示字符等。它的运行方式如下：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/eA02LFamg7.png?imageslim" alt="mark"><br>其实轮询到每一个TTY时，不外乎做两件事：</p>

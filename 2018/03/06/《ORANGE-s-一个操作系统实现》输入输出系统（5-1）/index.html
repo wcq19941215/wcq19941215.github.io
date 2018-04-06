@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="键盘操作系统需要交互，首先就是键盘 从中断开始：键盘的初体验因为8259A的IRQ1就是键盘，现在我们写一个键盘的处理程序：1234PUBLIC void keyboard_handler(int irq)&amp;#123;    disp_str(&quot;*&quot;);&amp;#125; 这个结果就是每按一次键盘，就会打印一个星号。然后添加中断处理程序，并打开键盘中断：12345PUBLIC void init_ke">
+<meta name="description" content="键盘操作系统需要交互，首先就是键盘 从中断开始：键盘的初体验">
 <meta name="keywords" content="操作系统,键盘交互,AT、PS&#x2F;2键盘,键盘扫描码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》输入输出系统（5-1）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/03/06/《ORANGE-s-一个操作系统实现》输入输出系统（5-1）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="键盘操作系统需要交互，首先就是键盘 从中断开始：键盘的初体验因为8259A的IRQ1就是键盘，现在我们写一个键盘的处理程序：1234PUBLIC void keyboard_handler(int irq)&amp;#123;    disp_str(&quot;*&quot;);&amp;#125; 这个结果就是每按一次键盘，就会打印一个星号。然后添加中断处理程序，并打开键盘中断：12345PUBLIC void init_ke">
+<meta property="og:description" content="键盘操作系统需要交互，首先就是键盘 从中断开始：键盘的初体验">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/gChGbh378K.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/gIeCdjfFDb.png?imageslim">
@@ -114,10 +114,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/Fj85fFJBLC.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/AKF3268ahI.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/mfigfdIkE7.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:46:07.416Z">
+<meta property="og:updated_time" content="2018-04-06T04:24:18.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》输入输出系统（5-1）">
-<meta name="twitter:description" content="键盘操作系统需要交互，首先就是键盘 从中断开始：键盘的初体验因为8259A的IRQ1就是键盘，现在我们写一个键盘的处理程序：1234PUBLIC void keyboard_handler(int irq)&amp;#123;    disp_str(&quot;*&quot;);&amp;#125; 这个结果就是每按一次键盘，就会打印一个星号。然后添加中断处理程序，并打开键盘中断：12345PUBLIC void init_ke">
+<meta name="twitter:description" content="键盘操作系统需要交互，首先就是键盘 从中断开始：键盘的初体验">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180306/gChGbh378K.png?imageslim">
 
 
@@ -458,9 +458,9 @@
       
 
       
-        <a id="more"></a>
-<h1 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h1><p>操作系统需要交互，首先就是键盘</p>
-<h2 id="从中断开始：键盘的初体验"><a href="#从中断开始：键盘的初体验" class="headerlink" title="从中断开始：键盘的初体验"></a>从中断开始：键盘的初体验</h2><p>因为8259A的IRQ1就是键盘，现在我们写一个键盘的处理程序：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">PUBLIC <span class="keyword">void</span> <span class="title">keyboard_handler</span><span class="params">(<span class="keyword">int</span> irq)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    disp_str(<span class="string">"*"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h1 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h1><p>操作系统需要交互，首先就是键盘</p>
+<h2 id="从中断开始：键盘的初体验"><a href="#从中断开始：键盘的初体验" class="headerlink" title="从中断开始：键盘的初体验"></a>从中断开始：键盘的初体验</h2><a id="more"></a>
+<p>因为8259A的IRQ1就是键盘，现在我们写一个键盘的处理程序：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">PUBLIC <span class="keyword">void</span> <span class="title">keyboard_handler</span><span class="params">(<span class="keyword">int</span> irq)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    disp_str(<span class="string">"*"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这个结果就是每按一次键盘，就会打印一个星号。<br>然后添加中断处理程序，并打开键盘中断：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">PUBLIC</span> <span class="selector-tag">void</span> <span class="selector-tag">init_keyboard</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="selector-tag">put_irq_handler</span>(KEYBOARD_IRD,keyboard_handler);<span class="comment">/*设定键盘中断程序*/</span></span><br><span class="line">    <span class="selector-tag">enable_irq</span>(KEYBOARD_IRQ);<span class="comment">/*开键盘中断*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>然后在proto.h中声明init_keyboard()并调用它。<br>make之后，运行结果如下。<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/gChGbh378K.png?imageslim" alt="mark"><br>然后问题出现了，按了一次以后就没法再按出星号了。</p>
 <h2 id="AT、PS-2键盘"><a href="#AT、PS-2键盘" class="headerlink" title="AT、PS/2键盘"></a>AT、PS/2键盘</h2><p>下图左边是PS/2键盘的接口，右边是AT键盘的接口，现在主流的都是USB的了。<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180306/gIeCdjfFDb.png?imageslim" alt="mark"></p>

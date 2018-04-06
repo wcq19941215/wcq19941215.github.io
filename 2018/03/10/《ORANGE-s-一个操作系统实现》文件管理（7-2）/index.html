@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="在硬盘上制作一个文件系统文件系统通常有两个含义：  用于存储和组织计算机文件数据的一套方法 存在于某介质上的具备某种格式的数据我们所做的工作是第一种，所以我们需要考虑如何利用空间，如何对文件进行添加、删除以及修改，还要考虑不同类型的文件如何并存于一个文件系统。当我们说某个硬盘分区是“某某文件系统”时，是说的第二种，其格式表名这个分区是由某种策略和机制来管理。文件系统设计的数据结构主要有超级块、i">
+<meta name="description" content="在硬盘上制作一个文件系统">
 <meta name="keywords" content="文件读写,文件描述符">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》文件管理（7-2）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/03/10/《ORANGE-s-一个操作系统实现》文件管理（7-2）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="在硬盘上制作一个文件系统文件系统通常有两个含义：  用于存储和组织计算机文件数据的一套方法 存在于某介质上的具备某种格式的数据我们所做的工作是第一种，所以我们需要考虑如何利用空间，如何对文件进行添加、删除以及修改，还要考虑不同类型的文件如何并存于一个文件系统。当我们说某个硬盘分区是“某某文件系统”时，是说的第二种，其格式表名这个分区是由某种策略和机制来管理。文件系统设计的数据结构主要有超级块、i">
+<meta property="og:description" content="在硬盘上制作一个文件系统">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180313/e6kBg7AIEa.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180313/K56bE5mAeG.png?imageslim">
@@ -109,10 +109,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180313/K2hdh8g0ED.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180313/8f0m3aG2c4.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180313/0ggKCicGHh.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:45:37.177Z">
+<meta property="og:updated_time" content="2018-04-06T04:24:28.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》文件管理（7-2）">
-<meta name="twitter:description" content="在硬盘上制作一个文件系统文件系统通常有两个含义：  用于存储和组织计算机文件数据的一套方法 存在于某介质上的具备某种格式的数据我们所做的工作是第一种，所以我们需要考虑如何利用空间，如何对文件进行添加、删除以及修改，还要考虑不同类型的文件如何并存于一个文件系统。当我们说某个硬盘分区是“某某文件系统”时，是说的第二种，其格式表名这个分区是由某种策略和机制来管理。文件系统设计的数据结构主要有超级块、i">
+<meta name="twitter:description" content="在硬盘上制作一个文件系统">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180313/e6kBg7AIEa.png?imageslim">
 
 
@@ -453,8 +453,8 @@
       
 
       
-        <a id="more"></a>
-<h1 id="在硬盘上制作一个文件系统"><a href="#在硬盘上制作一个文件系统" class="headerlink" title="在硬盘上制作一个文件系统"></a>在硬盘上制作一个文件系统</h1><p>文件系统通常有两个含义：</p>
+        <h1 id="在硬盘上制作一个文件系统"><a href="#在硬盘上制作一个文件系统" class="headerlink" title="在硬盘上制作一个文件系统"></a>在硬盘上制作一个文件系统</h1><a id="more"></a>
+<p>文件系统通常有两个含义：</p>
 <ul>
 <li>用于存储和组织计算机文件数据的一套方法</li>
 <li>存在于某介质上的具备某种格式的数据<br>我们所做的工作是第一种，所以我们需要考虑如何利用空间，如何对文件进行添加、删除以及修改，还要考虑不同类型的文件如何并存于一个文件系统。<br>当我们说某个硬盘分区是“某某文件系统”时，是说的第二种，其格式表名这个分区是由某种策略和机制来管理。<h2 id="文件系统设计的数据结构"><a href="#文件系统设计的数据结构" class="headerlink" title="文件系统设计的数据结构"></a>文件系统设计的数据结构</h2>主要有超级块、i-node和目录项。<br>超级块主要关注以下内容：</li>

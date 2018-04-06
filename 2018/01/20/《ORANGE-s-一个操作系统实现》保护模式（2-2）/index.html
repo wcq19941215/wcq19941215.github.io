@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="保护模式进阶前面我们学习了保护模式，对它的一个整体有了了解，其中突出讲解了保护模式下的强大寻址能力，但是保护模式不仅仅有这个优点，下面我们继续学习保护模式。 1.补个坑前面我们还是把保护模式写在引导扇区，这就限制在了512字节，我们就借用DOS的引导扇区来解除这个限制。首先，我们按照如下操作进行：  到Bochs官网下载FreeDOs。解压后将其中的a.img复制到工作目录下，并改名为freed">
+<meta name="description" content="保护模式进阶前面我们学习了保护模式，对它的一个整体有了了解，其中突出讲解了保护模式下的强大寻址能力，但是保护模式不仅仅有这个优点，下面我们继续学习保护模式。">
 <meta name="keywords" content="保护模式,Bochs,NASM,操作系统,于渊">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》保护模式（2-2）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/01/20/《ORANGE-s-一个操作系统实现》保护模式（2-2）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="保护模式进阶前面我们学习了保护模式，对它的一个整体有了了解，其中突出讲解了保护模式下的强大寻址能力，但是保护模式不仅仅有这个优点，下面我们继续学习保护模式。 1.补个坑前面我们还是把保护模式写在引导扇区，这就限制在了512字节，我们就借用DOS的引导扇区来解除这个限制。首先，我们按照如下操作进行：  到Bochs官网下载FreeDOs。解压后将其中的a.img复制到工作目录下，并改名为freed">
+<meta property="og:description" content="保护模式进阶前面我们学习了保护模式，对它的一个整体有了了解，其中突出讲解了保护模式下的强大寻址能力，但是保护模式不仅仅有这个优点，下面我们继续学习保护模式。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180120/EF4FdhJKB7.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180120/IciDc4aDlH.png?imageslim">
@@ -115,10 +115,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180122/EG1Bi2Il21.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180124/bmK3AeF8ga.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180124/A0eeC4Lh3F.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:47:23.469Z">
+<meta property="og:updated_time" content="2018-04-06T04:21:33.187Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》保护模式（2-2）">
-<meta name="twitter:description" content="保护模式进阶前面我们学习了保护模式，对它的一个整体有了了解，其中突出讲解了保护模式下的强大寻址能力，但是保护模式不仅仅有这个优点，下面我们继续学习保护模式。 1.补个坑前面我们还是把保护模式写在引导扇区，这就限制在了512字节，我们就借用DOS的引导扇区来解除这个限制。首先，我们按照如下操作进行：  到Bochs官网下载FreeDOs。解压后将其中的a.img复制到工作目录下，并改名为freed">
+<meta name="twitter:description" content="保护模式进阶前面我们学习了保护模式，对它的一个整体有了了解，其中突出讲解了保护模式下的强大寻址能力，但是保护模式不仅仅有这个优点，下面我们继续学习保护模式。">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180120/EF4FdhJKB7.png?imageslim">
 
 
@@ -459,8 +459,7 @@
       
 
       
-        <a id="more"></a>
-<h1 id="保护模式进阶"><a href="#保护模式进阶" class="headerlink" title="保护模式进阶"></a>保护模式进阶</h1><p>前面我们学习了保护模式，对它的一个整体有了了解，其中突出讲解了保护模式下的强大寻址能力，但是保护模式不仅仅有这个优点，下面我们继续学习保护模式。</p>
+        <h1 id="保护模式进阶"><a href="#保护模式进阶" class="headerlink" title="保护模式进阶"></a>保护模式进阶</h1><p>前面我们学习了保护模式，对它的一个整体有了了解，其中突出讲解了保护模式下的强大寻址能力，但是保护模式不仅仅有这个优点，下面我们继续学习保护模式。<br><a id="more"></a></p>
 <h1 id="1-补个坑"><a href="#1-补个坑" class="headerlink" title="1.补个坑"></a>1.补个坑</h1><p>前面我们还是把保护模式写在引导扇区，这就限制在了512字节，我们就借用DOS的引导扇区来解除这个限制。<br>首先，我们按照如下操作进行：</p>
 <ul>
 <li>到Bochs官网下载FreeDOs。解压后将其中的a.img复制到工作目录下，并改名为freedos.img。</li>

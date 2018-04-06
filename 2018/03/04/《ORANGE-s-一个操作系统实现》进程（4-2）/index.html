@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="多进程前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。 添加一个进程体12345678910void TestB()&amp;#123;    int i =0x1000;    while(1)&amp;#123;        disp_str(&quot;B&quot;);">
+<meta name="description" content="多进程前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。 添加一个进程体">
 <meta name="keywords" content="进程调度,多进程,8253&#x2F;8254,PIT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》进程（4-2）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/03/04/《ORANGE-s-一个操作系统实现》进程（4-2）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="多进程前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。 添加一个进程体12345678910void TestB()&amp;#123;    int i =0x1000;    while(1)&amp;#123;        disp_str(&quot;B&quot;);">
+<meta property="og:description" content="多进程前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。 添加一个进程体">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180305/H51aAdE348.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180305/gLFAfE6Cji.png?imageslim">
@@ -115,10 +115,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180305/66klAkE9cA.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180305/6L3b4dhc45.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180305/GiBeb7Lcef.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:46:13.260Z">
+<meta property="og:updated_time" content="2018-04-06T04:19:37.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》进程（4-2）">
-<meta name="twitter:description" content="多进程前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。 添加一个进程体12345678910void TestB()&amp;#123;    int i =0x1000;    while(1)&amp;#123;        disp_str(&quot;B&quot;);">
+<meta name="twitter:description" content="多进程前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。 添加一个进程体">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180305/H51aAdE348.png?imageslim">
 
 
@@ -459,9 +459,9 @@
       
 
       
-        <a id="more"></a>
-<h1 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h1><p>前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。</p>
-<h2 id="添加一个进程体"><a href="#添加一个进程体" class="headerlink" title="添加一个进程体"></a>添加一个进程体</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestB</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i =<span class="number">0x1000</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        disp_str(<span class="string">"B"</span>);</span><br><span class="line">        disp_int(i++);</span><br><span class="line">        disp_str(<span class="string">"."</span>);</span><br><span class="line">        delay(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h1><p>前面我们完成了ring0到ring1的跳转，它可以随时被中断，可以在中断处理程序完成之后被恢复。进程此时已经有了两种状态：运行和睡眠。接着我们只需要让其中一个进程处在运行状态，其余进程处在睡眠状态即可。</p>
+<h2 id="添加一个进程体"><a href="#添加一个进程体" class="headerlink" title="添加一个进程体"></a>添加一个进程体</h2><a id="more"></a>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestB</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i =<span class="number">0x1000</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        disp_str(<span class="string">"B"</span>);</span><br><span class="line">        disp_int(i++);</span><br><span class="line">        disp_str(<span class="string">"."</span>);</span><br><span class="line">        delay(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="进程表初始化代码扩充"><a href="#进程表初始化代码扩充" class="headerlink" title="进程表初始化代码扩充"></a>进程表初始化代码扩充</h2><p>进程之间的区别真的不大。每一次循环的不同在于，从TASK结构中读取不同的任务入口地址\堆栈栈顶和进程名，然后赋给相应的进程表项。需要注意以下两点：</p>
 <ul>
 <li>由于堆栈是从高地址到低地址生长的，所以在给每一个进程分配堆栈空间的时候，也是从高地址往低地址进行。</li>

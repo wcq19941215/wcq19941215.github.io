@@ -95,13 +95,13 @@
 
 
 
-<meta name="description" content="跳入保护模式首先是GDT以及对应的选择子，我们只定义三个描述符，分别是0~4GB的可执行段、0~4GB可读写段和一个指向显存开始地址的段。因为段地址已经被确定为BaseOfLoader,所以Loader中出现的标号的物理地址可以用下面的公式表示：1物理地址 = BaseOfLoader x 10h + 变量的偏移 然后运行后，如果看到字母“p”则代表我们进入了保护模式，如图所示： 重新放置内核以">
+<meta name="description" content="跳入保护模式首先是GDT以及对应的选择子，我们只定义三个描述符，分别是0~4GB的可执行段、0~4GB可读写段和一个指向显存开始地址的段。">
 <meta name="keywords" content="NASM,操作系统,于渊,内核,ELF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》内核雏形（3-2）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/02/28/《ORANGE-s-一个操作系统实现》内核雏形（3-2）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="跳入保护模式首先是GDT以及对应的选择子，我们只定义三个描述符，分别是0~4GB的可执行段、0~4GB可读写段和一个指向显存开始地址的段。因为段地址已经被确定为BaseOfLoader,所以Loader中出现的标号的物理地址可以用下面的公式表示：1物理地址 = BaseOfLoader x 10h + 变量的偏移 然后运行后，如果看到字母“p”则代表我们进入了保护模式，如图所示： 重新放置内核以">
+<meta property="og:description" content="跳入保护模式首先是GDT以及对应的选择子，我们只定义三个描述符，分别是0~4GB的可执行段、0~4GB可读写段和一个指向显存开始地址的段。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180228/D0HELa024G.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180228/a5liccl973.png?imageslim">
@@ -115,10 +115,10 @@
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180301/g0h8FDbgFJ.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180301/64jFAiG2JH.png?imageslim">
 <meta property="og:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180301/GE94l7gm3I.png?imageslim">
-<meta property="og:updated_time" content="2018-03-30T03:46:30.397Z">
+<meta property="og:updated_time" content="2018-04-06T04:20:16.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《ORANGE-s-一个操作系统实现》内核雏形（3-2）">
-<meta name="twitter:description" content="跳入保护模式首先是GDT以及对应的选择子，我们只定义三个描述符，分别是0~4GB的可执行段、0~4GB可读写段和一个指向显存开始地址的段。因为段地址已经被确定为BaseOfLoader,所以Loader中出现的标号的物理地址可以用下面的公式表示：1物理地址 = BaseOfLoader x 10h + 变量的偏移 然后运行后，如果看到字母“p”则代表我们进入了保护模式，如图所示： 重新放置内核以">
+<meta name="twitter:description" content="跳入保护模式首先是GDT以及对应的选择子，我们只定义三个描述符，分别是0~4GB的可执行段、0~4GB可读写段和一个指向显存开始地址的段。">
 <meta name="twitter:image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180228/D0HELa024G.png?imageslim">
 
 
@@ -459,8 +459,7 @@
       
 
       
-        <a id="more"></a>
-<h2 id="跳入保护模式"><a href="#跳入保护模式" class="headerlink" title="跳入保护模式"></a>跳入保护模式</h2><p>首先是GDT以及对应的选择子，我们只定义三个描述符，分别是0~4GB的可执行段、0~4GB可读写段和一个指向显存开始地址的段。<br>因为段地址已经被确定为BaseOfLoader,所以Loader中出现的标号的物理地址可以用下面的公式表示：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">物理地址 = <span class="keyword">BaseOfLoader </span>x <span class="number">10</span>h + 变量的偏移</span><br></pre></td></tr></table></figure></p>
+        <h2 id="跳入保护模式"><a href="#跳入保护模式" class="headerlink" title="跳入保护模式"></a>跳入保护模式</h2><p>首先是GDT以及对应的选择子，我们只定义三个描述符，分别是0~4GB的可执行段、0~4GB可读写段和一个指向显存开始地址的段。<br><a id="more"></a><br>因为段地址已经被确定为BaseOfLoader,所以Loader中出现的标号的物理地址可以用下面的公式表示：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">物理地址 = <span class="keyword">BaseOfLoader </span>x <span class="number">10</span>h + 变量的偏移</span><br></pre></td></tr></table></figure></p>
 <p>然后运行后，如果看到字母“p”则代表我们进入了保护模式，如图所示：<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180228/D0HELa024G.png?imageslim" alt="mark"></p>
 <h2 id="重新放置内核以及控制器的转让"><a href="#重新放置内核以及控制器的转让" class="headerlink" title="重新放置内核以及控制器的转让"></a>重新放置内核以及控制器的转让</h2><p>下图是一个内存的使用分布图。<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180228/a5liccl973.png?imageslim" alt="mark"><br>虽然引导扇区将剩余的内存空间分割成了两块，但实际上引导扇区在完成了它的使命之后就没有用了，可以视为空闲内存。<br>运行之后，可以看到K字母，即代表成功由内核在控制了。<br><img src="http://p29pmm8g4.bkt.clouddn.com/blog/180228/i1HDh6BLje.png?imageslim" alt="mark"></p>
 <h1 id="扩充内核"><a href="#扩充内核" class="headerlink" title="扩充内核"></a>扩充内核</h1><h2 id="切换堆栈和GDT"><a href="#切换堆栈和GDT" class="headerlink" title="切换堆栈和GDT"></a>切换堆栈和GDT</h2><p>代码如下：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">SELECTOR_KERNEL_CS	equ	<span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; 导入函数</span></span><br><span class="line"><span class="keyword">extern	</span>cstart</span><br><span class="line"></span><br><span class="line"><span class="comment">; 导入全局变量</span></span><br><span class="line"><span class="keyword">extern	</span>gdt_ptr</span><br><span class="line"></span><br><span class="line">[SECTION .<span class="keyword">bss]</span></span><br><span class="line"><span class="keyword">StackSpace	</span>	resb	<span class="number">2</span> * <span class="number">1024</span></span><br><span class="line"><span class="symbol">StackTop:</span>		<span class="comment">; 栈顶</span></span><br><span class="line"></span><br><span class="line">[section <span class="meta">.text</span>]	<span class="comment">; 代码在此</span></span><br><span class="line"></span><br><span class="line">global _start	<span class="comment">; 导出 _start</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">_start:</span></span><br><span class="line">mov	esp, StackTop	<span class="comment">; 堆栈在 bss 段中</span></span><br><span class="line"></span><br><span class="line">	sgdt	[gdt_ptr]	<span class="comment">; cstart() 中将会用到 gdt_ptr</span></span><br><span class="line">	call	cstart		<span class="comment">; 在此函数中改变了gdt_ptr，让它指向新的GDT</span></span><br><span class="line">	lgdt	[gdt_ptr]	<span class="comment">; 使用新的GDT</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">;lidt	[idt_ptr]</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">jmp	</span>SELECTOR_KERNEL_CS:csinit</span><br><span class="line"><span class="symbol">csinit:</span>		<span class="comment">; “这个跳转指令强制使用刚刚初始化的结构”——&lt;&lt;OS:D&amp;I 2nd&gt;&gt; P90.</span></span><br><span class="line"></span><br><span class="line">	push	<span class="number">0</span></span><br><span class="line">	popfd	<span class="comment">; Pop top of stack into EFLAGS</span></span><br><span class="line"></span><br><span class="line">	hlt</span><br></pre></td></tr></table></figure></p>
