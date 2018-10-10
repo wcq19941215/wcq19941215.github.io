@@ -167,9 +167,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
-        <tag>保护模式</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>保护模式</tag>
         <tag>FAT12</tag>
         <tag>Loader</tag>
       </tags>
@@ -198,9 +198,9 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
-        <tag>保护模式</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>保护模式</tag>
         <tag>页式存储</tag>
         <tag>中断和异常</tag>
       </tags>
@@ -214,11 +214,11 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
-        <tag>保护模式</tag>
-        <tag>Bochs</tag>
         <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>保护模式</tag>
+        <tag>Bochs</tag>
       </tags>
   </entry>
   <entry>
@@ -247,11 +247,11 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
-        <tag>保护模式</tag>
-        <tag>Bochs</tag>
         <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+        <tag>保护模式</tag>
+        <tag>Bochs</tag>
       </tags>
   </entry>
   <entry>
@@ -263,11 +263,27 @@
         <category>ORANGE&#39;s的学习</category>
       </categories>
       <tags>
+        <tag>Bochs2.6.9虚拟机</tag>
+        <tag>Bochs配置</tag>
         <tag>NASM</tag>
         <tag>操作系统</tag>
         <tag>于渊</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[《ORANGE's:一个操作系统实现》搭建工作环境（1）]]></title>
+    <url>%2F2018%2F01%2F08%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%881%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[BOchs虚拟机可以让我们像上帝一样，随时让时间“停住”钻进计算机里的小计算机里，CPU、内存、硬盘等尽收眼底 Bochs虚拟机的安装安装环境：Window7 64位下的Vm虚拟机（11.0.4）下的Ubuntu16.0.4 Bochs2.6.9安装过程： 1我在官网下载好bochs-2.6.9.tar.gz后，放在MyOS目录下，第一步解压1sudo tar zxvf bochs-2.6.9.tar.gz Bochs下载链接 2进入bochs-2.6.9目录下开始编译安装：1sudo make 1sudo make install 3安装完成后如图 Bochs的使用1创建一个软盘映像代码如图所示：完成以后，在当前目录下就多出了一个a.img 现在我们有了“计算机”和“软盘”，是时候将引导扇区写进软盘了。我们使用dd命令：1dd if=boot.bin of=a.img bs=512 count=1 conv=notrunc 其中 boot.bin 文件需要复制到和a.img同一目录下。这行代码中“conv=notrunc”若不用，a.img会被截断，因为boot.bin比a.img小。 2配置Bochs这一步是为了说明虚拟级的内存大小、硬盘映射和软盘映射都是哪些文件。配置文件bochsrc内容如下：12345678910111213141516171819202122232425################################################################ Configuration file for Bochs################################################################ how much memory the emulated machine will havemegs: 32# filename of ROM imagesromimage: file=$BXSHARE/BIOS-bochs-latest vgaromimage: file=$BXSHARE/VGABIOS-lgpl-latest # what disk images will be usedfloppya: 1_44=a.img, status=inserted# choose the boot disk.boot: floppy# where do we send log messages?# log: bochsout.txt# disable the mousemouse: enabled=0# enable key mapping, using US layout as default.keyboard: keymap=$BXSHARE/keymaps/x11-pc-us.map 然后再输入命令：1bochs -f bochsrc 会出现下面内容，然后选择6，若出现黑色的框也就是Bochs那就是成功啦，然后再终端输入c,大功告成！！ 用Bochs调试操作系统我们以开始的引导扇区为例，在07c00h处设置断点，从这里开始执行，然后单步执行，和其他调试工具一样。同时在任何时刻你都可以查看CPU寄存器，或者查看某个内存地址处的内容。下面我们具体操作一下：注意！！！： bochs 2.3.5 以上的版本没有dump_cpu了,可以用r，fp，mmx，sse，dreg，sreg，creg命令代替。 附录调试命令： #接着安装GCC和NASM查看某软件是否安装的命令 * -v下载安装某软件的命令，123sudo apt-get install build-essential ***例子：安装nasmsudo apt-get install build-essential nasm]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>ORANGE&#39;s的学习</category>
+      </categories>
+      <tags>
         <tag>Bochs2.6.9虚拟机</tag>
         <tag>Bochs配置</tag>
+        <tag>NASM</tag>
+        <tag>操作系统</tag>
+        <tag>于渊</tag>
       </tags>
   </entry>
   <entry>
