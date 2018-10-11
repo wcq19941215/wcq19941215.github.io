@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LeetCode刷题之旅（2）--两数相加（中等题）]]></title>
+    <url>%2F2018%2F10%2F11%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%882%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&lt;-&gt; 题目:两数之和12给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。你可以假设除了数字0之外，这两个数字都不会以零开头。 1234示例:输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)输出：7 -&gt; 0 -&gt; 8原因：342 + 465 = 807 解题思路：方法：1、判断了l1和l2是否存在，如果存在，就可以累加，然后将累加后产生的进位存起来 2、要考虑到两个表长度不一样，所以，在其中一个表已经空了以后，就要将进位的值消耗掉，如果两个表都为空了以后，进位还不为0，则最后一位必为1 1234567891011121314151617181920212223242526272829303132333435363738394041/** * Definition for singly-linked list. * struct ListNode &#123; * int val; * ListNode *next; * ListNode(int x) : val(x), next(NULL) &#123;&#125; * &#125;; */class Solution &#123;public: ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) &#123; ListNode* result=new ListNode(0);//初始化第一个至为0 ListNode* tmp=result;//使用tmp记录每次计算了以后的余数，比如6+5=11 tmp=1 int sum_jinwei=0;//这个变量起到两个作用，一是用作l1与l2的相加的值sum，二是作为jinwei的值例如8+7=17，jinwei=1 while(l1||l2) &#123; if(l1) &#123; sum_jinwei=sum_jinwei+l1-&gt;val; l1=l1-&gt;next; &#125; if(l2) &#123; sum_jinwei=sum_jinwei+l2-&gt;val; l2=l2-&gt;next; &#125; tmp-&gt;next=new ListNode(sum_jinwei%10);//tmp-&gt;next就记录余数，也就是最后显示的值 sum_jinwei=sum_jinwei/10;//此时sum_jinwei就起到了携带进位的任务 tmp=tmp-&gt;next; &#125; if(sum_jinwei==1) &#123; tmp-&gt;next=new ListNode(1);//当sum_jinwei==1的时候就证明最高位必然为1 &#125; return result-&gt;next; &#125;&#125;;执行用时：24 ms]]></content>
+      <categories>
+        <category>算法</category>
+        <category>LeetCode刷题之旅</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>两数相加</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode刷题之旅（1）--两数之和（简单题）]]></title>
     <url>%2F2018%2F10%2F10%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%881%EF%BC%89%2F</url>
     <content type="text"><![CDATA[算法，永远是检验一个程序员的能力大小的重要指标，也是提升自身能力所必备的专业技能。所以现在就要动手练习，同时，可以对C++有更加深刻的认识和理解。而LeetCode上可以和各位算法爱好者一起学习，是一个很好的平台。好好加油吧&lt;-&gt; 题目:两数之和12给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。 12345示例:给定 nums = [2, 7, 11, 15], target = 9因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1] 解题思路：方法一：使用两个for循环，从头到尾遍历nums，同时对比即可，这个方法很简单，但是时间复杂度为$$O(n^2)$$,实际的执行时间也到了180ms左右，显然不太好（代码在下面的注释里）。 方法二：使用以空间换时间的方法，那也就是哈希表了，这里的思路就是使用关联容器中的无序集合类型——unordered_map。在C++11中关联容器支持高效的关键字查找和访问。在此题中，使用map的思路就是，首先看是否能够find到target-nums[i]的值，如果能找到，就说明在nums中存在两个数字满足题意，那么直接返回两者的对应下标即可，也就是i，和r[key]；如果找不到target-nums[i]，那么就初始化map的键值对，这里可能乍一看怎么没有初始化map，其实不然，每一次没有找到就会初始化一个值，这样效率最高。例如：实例中的例子，一开始的key=9-2=7,map此时为空，所以找不到，那么初始化r[2]=0,然后再循环key=9-7=2，刚好有2，然后就可以返回下标i=1,r[2]=0，完毕。1234567891011121314151617181920212223242526272829303132class Solution &#123;public: vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) &#123; unordered_map&lt;int,int&gt;r; int i=0; for(i=0;i&lt;nums.size();i++) &#123; int key=target-nums[i]; if(r.find(key)!=r.end()) &#123; return vector&lt;int&gt;(&#123;i,r[key]&#125;); &#125; r[nums[i]] = i; &#125; &#125; /* vector&lt;int&gt; result; for (int i = 0; i &lt; nums.size(); i++) &#123; for (int j = i + 1; j &lt; nums.size(); j++) &#123; if (nums[i] + nums[j] == target) &#123; result.push_back(i); result.push_back(j); return result; &#125; &#125; &#125;*/&#125;;执行用时：8 ms]]></content>
