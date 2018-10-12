@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LeetCode刷题之旅（3）--无重复字符的最长子串（中等题）]]></title>
+    <url>%2F2018%2F10%2F12%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%883%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&lt;-&gt; 题目:两数之和1给定一个字符串，找出不含有重复字符的最长子串的长度。 123456789101112131415示例1:输入: "abcabcbb"输出: 3 解释: 无重复字符的最长子串是 "abc"，其长度为 3。示例2:输入: "bbbbb"输出: 1解释: 无重复字符的最长子串是 "b"，其长度为 1。示例3:输入: "pwwkew"输出: 3解释: 无重复字符的最长子串是 "wke"，其长度为 3。 请注意，答案必须是一个子串，"pwke" 是一个子序列 而不是子串。 解题思路：方法1：首先，因为键盘可输入字符为128个，所以先int一个128的数组并且初始化为0，用此数组来记录是否重复，然后在循环中判断，如果为0，那么就累加长度，并且记录最大长度。然后在不为0的时候，再初始化数组为0。很明显，这个初始化很耗时，所以又想了下面的方法。 方法2：双游标，i,j两者之差j-i+1就是子串的长度，然后数组记录的不再是字符是否重复了，而是记录最后一个字母在s串中的位置。细节在于，i在字母重复的时候，会变成字母所在的位置，判断的时候的细节在于，重复的字母的位置如果在i的左边，则表示不会在i到j的子串中重复。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748class Solution &#123;public: int lengthOfLongestSubstring(string s) &#123; int arr[128]=&#123;0&#125;; int max_length=0,i,j; for(i=0,j=0;j&lt;s.size();++j) &#123; if(arr[(int)s[j]]==0||arr[(int)s[j]]-1&lt;i) &#123; arr[(int)s[j]]=j+1;//保持字符 s[j] 在s中的位置+1 比如0位 ，最后保存的是1 //length++; if(j-i+1&gt;max_length) &#123; max_length=j-i+1; &#125; &#125; else &#123; if(arr[(int)s[j]]-1&lt;i) &#123; &#125; else &#123; i=arr[(int)s[j]]; arr[(int)s[j]]=j+1; /*if(j-i&gt;max_length) &#123; max_length=j-i+1; &#125;*/ &#125; &#125; &#125; return max_length; &#125;&#125;;static const auto _____ = []() &#123; ios::sync_with_stdio(false); cin.tie(nullptr); return nullptr;&#125;();执行用时：12 ms]]></content>
+      <categories>
+        <category>算法</category>
+        <category>LeetCode刷题之旅</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>无重复字符的最长子串</tag>
+        <tag>双游标</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode刷题之旅（2）--两数相加（中等题）]]></title>
     <url>%2F2018%2F10%2F11%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%882%EF%BC%89%2F</url>
     <content type="text"><![CDATA[没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&lt;-&gt; 题目:两数之和12给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。你可以假设除了数字0之外，这两个数字都不会以零开头。 1234示例:输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)输出：7 -&gt; 0 -&gt; 8原因：342 + 465 = 807 解题思路：方法：1、判断了l1和l2是否存在，如果存在，就可以累加，然后将累加后产生的进位存起来 2、要考虑到两个表长度不一样，所以，在其中一个表已经空了以后，就要将进位的值消耗掉，如果两个表都为空了以后，进位还不为0，则最后一位必为1 1234567891011121314151617181920212223242526272829303132333435363738394041/** * Definition for singly-linked list. * struct ListNode &#123; * int val; * ListNode *next; * ListNode(int x) : val(x), next(NULL) &#123;&#125; * &#125;; */class Solution &#123;public: ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) &#123; ListNode* result=new ListNode(0);//初始化第一个至为0 ListNode* tmp=result;//使用tmp记录每次计算了以后的余数，比如6+5=11 tmp=1 int sum_jinwei=0;//这个变量起到两个作用，一是用作l1与l2的相加的值sum，二是作为jinwei的值例如8+7=17，jinwei=1 while(l1||l2) &#123; if(l1) &#123; sum_jinwei=sum_jinwei+l1-&gt;val; l1=l1-&gt;next; &#125; if(l2) &#123; sum_jinwei=sum_jinwei+l2-&gt;val; l2=l2-&gt;next; &#125; tmp-&gt;next=new ListNode(sum_jinwei%10);//tmp-&gt;next就记录余数，也就是最后显示的值 sum_jinwei=sum_jinwei/10;//此时sum_jinwei就起到了携带进位的任务 tmp=tmp-&gt;next; &#125; if(sum_jinwei==1) &#123; tmp-&gt;next=new ListNode(1);//当sum_jinwei==1的时候就证明最高位必然为1 &#125; return result-&gt;next; &#125;&#125;;执行用时：24 ms]]></content>
