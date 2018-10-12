@@ -95,18 +95,18 @@
 
 
 
-<meta name="description" content="没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&amp;lt;-&amp;gt; 题目:两数之和1给定一个字符串，找出不含有重复字符的最长子串的长度。 123456789101112131415示例1:输入: &quot;abcabcbb&quot;输出: 3 解释: 无重复字符的最长子串是 &quot;abc&quot;，其长度为 3。示例2:输入: &quot;bbbbb&quot;输出: 1解释: 无重复字符的最长子串是 &quot;b&quot;，其长度">
+<meta name="description" content="没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&amp;lt;-&amp;gt; 题目:无重复字符的最长子串1给定一个字符串，找出不含有重复字符的最长子串的长度。 123456789101112131415示例1:输入: &quot;abcabcbb&quot;输出: 3 解释: 无重复字符的最长子串是 &quot;abc&quot;，其长度为 3。示例2:输入: &quot;bbbbb&quot;输出: 1解释: 无重复字符的最长子串是 &quot;">
 <meta name="keywords" content="LeetCode,无重复字符的最长子串,双游标">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode刷题之旅（3）--无重复字符的最长子串（中等题）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/10/12/LeetCode刷题之旅（3）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&amp;lt;-&amp;gt; 题目:两数之和1给定一个字符串，找出不含有重复字符的最长子串的长度。 123456789101112131415示例1:输入: &quot;abcabcbb&quot;输出: 3 解释: 无重复字符的最长子串是 &quot;abc&quot;，其长度为 3。示例2:输入: &quot;bbbbb&quot;输出: 1解释: 无重复字符的最长子串是 &quot;b&quot;，其长度">
+<meta property="og:description" content="没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&amp;lt;-&amp;gt; 题目:无重复字符的最长子串1给定一个字符串，找出不含有重复字符的最长子串的长度。 123456789101112131415示例1:输入: &quot;abcabcbb&quot;输出: 3 解释: 无重复字符的最长子串是 &quot;abc&quot;，其长度为 3。示例2:输入: &quot;bbbbb&quot;输出: 1解释: 无重复字符的最长子串是 &quot;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-12T12:06:17.200Z">
+<meta property="og:updated_time" content="2018-10-12T12:42:10.217Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode刷题之旅（3）--无重复字符的最长子串（中等题）">
-<meta name="twitter:description" content="没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&amp;lt;-&amp;gt; 题目:两数之和1给定一个字符串，找出不含有重复字符的最长子串的长度。 123456789101112131415示例1:输入: &quot;abcabcbb&quot;输出: 3 解释: 无重复字符的最长子串是 &quot;abc&quot;，其长度为 3。示例2:输入: &quot;bbbbb&quot;输出: 1解释: 无重复字符的最长子串是 &quot;b&quot;，其长度">
+<meta name="twitter:description" content="没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&amp;lt;-&amp;gt; 题目:无重复字符的最长子串1给定一个字符串，找出不含有重复字符的最长子串的长度。 123456789101112131415示例1:输入: &quot;abcabcbb&quot;输出: 3 解释: 无重复字符的最长子串是 &quot;abc&quot;，其长度为 3。示例2:输入: &quot;bbbbb&quot;输出: 1解释: 无重复字符的最长子串是 &quot;">
 
 
 
@@ -447,7 +447,7 @@
 
       
         <p>没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&lt;-&gt;</p>
-<h2 id="题目-两数之和"><a href="#题目-两数之和" class="headerlink" title="题目:两数之和"></a>题目:两数之和</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定一个字符串，找出不含有重复字符的最长子串的长度。</span><br></pre></td></tr></table></figure>
+<h2 id="题目-无重复字符的最长子串"><a href="#题目-无重复字符的最长子串" class="headerlink" title="题目:无重复字符的最长子串"></a>题目:无重复字符的最长子串</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定一个字符串，找出不含有重复字符的最长子串的长度。</span><br></pre></td></tr></table></figure>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">示例1:</span></span><br><span class="line"><span class="section">输入: "abcabcbb"</span></span><br><span class="line"><span class="section">输出: 3 </span></span><br><span class="line"><span class="section">解释: 无重复字符的最长子串是 "abc"，其长度为 3。</span></span><br><span class="line"></span><br><span class="line"><span class="section">示例2:</span></span><br><span class="line"><span class="section">输入: "bbbbb"</span></span><br><span class="line"><span class="section">输出: 1</span></span><br><span class="line"><span class="section">解释: 无重复字符的最长子串是 "b"，其长度为 1。</span></span><br><span class="line"></span><br><span class="line"><span class="section">示例3:</span></span><br><span class="line"><span class="section">输入: "pwwkew"</span></span><br><span class="line"><span class="section">输出: 3</span></span><br><span class="line"><span class="section">解释: 无重复字符的最长子串是 "wke"，其长度为 3。</span></span><br><span class="line">     请注意，答案必须是一个子串，<span class="string">"pwke"</span> 是一个子序列 而不是子串。</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><h3 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h3><p>首先，因为键盘可输入字符为128个，所以先int一个128的数组并且初始化为0，用此数组来记录是否重复，然后在循环中判断，如果为0，那么就累加长度，并且记录最大长度。然后在不为0的时候，再初始化数组为0。很明显，这个初始化很耗时，所以又想了下面的方法。</p>
@@ -525,6 +525,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/12/LeetCode刷题之旅（4）/" rel="prev" title="LeetCode刷题之旅（4）--两个排序数组的中位数（困难题）">
+                LeetCode刷题之旅（4）--两个排序数组的中位数（困难题） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -636,7 +640,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -658,7 +662,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -719,7 +723,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目-两数之和"><span class="nav-number">1.</span> <span class="nav-text">题目:两数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路："><span class="nav-number">2.</span> <span class="nav-text">解题思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法1："><span class="nav-number">2.1.</span> <span class="nav-text">方法1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法2："><span class="nav-number">2.2.</span> <span class="nav-text">方法2：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目-无重复字符的最长子串"><span class="nav-number">1.</span> <span class="nav-text">题目:无重复字符的最长子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路："><span class="nav-number">2.</span> <span class="nav-text">解题思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法1："><span class="nav-number">2.1.</span> <span class="nav-text">方法1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法2："><span class="nav-number">2.2.</span> <span class="nav-text">方法2：</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LeetCode刷题之旅（4）--两个排序数组的中位数（困难题）]]></title>
+    <url>%2F2018%2F10%2F12%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%884%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[10分钟，一次AC并且超过了95%，还不错^.^ 题目:两个排序数组的中位数12给定两个大小为 m 和 n 的有序数组 nums1 和 nums2 。请找出这两个有序数组的中位数。要求算法的时间复杂度为 O(log (m+n)) 。你可以假设 nums1 和 nums2 不同时为空。 123456789示例1:nums1 = [1, 3]nums2 = [2]中位数是 2.0示例2:nums1 = [1, 2]nums2 = [3, 4]中位数是 (2 + 3)/2 = 2.5 解题思路：方法：这题的思路很简单，当两个数组，有一个已经填充到arr完毕的时候，另外一组直接“贴”在最后即可，然后在取arr的中位数，这题过于简单了。1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859class Solution &#123;public: double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123; int sizeall=0,i=0,j=0,k=0; sizeall=nums1.size()+nums2.size(); int arr[sizeall]=&#123;0&#125;; while(i&lt;nums1.size()&amp;&amp;j&lt;nums2.size()) &#123; if(nums1[i]&lt;nums2[j]) &#123; arr[k]=nums1[i]; i++; &#125; else &#123; arr[k]=nums2[j]; j++; &#125; k++; &#125; if(i&lt;nums1.size()) &#123; while(i&lt;nums1.size()) &#123; arr[k]=nums1[i]; i++; k++; &#125; &#125; if(j&lt;nums2.size()) &#123; while(j&lt;nums2.size()) &#123; arr[k]=nums2[j]; j++; k++; &#125; &#125; if((sizeall)%2==0) &#123; return (arr[sizeall/2]+arr[(sizeall-1)/2])/2.0; &#125; else &#123; return (double)arr[sizeall/2]; &#125; &#125;&#125;;static const auto io_sync_off = []()&#123; // turn off sync std::ios::sync_with_stdio(false); // untie in/out streams std::cin.tie(nullptr); return nullptr;&#125;();执行用时：28 ms]]></content>
+      <categories>
+        <category>算法</category>
+        <category>LeetCode刷题之旅</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>双游标</tag>
+        <tag>两个排序数组的中位数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode刷题之旅（3）--无重复字符的最长子串（中等题）]]></title>
     <url>%2F2018%2F10%2F12%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%883%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&lt;-&gt; 题目:两数之和1给定一个字符串，找出不含有重复字符的最长子串的长度。 123456789101112131415示例1:输入: "abcabcbb"输出: 3 解释: 无重复字符的最长子串是 "abc"，其长度为 3。示例2:输入: "bbbbb"输出: 1解释: 无重复字符的最长子串是 "b"，其长度为 1。示例3:输入: "pwwkew"输出: 3解释: 无重复字符的最长子串是 "wke"，其长度为 3。 请注意，答案必须是一个子串，"pwke" 是一个子序列 而不是子串。 解题思路：方法1：首先，因为键盘可输入字符为128个，所以先int一个128的数组并且初始化为0，用此数组来记录是否重复，然后在循环中判断，如果为0，那么就累加长度，并且记录最大长度。然后在不为0的时候，再初始化数组为0。很明显，这个初始化很耗时，所以又想了下面的方法。 方法2：双游标，i,j两者之差j-i+1就是子串的长度，然后数组记录的不再是字符是否重复了，而是记录最后一个字母在s串中的位置。细节在于，i在字母重复的时候，会变成字母所在的位置，判断的时候的细节在于，重复的字母的位置如果在i的左边，则表示不会在i到j的子串中重复。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748class Solution &#123;public: int lengthOfLongestSubstring(string s) &#123; int arr[128]=&#123;0&#125;; int max_length=0,i,j; for(i=0,j=0;j&lt;s.size();++j) &#123; if(arr[(int)s[j]]==0||arr[(int)s[j]]-1&lt;i) &#123; arr[(int)s[j]]=j+1;//保持字符 s[j] 在s中的位置+1 比如0位 ，最后保存的是1 //length++; if(j-i+1&gt;max_length) &#123; max_length=j-i+1; &#125; &#125; else &#123; if(arr[(int)s[j]]-1&lt;i) &#123; &#125; else &#123; i=arr[(int)s[j]]; arr[(int)s[j]]=j+1; /*if(j-i&gt;max_length) &#123; max_length=j-i+1; &#125;*/ &#125; &#125; &#125; return max_length; &#125;&#125;;static const auto _____ = []() &#123; ios::sync_with_stdio(false); cin.tie(nullptr); return nullptr;&#125;();执行用时：12 ms]]></content>
+    <content type="text"><![CDATA[没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&lt;-&gt; 题目:无重复字符的最长子串1给定一个字符串，找出不含有重复字符的最长子串的长度。 123456789101112131415示例1:输入: "abcabcbb"输出: 3 解释: 无重复字符的最长子串是 "abc"，其长度为 3。示例2:输入: "bbbbb"输出: 1解释: 无重复字符的最长子串是 "b"，其长度为 1。示例3:输入: "pwwkew"输出: 3解释: 无重复字符的最长子串是 "wke"，其长度为 3。 请注意，答案必须是一个子串，"pwke" 是一个子序列 而不是子串。 解题思路：方法1：首先，因为键盘可输入字符为128个，所以先int一个128的数组并且初始化为0，用此数组来记录是否重复，然后在循环中判断，如果为0，那么就累加长度，并且记录最大长度。然后在不为0的时候，再初始化数组为0。很明显，这个初始化很耗时，所以又想了下面的方法。 方法2：双游标，i,j两者之差j-i+1就是子串的长度，然后数组记录的不再是字符是否重复了，而是记录最后一个字母在s串中的位置。细节在于，i在字母重复的时候，会变成字母所在的位置，判断的时候的细节在于，重复的字母的位置如果在i的左边，则表示不会在i到j的子串中重复。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748class Solution &#123;public: int lengthOfLongestSubstring(string s) &#123; int arr[128]=&#123;0&#125;; int max_length=0,i,j; for(i=0,j=0;j&lt;s.size();++j) &#123; if(arr[(int)s[j]]==0||arr[(int)s[j]]-1&lt;i) &#123; arr[(int)s[j]]=j+1;//保持字符 s[j] 在s中的位置+1 比如0位 ，最后保存的是1 //length++; if(j-i+1&gt;max_length) &#123; max_length=j-i+1; &#125; &#125; else &#123; if(arr[(int)s[j]]-1&lt;i) &#123; &#125; else &#123; i=arr[(int)s[j]]; arr[(int)s[j]]=j+1; /*if(j-i&gt;max_length) &#123; max_length=j-i+1; &#125;*/ &#125; &#125; &#125; return max_length; &#125;&#125;;static const auto _____ = []() &#123; ios::sync_with_stdio(false); cin.tie(nullptr); return nullptr;&#125;();执行用时：12 ms]]></content>
       <categories>
         <category>算法</category>
         <category>LeetCode刷题之旅</category>
