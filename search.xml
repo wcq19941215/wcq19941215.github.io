@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LeetCode刷题之旅（6）--Z字形变换（中等题）]]></title>
+    <url>%2F2018%2F10%2F22%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%886%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt; 题目:Z字形变换1234567将字符串 "PAYPALISHIRING"以Z字形排列成给定的行数：P A H NA P L S I I GY I R之后从左往右，逐行读取字符："PAHNAPLSIIGYIR"实现一个将字符串进行指定行数变换的函数:string convert(string s, int numRows); 12345678910111213示例1:输入: s = "PAYPALISHIRING", numRows = 3输出: "PAHNAPLSIIGYIR"示例2:输入: s = "PAYPALISHIRING", numRows = 4输出: "PINALSIGYAHRPI"解释:P I NA L S I GY A H RP I 解题思路：方法：思路很简单，就是从左到右按照行数依次存入，就是按照题意的规律存。通过观察，可以发现，先存第一行，然后第二行只是第一行的每个数的左右两个字符依次存取，第三行是第一行每个数的左右间隔一个数的依次存取…..而第一行的规矩就是2（numRows-2）+2为两个字符之间的距离。第一行第一个字符，可以看做是第零行第一个字符的右下第一个字符，所以要先s[j+1],然后再存第零行第二个字符左下的字符所以是s[j+row0-i]i为行数从0开始计数。 12345678910111213141516171819202122class Solution &#123;public: string convert(string s, int numRows) &#123; if(numRows&lt;=1)return s; int n=s.size(); int i=0,j=0; int row0=2*numRows-2; string res; for(i=0;i&lt;numRows;i++) &#123; for(j=0;j+i&lt;n;j=j+row0) &#123; res+=s[j+i]; if(i!=0&amp;&amp;i!=numRows-1&amp;&amp;j+row0-i&lt;n) res+=s[j+row0-i]; &#125; &#125; return res; &#125;&#125;;执行用时：28 ms]]></content>
+      <categories>
+        <category>算法</category>
+        <category>LeetCode刷题之旅</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>Z字形变换</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode刷题之旅（5）--最长回文子串（中等题）]]></title>
     <url>%2F2018%2F10%2F15%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%885%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[方法一耗时很长但是思路容易理解，还要接着想其他更好的方法呀，加油。 题目:最长回文子串1给定一个字符串s，找到s中最长的回文子串。你可以假设 s 的最大长度为1000。 12345678示例1:输入: "babad"输出: "bab"注意: "aba"也是一个有效答案。示例2:输入: "cbbd"输出: "bb" 解题思路：方法一：从头到尾遍历字符串s，当前后有字母相同时，证明有可能这两个字母间的串为最长回文串，所以，判断该串是否是回文串即可，若是则输出成新串new_s即可。而判断是否是回文串也很简单，一样的思路，如果遍历字符串，如果一直头尾相等，那么该串就是回文串了。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960class Solution &#123;public: string longestPalindrome(string s) &#123; int m,n,max_length=0,m1,n1; string new_s=""; for(m=0,n=s.size()-1;m&lt;s.size();n--) &#123; if(s[m]==s[n]) &#123; if(is_huiwenstring(s,m+1,n-1)) &#123; if(n-m+1&gt;max_length) &#123; max_length=n-m+1; new_s=""; for(m1=m,n1=n;m1&lt;=n1;m1++) &#123; new_s=new_s+s[m1]; &#125; &#125; &#125; &#125; if(m==n) &#123; m++; n=s.size(); &#125; &#125; return new_s; &#125; bool is_huiwenstring(string s,int A,int B) &#123; int i=0,j=0; if((B-A+1)%2==0) &#123; for(i=A,j=B;i&lt;(B+A+1)/2;i++,j--) &#123; if(s[i]!=s[j]) &#123; return false; &#125; &#125; &#125; else &#123; for(i=A,j=B;i&lt;(B+A)/2;i++,j--) &#123; if(s[i]!=s[j]) &#123; return false; &#125; &#125; &#125; return true; &#125;&#125;;执行用时：1328 ms 方法二：]]></content>
+    <content type="text"><![CDATA[方法一耗时很长但是思路容易理解，还要接着想其他更好的方法呀，加油。 题目:最长回文子串1给定一个字符串s，找到s中最长的回文子串。你可以假设 s 的最大长度为1000。 12345678示例1:输入: "babad"输出: "bab"注意: "aba"也是一个有效答案。示例2:输入: "cbbd"输出: "bb" 解题思路：方法一：从头到尾遍历字符串s，当前后有字母相同时，证明有可能这两个字母间的串为最长回文串，所以，判断该串是否是回文串即可，若是则输出成新串new_s即可。而判断是否是回文串也很简单，一样的思路，如果遍历字符串，如果一直头尾相等，那么该串就是回文串了。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960class Solution &#123;public: string longestPalindrome(string s) &#123; int m,n,max_length=0,m1,n1; string new_s=""; for(m=0,n=s.size()-1;m&lt;s.size();n--) &#123; if(s[m]==s[n]) &#123; if(is_huiwenstring(s,m+1,n-1)) &#123; if(n-m+1&gt;max_length) &#123; max_length=n-m+1; new_s=""; for(m1=m,n1=n;m1&lt;=n1;m1++) &#123; new_s=new_s+s[m1]; &#125; &#125; &#125; &#125; if(m==n) &#123; m++; n=s.size(); &#125; &#125; return new_s; &#125; bool is_huiwenstring(string s,int A,int B) &#123; int i=0,j=0; if((B-A+1)%2==0) &#123; for(i=A,j=B;i&lt;(B+A+1)/2;i++,j--) &#123; if(s[i]!=s[j]) &#123; return false; &#125; &#125; &#125; else &#123; for(i=A,j=B;i&lt;(B+A)/2;i++,j--) &#123; if(s[i]!=s[j]) &#123; return false; &#125; &#125; &#125; return true; &#125;&#125;;执行用时：1328 ms 方法二：这个方法就是找到最长子串的中心，然后想外部扩展，使用了i、j的双游标。123456789101112131415161718192021222324252627282930313233343536static const auto __ = []() &#123; ios::sync_with_stdio(false); cin.tie(nullptr); return nullptr;&#125;();class Solution &#123;public: string longestPalindrome(string s) &#123; int center=0,left=0,right=0,max_length=0,place=0; while(center&lt;s.size()) &#123; left=center; right=center; while(right&lt;s.size()&amp;&amp;s[right]==s[right+1])//右边的游标先从中心出发，这样就可以保证，无论回文子串是偶数长度还是奇数长度，left和right都可以分开。简单来说，因为在偶数的情况下，中心的两个字符必然相等，该操作等同于产生了左右两个中心，一个是原地不动的left_center，一个是r++了以后的right_center &#123; right++; &#125; center=right+1;//更新中心的位置 while(left&gt;=0&amp;&amp;right&lt;s.size()&amp;&amp;s[left]==s[right]) &#123; left--; right++; &#125; if(max_length&lt;right-left+1-2) &#123; max_length=right-left+1-2; place=left+1; &#125; &#125; return s.substr(place,max_length); &#125;&#125;;执行用时：4 ms]]></content>
       <categories>
         <category>算法</category>
         <category>LeetCode刷题之旅</category>
@@ -23,8 +36,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>双游标</tag>
         <tag>两个排序数组的中位数</tag>
+        <tag>双游标</tag>
       </tags>
   </entry>
   <entry>
@@ -37,8 +50,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>无重复字符的最长子串</tag>
         <tag>双游标</tag>
+        <tag>无重复字符的最长子串</tag>
       </tags>
   </entry>
   <entry>
