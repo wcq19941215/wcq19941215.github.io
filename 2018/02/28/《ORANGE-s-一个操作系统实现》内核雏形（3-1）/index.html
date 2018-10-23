@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="NASM,操作系统,于渊,内核,ELF," />
+  <meta name="keywords" content="操作系统,于渊,NASM,内核,ELF," />
 
 
 
@@ -96,7 +96,7 @@
 
 
 <meta name="description" content="在Linux下红汇编写Hello World因为在后面的很多工作中，都要用到汇编编程，所以我们先试试用汇编在Linux下编写Hello World，具体代码如下：">
-<meta name="keywords" content="NASM,操作系统,于渊,内核,ELF">
+<meta name="keywords" content="操作系统,于渊,NASM,内核,ELF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》内核雏形（3-1）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/02/28/《ORANGE-s-一个操作系统实现》内核雏形（3-1）/index.html">
@@ -527,11 +527,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NASM/" rel="tag"># NASM</a>
-          
             <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
             <a href="/tags/于渊/" rel="tag"># 于渊</a>
+          
+            <a href="/tags/NASM/" rel="tag"># NASM</a>
           
             <a href="/tags/内核/" rel="tag"># 内核</a>
           
@@ -1488,7 +1488,24 @@ var jiathis_config={
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

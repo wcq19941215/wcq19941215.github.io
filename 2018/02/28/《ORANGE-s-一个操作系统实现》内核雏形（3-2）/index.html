@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="NASM,操作系统,于渊,内核,ELF," />
+  <meta name="keywords" content="操作系统,于渊,NASM,内核,ELF," />
 
 
 
@@ -96,7 +96,7 @@
 
 
 <meta name="description" content="跳入保护模式首先是GDT以及对应的选择子，我们只定义三个描述符，分别是0~4GB的可执行段、0~4GB可读写段和一个指向显存开始地址的段。">
-<meta name="keywords" content="NASM,操作系统,于渊,内核,ELF">
+<meta name="keywords" content="操作系统,于渊,NASM,内核,ELF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《ORANGE-s-一个操作系统实现》内核雏形（3-2）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2018/02/28/《ORANGE-s-一个操作系统实现》内核雏形（3-2）/index.html">
@@ -538,11 +538,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NASM/" rel="tag"># NASM</a>
-          
             <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
             <a href="/tags/于渊/" rel="tag"># 于渊</a>
+          
+            <a href="/tags/NASM/" rel="tag"># NASM</a>
           
             <a href="/tags/内核/" rel="tag"># 内核</a>
           
@@ -1499,7 +1499,24 @@ var jiathis_config={
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
