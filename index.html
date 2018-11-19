@@ -323,6 +323,366 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/11/19/LeetCode刷题之旅（14）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王超群">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/jegddfAhH2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang的宝库">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/19/LeetCode刷题之旅（14）/" itemprop="url">LeetCode刷题之旅（14）--最长公共前缀（简单题）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T20:59:55+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/LeetCode刷题之旅/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode刷题之旅</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/11/19/LeetCode刷题之旅（14）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.wcqwolflow.com/2018/11/19/LeetCode刷题之旅（14）/" class="cy_cmt_count" data-xid="2018/11/19/LeetCode刷题之旅（14）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/11/19/LeetCode刷题之旅（14）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（14）--最长公共前缀（简单题）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt;</p>
+<h2 id="题目-最长公共前缀"><a href="#题目-最长公共前缀" class="headerlink" title="题目:最长公共前缀"></a>题目:最长公共前缀</h2><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">编写一个函数来查找字符串数组中的最长公共前缀。</span><br><span class="line"></span><br><span class="line">如果不存在公共前缀，返回空字符串 <span class="string">""</span>。</span><br><span class="line"></span><br><span class="line">示例 <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">输入: [<span class="string">"flower"</span>,<span class="string">"flow"</span>,<span class="string">"flight"</span>]</span><br><span class="line">输出: <span class="string">"fl"</span></span><br><span class="line">示例 <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">输入: [<span class="string">"dog"</span>,<span class="string">"racecar"</span>,<span class="string">"car"</span>]</span><br><span class="line">输出: <span class="string">""</span></span><br><span class="line">解释: 输入不存在公共前缀。</span><br><span class="line">说明:</span><br><span class="line"></span><br><span class="line">所有输入只包含小写字母 a-z 。</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/19/LeetCode刷题之旅（14）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/11/19/LeetCode刷题之旅（13）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王超群">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/jegddfAhH2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang的宝库">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/19/LeetCode刷题之旅（13）/" itemprop="url">LeetCode刷题之旅（13）--罗马数字转整数（简单题）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T20:11:58+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/LeetCode刷题之旅/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode刷题之旅</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/11/19/LeetCode刷题之旅（13）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.wcqwolflow.com/2018/11/19/LeetCode刷题之旅（13）/" class="cy_cmt_count" data-xid="2018/11/19/LeetCode刷题之旅（13）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/11/19/LeetCode刷题之旅（13）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（13）--罗马数字转整数（简单题）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt;</p>
+<h2 id="题目-罗马数字转整数"><a href="#题目-罗马数字转整数" class="headerlink" title="题目:罗马数字转整数"></a>题目:罗马数字转整数</h2><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">罗马数字包含以下七种字符： <span class="keyword">I</span>， V， X， L，<span class="keyword">C</span>，<span class="keyword">D</span> 和 M。</span><br><span class="line"></span><br><span class="line">字符          数值</span><br><span class="line"><span class="keyword">I</span>             <span class="number">1</span></span><br><span class="line">V             <span class="number">5</span></span><br><span class="line">X             <span class="number">10</span></span><br><span class="line">L             <span class="number">50</span></span><br><span class="line"><span class="keyword">C</span>             <span class="number">100</span></span><br><span class="line"><span class="keyword">D</span>             <span class="number">500</span></span><br><span class="line">M             <span class="number">1000</span></span><br><span class="line"></span><br><span class="line">例如， 罗马数字 <span class="number">2</span> 写做 II ，即为两个并列的 <span class="number">1</span>。<span class="number">12</span> 写做 XII ，即为 X + II 。 <span class="number">27</span> 写做  XXVII, 即为 XX + V + II 。</span><br><span class="line"></span><br><span class="line">通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 <span class="number">4</span> 不写做 IIII，而是 IV。数字 <span class="number">1</span> 在数字 <span class="number">5</span> 的左边，所表示的数等于大数 <span class="number">5</span> 减小数 <span class="number">1</span> 得到的数值 <span class="number">4</span> 。同样地，数字 <span class="number">9</span> 表示为 IX。这个特殊的规则只适用于以下六种情况：</span><br><span class="line"></span><br><span class="line"><span class="keyword">I</span> 可以放在 V (<span class="number">5</span>) 和 X (<span class="number">10</span>) 的左边，来表示 <span class="number">4</span> 和 <span class="number">9</span>。</span><br><span class="line">X 可以放在 L (<span class="number">50</span>) 和 <span class="keyword">C</span> (<span class="number">100</span>) 的左边，来表示 <span class="number">40</span> 和 <span class="number">90</span>。 </span><br><span class="line"><span class="keyword">C</span> 可以放在 <span class="keyword">D</span> (<span class="number">500</span>) 和 M (<span class="number">1000</span>) 的左边，来表示 <span class="number">400</span> 和 <span class="number">900</span>。</span><br><span class="line">给定一个罗马数字，将其转换成整数。输入确保在 <span class="number">1</span> 到 <span class="number">3999</span> 的范围内。</span><br><span class="line"></span><br><span class="line">示例 <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">输入: <span class="string">"III"</span></span><br><span class="line">输出: <span class="number">3</span></span><br><span class="line">示例 <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">输入: <span class="string">"IV"</span></span><br><span class="line">输出: <span class="number">4</span></span><br><span class="line">示例 <span class="number">3</span>:</span><br><span class="line"></span><br><span class="line">输入: <span class="string">"IX"</span></span><br><span class="line">输出: <span class="number">9</span></span><br><span class="line">示例 <span class="number">4</span>:</span><br><span class="line"></span><br><span class="line">输入: <span class="string">"LVIII"</span></span><br><span class="line">输出: <span class="number">58</span></span><br><span class="line">解释: L = <span class="number">50</span>, V= <span class="number">5</span>, III = <span class="number">3.</span></span><br><span class="line">示例 <span class="number">5</span>:</span><br><span class="line"></span><br><span class="line">输入: <span class="string">"MCMXCIV"</span></span><br><span class="line">输出: <span class="number">1994</span></span><br><span class="line">解释: M = <span class="number">1000</span>, CM = <span class="number">900</span>, XC = <span class="number">90</span>, IV = <span class="number">4.</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/19/LeetCode刷题之旅（13）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/11/19/LeetCode刷题之旅（12）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1720,368 +2080,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/10/12/LeetCode刷题之旅（3）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王超群">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/jegddfAhH2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wang的宝库">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/12/LeetCode刷题之旅（3）/" itemprop="url">LeetCode刷题之旅（3）--无重复字符的最长子串（中等题）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-12T19:21:11+08:00">
-                2018-10-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/LeetCode刷题之旅/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode刷题之旅</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/10/12/LeetCode刷题之旅（3）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.wcqwolflow.com/2018/10/12/LeetCode刷题之旅（3）/" class="cy_cmt_count" data-xid="2018/10/12/LeetCode刷题之旅（3）/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-             <span id="/2018/10/12/LeetCode刷题之旅（3）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（3）--无重复字符的最长子串（中等题）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&lt;-&gt;</p>
-<h2 id="题目-无重复字符的最长子串"><a href="#题目-无重复字符的最长子串" class="headerlink" title="题目:无重复字符的最长子串"></a>题目:无重复字符的最长子串</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给定一个字符串，找出不含有重复字符的最长子串的长度。</span><br></pre></td></tr></table></figure>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">示例1:</span></span><br><span class="line"><span class="section">输入: "abcabcbb"</span></span><br><span class="line"><span class="section">输出: 3 </span></span><br><span class="line"><span class="section">解释: 无重复字符的最长子串是 "abc"，其长度为 3。</span></span><br><span class="line"></span><br><span class="line"><span class="section">示例2:</span></span><br><span class="line"><span class="section">输入: "bbbbb"</span></span><br><span class="line"><span class="section">输出: 1</span></span><br><span class="line"><span class="section">解释: 无重复字符的最长子串是 "b"，其长度为 1。</span></span><br><span class="line"></span><br><span class="line"><span class="section">示例3:</span></span><br><span class="line"><span class="section">输入: "pwwkew"</span></span><br><span class="line"><span class="section">输出: 3</span></span><br><span class="line"><span class="section">解释: 无重复字符的最长子串是 "wke"，其长度为 3。</span></span><br><span class="line">     请注意，答案必须是一个子串，<span class="string">"pwke"</span> 是一个子序列 而不是子串。</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/12/LeetCode刷题之旅（3）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/10/11/LeetCode刷题之旅（2）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王超群">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p29pmm8g4.bkt.clouddn.com/blog/180125/jegddfAhH2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wang的宝库">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/11/LeetCode刷题之旅（2）/" itemprop="url">LeetCode刷题之旅（2）--两数相加（中等题）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-11T19:35:33+08:00">
-                2018-10-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/LeetCode刷题之旅/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode刷题之旅</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/10/11/LeetCode刷题之旅（2）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.wcqwolflow.com/2018/10/11/LeetCode刷题之旅（2）/" class="cy_cmt_count" data-xid="2018/10/11/LeetCode刷题之旅（2）/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-             <span id="/2018/10/11/LeetCode刷题之旅（2）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（2）--两数相加（中等题）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>没有简单的题目，或者说，再简单的题目，只要追求极致，都会要花心思。好好加油吧&lt;-&gt;</p>
-<h2 id="题目-两数之和"><a href="#题目-两数之和" class="headerlink" title="题目:两数之和"></a>题目:两数之和</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。</span><br><span class="line">你可以假设除了数字<span class="number">0</span>之外，这两个数字都不会以零开头。</span><br></pre></td></tr></table></figure>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入：(<span class="number">2</span> -&gt; <span class="number">4</span> -&gt; <span class="number">3</span>) + (<span class="number">5</span> -&gt; <span class="number">6</span> -&gt; <span class="number">4</span>)</span><br><span class="line">输出：<span class="number">7</span> -&gt; <span class="number">0</span> -&gt; <span class="number">8</span></span><br><span class="line">原因：<span class="number">342</span> + <span class="number">465</span> = <span class="number">807</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/11/LeetCode刷题之旅（2）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2136,7 +2134,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2158,7 +2156,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
