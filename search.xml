@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[算法作业3-多米诺骨牌]]></title>
+    <url>%2F2018%2F11%2F26%2F%E7%AE%97%E6%B3%95%E4%BD%9C%E4%B8%9A3-%E5%A4%9A%E7%B1%B3%E8%AF%BA%E9%AA%A8%E7%89%8C%2F</url>
+    <content type="text"><![CDATA[每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt; 题目:多米诺骨牌12现有 n 块 “多米诺骨牌” s1; s2; 。 。 。 ; sn 水平放成一排，每块骨牌 si 包含左右两 个部分，每个部分赋予一个非负整数值，如下图所示为包含 6 块骨牌的序列。骨牌可做 180 度旋转，使得原来在左边的值变到右边，而原来在右边的值移到左边，假设不论 si 如何旋转，L[i] 总是存储 si 左边的值，R[i] 总是存储 si 右边的值，W [i] 用于存储 si 的状态： 当 L[i] &lt;=R[i] 时记为 0，否则记为1，试采用分治法设计算法 解题思路：方法：在实验过程中，很容易观察到，在骨牌首尾补充两张牌00，00，就可以讲问题分成左右两个部分，就可以分别求出MAX0,MAX1,然后比较两者的值较大者就是题目要求的结果。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110#include "stdafx.h"#include &lt;iostream&gt;using namespace std;int max_duominuo(int* L, int* R, int start,int end,int* w) &#123;//这里的start end是骨牌的序号 /*思路 很容易观察到，在骨牌收尾补充两张牌00，00，就可以讲问题分成左右两个部分，就可以分别求出MAX0,MAX1,然后比较两者的值 较大者就是题目要求的结果。 */ int mid = 0,maxL1,maxR1,MAX1, maxL0, maxR0, MAX0, tmp; if (end - start == 1)//此时证明只有两张牌，直接计算即可 &#123; return R[start] * L[end]; &#125; else &#123; mid = (start + end) / 2; if (L[mid] &gt; R[mid]) &#123; w[mid] = 1; maxL1=max_duominuo(L, R, start, mid, w); maxR1=max_duominuo(L, R, mid, end, w); MAX1 = maxL1 + maxR1; tmp = L[mid]; L[mid] = R[mid]; R[mid] = tmp; w[mid] = 0; maxL0 = max_duominuo(L, R, start, mid, w); maxR0 = max_duominuo(L, R, mid, end, w); MAX0 = maxL0 + maxR0; if (MAX1 &gt; MAX0) &#123; w[mid] = 1; return MAX1; &#125; else &#123; w[mid] = 0; return MAX0; &#125; &#125; else &#123; w[mid] = 0; maxL0 = max_duominuo(L, R, start, mid, w); maxR0 = max_duominuo(L, R, mid, end, w); MAX0 = maxL0 + maxR0; tmp = L[mid]; L[mid] = R[mid]; R[mid] = tmp; w[mid] = 1; maxL1 = max_duominuo(L, R, start, mid, w); maxR1 = max_duominuo(L, R, mid, end, w); MAX1 = maxL1 + maxR1; if (MAX1 &gt; MAX0) &#123; w[mid] = 1; return MAX1; &#125; else &#123; w[mid] = 0; return MAX0; &#125; &#125; &#125;&#125;int main() &#123; int n = 0,MAX=0; cout &lt;&lt; "请输入骨牌个数n="; cin &gt;&gt; n; if (n &lt;= 1) &#123; cout &lt;&lt; "骨牌过少，无法计算" &lt;&lt; endl; return 0; &#125; cout &lt;&lt; endl; int *L = new int[n+2]; int *R = new int[n+2]; int *w = new int[n+2]; for (int i = 1; i &lt;= n; i++) &#123; cout &lt;&lt; "请输入骨牌S" &lt;&lt; i &lt;&lt; "的左骨牌数值: "; cin &gt;&gt; L[i]; cout &lt;&lt; "请输入骨牌S" &lt;&lt; i &lt;&lt; "的右骨牌数值: "; cin &gt;&gt; R[i]; cout &lt;&lt; endl; if (L[i] &lt;= R[i]) &#123; w[i] = 0; &#125; else &#123; w[i] = 1; &#125; &#125; R[0] = 0; L[0] = 0; L[n + 1] = 0; R[n + 1] = 0; MAX = max_duominuo(L,R,0,n+1,w); cout &lt;&lt; "最大值为：" &lt;&lt; MAX&lt;&lt;endl; cout &lt;&lt; "各个骨牌的状态为："; for (int i = 1; i &lt;=n; i++) &#123; cout &lt;&lt; w[i] &lt;&lt; " "; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>作业练习</category>
+      </categories>
+      <tags>
+        <tag>分治法</tag>
+        <tag>多米诺骨牌</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode刷题之旅（14）--最长公共前缀（简单题）]]></title>
     <url>%2F2018%2F11%2F19%2FLeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%8814%EF%BC%89%2F</url>
     <content type="text"><![CDATA[每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt; 题目:最长公共前缀12345678910111213141516编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 ""。示例 1:输入: ["flower","flow","flight"]输出: "fl"示例 2:输入: ["dog","racecar","car"]输出: ""解释: 输入不存在公共前缀。说明:所有输入只包含小写字母 a-z 。 解题思路：方法：很简单，不赘述。 1234567891011121314151617181920212223242526272829303132333435static const auto io_speed_up= []()&#123; std::ios::sync_with_stdio(false); cin.tie(nullptr); return 0;&#125;();class Solution &#123;public: string longestCommonPrefix(vector&lt;string&gt;&amp; strs) &#123; string result=""; int i=0,j=1; if(strs.size()==1)return strs[0]; if(strs.size()==0)return ""; while(i&lt;strs[0].length()) &#123; while(j&lt;strs.size()) &#123; if(strs[j][i]==strs[0][i]) &#123; j++; &#125; else &#123; return result; &#125; &#125; j=1; result=result+strs[0][i]; i++; &#125; return result; &#125;&#125;;执行用时：4 ms]]></content>
@@ -120,8 +133,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>双游标</tag>
         <tag>两个排序数组的中位数</tag>
+        <tag>双游标</tag>
       </tags>
   </entry>
   <entry>
@@ -134,8 +147,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>无重复字符的最长子串</tag>
         <tag>双游标</tag>
+        <tag>无重复字符的最长子串</tag>
       </tags>
   </entry>
   <entry>
