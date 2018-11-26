@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[算法作业1-右移数组]]></title>
+    <url>%2F2018%2F11%2F26%2F%E7%AE%97%E6%B3%95%E4%BD%9C%E4%B8%9A1-%E5%8F%B3%E7%A7%BB%E6%95%B0%E7%BB%84%2F</url>
+    <content type="text"><![CDATA[每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt; 题目:右移数组1已知一个长度为 n 的数组和一个正整数 k，并且最多只能使用一个用于交换数 组元素的附加空间单元，试设计算法得到原数组循环右移 k 次的结果并分析算法的时间复杂度。 解题思路：方法：在自己尝试的过程中，发现了一个很有趣的规律，例如 arr=1 2 3 4 5 n=5,k=2 显然右移两位以后的数组为 4 5 1 2 3 而该数组的逆序为 3 2 1 5 4 恰好是123 45子数组的逆序由此，该算法就很容易了 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include "stdafx.h"#include &lt;string&gt;#include &lt;assert.h&gt;#include &lt;iostream&gt;using namespace std;void nixu(char* arr, int start, int end) &#123;//arr为数组，n为数组长度，k为右移位数 char tmp; while (start &lt; end) &#123; tmp = arr[start]; arr[start] = arr[end]; arr[end] = tmp; start++; end--; &#125;&#125;int main() &#123; int n = 0, k = 0, flag = 0; cout &lt;&lt; "请输入数组长度:"; cin &gt;&gt; n; char *arr = new char[n]; cout &lt;&lt; endl; cout &lt;&lt; "请输入数组:"; while (flag == 0) &#123; cin &gt;&gt; arr; if (strlen(arr) == n) &#123; flag = 1; &#125; else &#123; cout &lt;&lt; "请重新输入数组，因为数组长度不为n"&lt;&lt;endl; &#125; &#125; cout &lt;&lt; endl; cout &lt;&lt; "请输入右移次数:"; cin &gt;&gt; k; cout &lt;&lt; endl; nixu(arr, 0, n - k - 1); nixu(arr, n - k, n - 1); nixu(arr, 0, n - 1); cout &lt;&lt; arr; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>作业练习</category>
+      </categories>
+      <tags>
+        <tag>逆序数组</tag>
+        <tag>右移数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[算法作业3-多米诺骨牌]]></title>
     <url>%2F2018%2F11%2F26%2F%E7%AE%97%E6%B3%95%E4%BD%9C%E4%B8%9A3-%E5%A4%9A%E7%B1%B3%E8%AF%BA%E9%AA%A8%E7%89%8C%2F</url>
     <content type="text"><![CDATA[每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt; 题目:多米诺骨牌12现有 n 块 “多米诺骨牌” s1; s2; 。 。 。 ; sn 水平放成一排，每块骨牌 si 包含左右两 个部分，每个部分赋予一个非负整数值，如下图所示为包含 6 块骨牌的序列。骨牌可做 180 度旋转，使得原来在左边的值变到右边，而原来在右边的值移到左边，假设不论 si 如何旋转，L[i] 总是存储 si 左边的值，R[i] 总是存储 si 右边的值，W [i] 用于存储 si 的状态： 当 L[i] &lt;=R[i] 时记为 0，否则记为1，试采用分治法设计算法 解题思路：方法：在实验过程中，很容易观察到，在骨牌首尾补充两张牌00，00，就可以讲问题分成左右两个部分，就可以分别求出MAX0,MAX1,然后比较两者的值较大者就是题目要求的结果。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110#include "stdafx.h"#include &lt;iostream&gt;using namespace std;int max_duominuo(int* L, int* R, int start,int end,int* w) &#123;//这里的start end是骨牌的序号 /*思路 很容易观察到，在骨牌收尾补充两张牌00，00，就可以讲问题分成左右两个部分，就可以分别求出MAX0,MAX1,然后比较两者的值 较大者就是题目要求的结果。 */ int mid = 0,maxL1,maxR1,MAX1, maxL0, maxR0, MAX0, tmp; if (end - start == 1)//此时证明只有两张牌，直接计算即可 &#123; return R[start] * L[end]; &#125; else &#123; mid = (start + end) / 2; if (L[mid] &gt; R[mid]) &#123; w[mid] = 1; maxL1=max_duominuo(L, R, start, mid, w); maxR1=max_duominuo(L, R, mid, end, w); MAX1 = maxL1 + maxR1; tmp = L[mid]; L[mid] = R[mid]; R[mid] = tmp; w[mid] = 0; maxL0 = max_duominuo(L, R, start, mid, w); maxR0 = max_duominuo(L, R, mid, end, w); MAX0 = maxL0 + maxR0; if (MAX1 &gt; MAX0) &#123; w[mid] = 1; return MAX1; &#125; else &#123; w[mid] = 0; return MAX0; &#125; &#125; else &#123; w[mid] = 0; maxL0 = max_duominuo(L, R, start, mid, w); maxR0 = max_duominuo(L, R, mid, end, w); MAX0 = maxL0 + maxR0; tmp = L[mid]; L[mid] = R[mid]; R[mid] = tmp; w[mid] = 1; maxL1 = max_duominuo(L, R, start, mid, w); maxR1 = max_duominuo(L, R, mid, end, w); MAX1 = maxL1 + maxR1; if (MAX1 &gt; MAX0) &#123; w[mid] = 1; return MAX1; &#125; else &#123; w[mid] = 0; return MAX0; &#125; &#125; &#125;&#125;int main() &#123; int n = 0,MAX=0; cout &lt;&lt; "请输入骨牌个数n="; cin &gt;&gt; n; if (n &lt;= 1) &#123; cout &lt;&lt; "骨牌过少，无法计算" &lt;&lt; endl; return 0; &#125; cout &lt;&lt; endl; int *L = new int[n+2]; int *R = new int[n+2]; int *w = new int[n+2]; for (int i = 1; i &lt;= n; i++) &#123; cout &lt;&lt; "请输入骨牌S" &lt;&lt; i &lt;&lt; "的左骨牌数值: "; cin &gt;&gt; L[i]; cout &lt;&lt; "请输入骨牌S" &lt;&lt; i &lt;&lt; "的右骨牌数值: "; cin &gt;&gt; R[i]; cout &lt;&lt; endl; if (L[i] &lt;= R[i]) &#123; w[i] = 0; &#125; else &#123; w[i] = 1; &#125; &#125; R[0] = 0; L[0] = 0; L[n + 1] = 0; R[n + 1] = 0; MAX = max_duominuo(L,R,0,n+1,w); cout &lt;&lt; "最大值为：" &lt;&lt; MAX&lt;&lt;endl; cout &lt;&lt; "各个骨牌的状态为："; for (int i = 1; i &lt;=n; i++) &#123; cout &lt;&lt; w[i] &lt;&lt; " "; &#125; return 0;&#125;]]></content>
@@ -133,8 +146,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>两个排序数组的中位数</tag>
         <tag>双游标</tag>
+        <tag>两个排序数组的中位数</tag>
       </tags>
   </entry>
   <entry>
@@ -147,8 +160,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>双游标</tag>
         <tag>无重复字符的最长子串</tag>
+        <tag>双游标</tag>
       </tags>
   </entry>
   <entry>
