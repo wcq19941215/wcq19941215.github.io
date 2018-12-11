@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[【科研笔记】CTeX的套件中MiKTeX版本太低，无法更新包的解决办法]]></title>
     <url>%2F2018%2F12%2F11%2F%E3%80%90%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0%E3%80%91-CTeX%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%2F</url>
-    <content type="text"><![CDATA[当前CTeX套装中的MiKTeX过于陈旧，很多宏包已经无法自动更新了。因此，需要重新安装新版MiKTeX来解决问题。 工具准备：(1)CTeX套装： CTeX_2.9.2.164_Full.exe ，网址：CTeX套装务必选择Full版本 (2)下载最新版 MiKTeX：basic-miktex-2.9.6753-x64.exe ，网址MiKTeX 开始安装：(1)安装CTeX，在如图一步时，不要勾选MiKTeX，因为默认的版本过低，已经没法连接上了，所以自己手动安装最新版。剩下就一路Next即可。 (2)安装下载好的最新版本的MikTeX：注意！！！在选择目录的时候，选择CTeX的安装目录，同时将MikTeX安装的文件夹的名字改为MiKTeX，如下图所示： (3)安装完毕以后，进入如下Miktex的控制台，并更新包。 1PS：在编译时，可能出现报错或者无法生成pdf的情况，往往是因为包没有更新，所以进入Miktex的控制台更新包，然后再shift+ctrl+p再编译运行生成pdf一次就可以解决。]]></content>
+    <content type="text"><![CDATA[当前CTeX套装中的MiKTeX过于陈旧，很多宏包已经无法自动更新了。因此，需要重新安装新版MiKTeX来解决问题。 工具准备：(1)CTeX套装： CTeX_2.9.2.164_Full.exe ，网址：CTeX套装务必选择Full版本 (2)下载最新版 MiKTeX：basic-miktex-2.9.6753-x64.exe ，网址MiKTeX 开始安装：(1)安装CTeX，在如图一步时，不要勾选MiKTeX，因为默认的版本过低，已经没法连接上了，所以自己手动安装最新版。剩下就一路Next即可。 (2)安装下载好的最新版本的MikTeX：注意！！！在选择目录的时候，选择CTeX的安装目录，同时将MikTeX安装的文件夹的名字改为MiKTeX，如下图所示： (3)安装完毕以后，进入如下Miktex的控制台，并更新包。 最后注意PS：在编译时，可能出现报错或者无法生成pdf的情况，往往是因为包没有更新，所以进入Miktex的控制台更新包，然后再shift+ctrl+p再编译运行生成pdf一次就可以解决。]]></content>
       <categories>
         <category>科研笔记</category>
         <category>论文部分</category>

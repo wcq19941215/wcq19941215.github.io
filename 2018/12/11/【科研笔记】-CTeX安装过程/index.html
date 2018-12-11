@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://user-images.githubusercontent.com/35086262/49799794-c9517480-fd80-11e8-9ea2-c60de6233fc5.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/35086262/49799861-fb62d680-fd80-11e8-97e6-bff3cd621508.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/35086262/49800019-71ffd400-fd81-11e8-9804-ddaf4e4cdbb1.png">
-<meta property="og:updated_time" content="2018-12-11T12:21:01.660Z">
+<meta property="og:updated_time" content="2018-12-11T12:26:27.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【科研笔记】CTeX的套件中MiKTeX版本太低，无法更新包的解决办法">
 <meta name="twitter:description" content="当前CTeX套装中的MiKTeX过于陈旧，很多宏包已经无法自动更新了。因此，需要重新安装新版MiKTeX来解决问题。 工具准备：(1)CTeX套装： CTeX_2.9.2.164_Full.exe ，网址：CTeX套装务必选择Full版本 (2)下载最新版 MiKTeX：basic-miktex-2.9.6753-x64.exe ，网址MiKTeX">
@@ -451,15 +451,16 @@
 
       
         <p>当前CTeX套装中的MiKTeX过于陈旧，很多宏包已经无法自动更新了。因此，需要重新安装新版MiKTeX来解决问题。</p>
-<h2 id="工具准备："><a href="#工具准备：" class="headerlink" title="工具准备："></a>工具准备：</h2><p>(1)CTeX套装： CTeX_2.9.2.164_Full.exe ，网址：<a href="https://www.ctex.org/" target="_blank" rel="noopener">CTeX套装</a><br>务必选择Full版本</p>
-<p>(2)下载最新版 MiKTeX：basic-miktex-2.9.6753-x64.exe ，网址<br><a href="https://www.miktex.org/" target="_blank" rel="noopener">MiKTeX</a></p>
+<h2 id="工具准备："><a href="#工具准备：" class="headerlink" title="工具准备："></a>工具准备：</h2><p>(1)CTeX套装： CTeX_2.9.2.164_Full.exe ，网址：<a href="https://www.ctex.org/CTeXDownload" target="_blank" rel="noopener">CTeX套装</a><br>务必选择Full版本</p>
+<p>(2)下载最新版 MiKTeX：basic-miktex-2.9.6753-x64.exe ，网址<br><a href="https://miktex.org/" target="_blank" rel="noopener">MiKTeX</a></p>
 <a id="more"></a>
 <h2 id="开始安装："><a href="#开始安装：" class="headerlink" title="开始安装："></a>开始安装：</h2><p>(1)安装CTeX，在如图一步时，不要勾选MiKTeX，因为默认的版本过低，已经没法连接上了，所以自己手动安装最新版。剩下就一路Next即可。</p>
 <p><img src="https://user-images.githubusercontent.com/35086262/49799794-c9517480-fd80-11e8-9ea2-c60de6233fc5.png" alt="image"></p>
 <p>(2)安装下载好的最新版本的MikTeX：注意！！！在选择目录的时候，选择CTeX的安装目录，同时将MikTeX安装的文件夹的名字改为MiKTeX，如下图所示：</p>
 <p><img src="https://user-images.githubusercontent.com/35086262/49799861-fb62d680-fd80-11e8-97e6-bff3cd621508.png" alt="image"></p>
 <p>(3)安装完毕以后，进入如下Miktex的控制台，并更新包。<br><img src="https://user-images.githubusercontent.com/35086262/49800019-71ffd400-fd81-11e8-9804-ddaf4e4cdbb1.png" alt="image"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS：在编译时，可能出现报错或者无法生成pdf的情况，往往是因为包没有更新，所以进入Miktex的控制台更新包，然后再<span class="built_in">shift</span>+ctrl+p再编译运行生成pdf一次就可以解决。</span><br></pre></td></tr></table></figure>
+<h2 id="最后注意"><a href="#最后注意" class="headerlink" title="最后注意"></a>最后注意</h2><p>PS：在编译时，可能出现报错或者无法生成pdf的情况，往往是因为包没有更新，所以进入Miktex的控制台更新包，然后再shift+ctrl+p再编译运行生成pdf一次就可以解决。</p>
+
       
     </div>
     
@@ -729,7 +730,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#工具准备："><span class="nav-number">1.</span> <span class="nav-text">工具准备：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装："><span class="nav-number">2.</span> <span class="nav-text">开始安装：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#工具准备："><span class="nav-number">1.</span> <span class="nav-text">工具准备：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装："><span class="nav-number">2.</span> <span class="nav-text">开始安装：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后注意"><span class="nav-number">3.</span> <span class="nav-text">最后注意</span></a></li></ol></div>
             
 
           </div>
