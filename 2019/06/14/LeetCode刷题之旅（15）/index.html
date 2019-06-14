@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="LeetCode,正则表达式匹配," />
 
 
 
@@ -95,17 +95,18 @@
 
 
 
-<meta name="description" content="生命不息，学习不停">
+<meta name="description" content="每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&amp;lt;.&amp;gt; 题目:正则表达式匹配123456789101112131415161718192021222324252627282930313233343536373839404142434445给你一个字符串 s 和一个字符规律 p，请你来实">
+<meta name="keywords" content="LeetCode,正则表达式匹配">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode刷题之旅（13）">
+<meta property="og:title" content="LeetCode刷题之旅（15）--正则表达式匹配（困难题）">
 <meta property="og:url" content="http://www.wcqwolflow.com/2019/06/14/LeetCode刷题之旅（15）/index.html">
 <meta property="og:site_name" content="Wang的宝库">
-<meta property="og:description" content="生命不息，学习不停">
+<meta property="og:description" content="每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&amp;lt;.&amp;gt; 题目:正则表达式匹配123456789101112131415161718192021222324252627282930313233343536373839404142434445给你一个字符串 s 和一个字符规律 p，请你来实">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-14T10:20:35.528Z">
+<meta property="og:updated_time" content="2019-06-14T11:08:18.802Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode刷题之旅（13）">
-<meta name="twitter:description" content="生命不息，学习不停">
+<meta name="twitter:title" content="LeetCode刷题之旅（15）--正则表达式匹配（困难题）">
+<meta name="twitter:description" content="每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&amp;lt;.&amp;gt; 题目:正则表达式匹配123456789101112131415161718192021222324252627282930313233343536373839404142434445给你一个字符串 s 和一个字符规律 p，请你来实">
 
 
 
@@ -141,7 +142,7 @@
 
 
 
-  <title>LeetCode刷题之旅（13） | Wang的宝库</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>LeetCode刷题之旅（15）--正则表达式匹配（困难题） | Wang的宝库</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -340,7 +341,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LeetCode刷题之旅（13）</h1>
+          <h1 class="post-title" itemprop="name headline">LeetCode刷题之旅（15）--正则表达式匹配（困难题）</h1>
         
 
         <div class="post-meta">
@@ -363,6 +364,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/LeetCode刷题之旅/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode刷题之旅</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -381,7 +415,7 @@
 
           
           
-             <span id="/2019/06/14/LeetCode刷题之旅（15）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（13）">
+             <span id="/2019/06/14/LeetCode刷题之旅（15）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（15）--正则表达式匹配（困难题）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,7 +446,13 @@
       
 
       
-        
+        <p>每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt;</p>
+<h2 id="题目-正则表达式匹配"><a href="#题目-正则表达式匹配" class="headerlink" title="题目:正则表达式匹配"></a>题目:正则表达式匹配</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。</span><br><span class="line"></span><br><span class="line">'.' 匹配任意单个字符</span><br><span class="line">'*' 匹配零个或多个前面的那一个元素</span><br><span class="line"></span><br><span class="line">所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。</span><br><span class="line"></span><br><span class="line"><span class="section">说明:</span></span><br><span class="line"></span><br><span class="line">s 可能为空，且只包含从 a-z 的小写字母。</span><br><span class="line">p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。</span><br><span class="line">示例 1:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"aa"</span></span><br><span class="line">p = <span class="string">"a"</span></span><br><span class="line"><span class="section">输出: false</span></span><br><span class="line"><span class="section">解释: "a" 无法匹配 "aa" 整个字符串。</span></span><br><span class="line">示例 2:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"aa"</span></span><br><span class="line">p = <span class="string">"a*"</span></span><br><span class="line"><span class="section">输出: true</span></span><br><span class="line"><span class="section">解释: 因为 '*' 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 'a'。因此，字符串 "aa" 可被视为 'a' 重复了一次。</span></span><br><span class="line">示例 3:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"ab"</span></span><br><span class="line">p = <span class="string">".*"</span></span><br><span class="line"><span class="section">输出: true</span></span><br><span class="line"><span class="section">解释: ".*" 表示可匹配零个或多个（'*'）任意字符（'.'）。</span></span><br><span class="line">示例 4:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"aab"</span></span><br><span class="line">p = <span class="string">"c*a*b"</span></span><br><span class="line"><span class="section">输出: true</span></span><br><span class="line"><span class="section">解释: 因为 '*' 表示零个或多个，这里 'c' 为 0 个, 'a' 被重复一次。因此可以匹配字符串 "aab"。</span></span><br><span class="line">示例 5:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"mississippi"</span></span><br><span class="line">p = <span class="string">"mis*is*p*."</span></span><br><span class="line"><span class="section">输出: false</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">递归解决方案：</span><br><span class="line">在想到递归之前，我一直想用最简单的<span class="keyword">if</span> <span class="keyword">else</span>解决，在理清了思路以后，发现每次遇到p[j]==<span class="string">'*'</span>时就进行不下去了，这时我意识到自己的思路还没有理清，所以推倒重来。然后发现，其实可以把思路精简为如下<span class="number">3</span>种情况进行思考：</span><br><span class="line"> <span class="number">1</span>、当p[j]和s[i]都是字母的时候</span><br><span class="line">    此时非常好分析，直接比较即可，如果匹配则j++，i++就可以了</span><br><span class="line"> <span class="number">2</span>、当p[j]=<span class="string">'.'</span>时</span><br><span class="line">    直接跳过p[j]进行到下一个即可，类似情况<span class="number">1</span></span><br><span class="line"> <span class="number">3</span>、当p[j]=<span class="string">'*'</span></span><br><span class="line">    这是最麻烦的一种情况，但是*可以这么理解，它相当于对前一个字符的补充说明，说明前一个字符到底是<span class="number">0</span>个还是多个,那么就可以视为*是和字母或者<span class="string">'.'</span>是绑定在一起的，每当匹配字母或者<span class="string">''</span>就检查后面是否跟着一个<span class="string">'*'</span>。举个栗子，s:abbc和p:ab*c 当检查到第一个b的时候，发现p中的b后有一个*，此时只有两种可能，一是跳过p中的b*，b*的含义相当于有<span class="number">0</span>个b，那么这时就会让s中的第一个b和p中的c匹配，如果不成功，那么就进行第二种情况，b*的含义就为多个b,那么s往后移动一位，p不变，再然后就是s中的b与p当前的b比较，然后重复上述过程跳过b*，s中的c就会与p中的c进行匹配,匹配成功结束. </span><br><span class="line">伪码如下：</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isMatch</span>(<span class="params"><span class="keyword">string</span> s, <span class="keyword">string</span> p</span>) </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        取p的第二个字符p[<span class="number">1</span>],s的第一个字符s[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span>(p[<span class="number">1</span>]==<span class="string">'*'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            上述分析中的两种情况，<span class="number">1</span>是p中的b*视为<span class="number">0</span>个b，所以跳过；<span class="number">2</span>是b*视为多个b，所以s往后移动一位</span><br><span class="line">            <span class="keyword">return</span> isMatch(s,p.substr(<span class="number">2</span>))||(isMatch(s.substr(<span class="number">1</span>),p));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            当p[<span class="number">0</span>]为普通字母或者<span class="string">'.'</span>时，s和p直接后移一位即可</span><br><span class="line">            <span class="keyword">return</span> isMatch(s.substr(<span class="number">1</span>),p.substr(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">具体代码如下，基本就是将伪码就行完善</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isMatch</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> p)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(p.size()&lt;=<span class="number">0</span>)<span class="keyword">return</span> s.size()&lt;=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> match=(s.size()&gt;<span class="number">0</span>&amp;&amp;(s[<span class="number">0</span>]==p[<span class="number">0</span>]||p[<span class="number">0</span>]==<span class="string">'.'</span>));</span><br><span class="line">        <span class="keyword">if</span>((p.size()&gt;<span class="number">1</span>)&amp;&amp;(p[<span class="number">1</span>]==<span class="string">'*'</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> isMatch(s,p.substr(<span class="number">2</span>))||(match&amp;&amp;isMatch(s.substr(<span class="number">1</span>),p));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> match&amp;&amp;isMatch(s.substr(<span class="number">1</span>),p.substr(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">执行用时：<span class="number">548</span> ms</span><br></pre></td></tr></table></figure>
+<p>递归耗时严重，后续会增加其他方法，目前还在思考中。</p>
+
       
     </div>
     
@@ -455,6 +495,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+            <a href="/tags/正则表达式匹配/" rel="tag"># 正则表达式匹配</a>
+          
+        </div>
       
 
       
@@ -556,8 +604,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -598,7 +655,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -649,6 +706,22 @@ var jiathis_config={
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目-正则表达式匹配"><span class="nav-number">1.</span> <span class="nav-text">题目:正则表达式匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路："><span class="nav-number">2.</span> <span class="nav-text">解题思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一："><span class="nav-number">2.1.</span> <span class="nav-text">方法一：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

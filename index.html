@@ -342,7 +342,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/14/LeetCode刷题之旅（15）/" itemprop="url">LeetCode刷题之旅（13）</a></h1>
+                <a class="post-title-link" href="/2019/06/14/LeetCode刷题之旅（15）/" itemprop="url">LeetCode刷题之旅（15）--正则表达式匹配（困难题）</a></h1>
         
 
         <div class="post-meta">
@@ -365,6 +365,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/LeetCode刷题之旅/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode刷题之旅</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -383,7 +416,7 @@
 
           
           
-             <span id="/2019/06/14/LeetCode刷题之旅（15）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（13）">
+             <span id="/2019/06/14/LeetCode刷题之旅（15）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（15）--正则表达式匹配（困难题）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -415,9 +448,15 @@
 
       
         
-          
-            
-          
+          <p>每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt;</p>
+<h2 id="题目-正则表达式匹配"><a href="#题目-正则表达式匹配" class="headerlink" title="题目:正则表达式匹配"></a>题目:正则表达式匹配</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。</span><br><span class="line"></span><br><span class="line">'.' 匹配任意单个字符</span><br><span class="line">'*' 匹配零个或多个前面的那一个元素</span><br><span class="line"></span><br><span class="line">所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。</span><br><span class="line"></span><br><span class="line"><span class="section">说明:</span></span><br><span class="line"></span><br><span class="line">s 可能为空，且只包含从 a-z 的小写字母。</span><br><span class="line">p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。</span><br><span class="line">示例 1:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"aa"</span></span><br><span class="line">p = <span class="string">"a"</span></span><br><span class="line"><span class="section">输出: false</span></span><br><span class="line"><span class="section">解释: "a" 无法匹配 "aa" 整个字符串。</span></span><br><span class="line">示例 2:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"aa"</span></span><br><span class="line">p = <span class="string">"a*"</span></span><br><span class="line"><span class="section">输出: true</span></span><br><span class="line"><span class="section">解释: 因为 '*' 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 'a'。因此，字符串 "aa" 可被视为 'a' 重复了一次。</span></span><br><span class="line">示例 3:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"ab"</span></span><br><span class="line">p = <span class="string">".*"</span></span><br><span class="line"><span class="section">输出: true</span></span><br><span class="line"><span class="section">解释: ".*" 表示可匹配零个或多个（'*'）任意字符（'.'）。</span></span><br><span class="line">示例 4:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"aab"</span></span><br><span class="line">p = <span class="string">"c*a*b"</span></span><br><span class="line"><span class="section">输出: true</span></span><br><span class="line"><span class="section">解释: 因为 '*' 表示零个或多个，这里 'c' 为 0 个, 'a' 被重复一次。因此可以匹配字符串 "aab"。</span></span><br><span class="line">示例 5:</span><br><span class="line"></span><br><span class="line"><span class="section">输入:</span></span><br><span class="line">s = <span class="string">"mississippi"</span></span><br><span class="line">p = <span class="string">"mis*is*p*."</span></span><br><span class="line"><span class="section">输出: false</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/14/LeetCode刷题之旅（15）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2112,7 +2151,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
