@@ -323,6 +323,188 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/10/23/LeetCode刷题之旅（8）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王超群">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://user-images.githubusercontent.com/35086262/49801818-34517a00-fd86-11e8-8655-6e9b5269e8ce.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang的宝库">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/23/LeetCode刷题之旅（8）/" itemprop="url">LeetCode刷题之旅（8）--字符串转整数 (atoi)（中等题）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T21:32:42+08:00">
+                2018-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/LeetCode刷题之旅/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode刷题之旅</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/10/23/LeetCode刷题之旅（8）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.wcqwolflow.com/2018/10/23/LeetCode刷题之旅（8）/" class="cy_cmt_count" data-xid="2018/10/23/LeetCode刷题之旅（8）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/10/23/LeetCode刷题之旅（8）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（8）--字符串转整数 (atoi)（中等题）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt;</p>
+<h2 id="题目-字符串转整数-atoi"><a href="#题目-字符串转整数-atoi" class="headerlink" title="题目:字符串转整数 (atoi)"></a>题目:字符串转整数 (atoi)</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">实现 atoi，将字符串转为整数。</span><br><span class="line"></span><br><span class="line">该函数首先根据需要丢弃任意多的空格字符，直到找到第一个非空格字符为止。如果第一个非空字符是正号或负号，选取该符号，并将其与后面尽可能多的连续的数字组合起来，这部分字符即为整数的值。如果第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。</span><br><span class="line"></span><br><span class="line">字符串可以在形成整数的字符后面包括多余的字符，这些字符可以被忽略，它们对于函数没有影响。</span><br><span class="line"></span><br><span class="line">当字符串中的第一个非空字符序列不是个有效的整数；或字符串为空；或字符串仅包含空白字符时，则不进行转换。</span><br><span class="line"></span><br><span class="line">若函数不能执行有效的转换，返回 <span class="number">0</span>。</span><br><span class="line"></span><br><span class="line">说明：</span><br><span class="line"></span><br><span class="line">假设我们的环境只能存储 <span class="number">32</span> 位有符号整数，其数值范围是</span><br></pre></td></tr></table></figure>
+<p> [$−2^{31}$,  $2^{31} − 1$]<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果数值超过可表示的范围，则返回  INT_MAX (<span class="number">231</span> − <span class="number">1</span>) 或 INT_MIN (−<span class="number">231</span>) 。</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">示例1:</span></span><br><span class="line"><span class="section">输入: "42"</span></span><br><span class="line"><span class="section">输出: 42</span></span><br><span class="line"></span><br><span class="line"><span class="section">示例2:</span></span><br><span class="line"><span class="section">输入: "   -42"</span></span><br><span class="line"><span class="section">输出: -42</span></span><br><span class="line"><span class="section">解释: 第一个非空白字符为 '-', 它是一个负号。</span></span><br><span class="line">     我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。</span><br><span class="line"></span><br><span class="line"><span class="section">示例3:</span></span><br><span class="line"><span class="section">输入: "4193 with words"</span></span><br><span class="line"><span class="section">输出: 4193</span></span><br><span class="line"><span class="section">解释: 转换截止于数字 '3' ，因为它的下一个字符不为数字。</span></span><br><span class="line"></span><br><span class="line"><span class="section">示例4:</span></span><br><span class="line"><span class="section">输入: "words and 987"</span></span><br><span class="line"><span class="section">输出: 0</span></span><br><span class="line"><span class="section">解释: 第一个非空字符是 'w', 但它不是数字或正、负号。</span></span><br><span class="line">     因此无法执行有效的转换。</span><br><span class="line">     </span><br><span class="line"><span class="section">示例5:</span></span><br><span class="line"><span class="section">输入: "-91283472332"</span></span><br><span class="line"><span class="section">输出: -2147483648</span></span><br><span class="line"><span class="section">解释: 数字 "-91283472332" 超过 32 位有符号整数范围。 因此返回 INT_MIN (−231) 。</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/23/LeetCode刷题之旅（8）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/10/22/LeetCode刷题之旅（7）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1937,185 +2119,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/03/10/《ORANGE-s-一个操作系统实现》文件管理（7-2）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王超群">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://user-images.githubusercontent.com/35086262/49801818-34517a00-fd86-11e8-8655-6e9b5269e8ce.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wang的宝库">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/10/《ORANGE-s-一个操作系统实现》文件管理（7-2）/" itemprop="url">《ORANGE-s-一个操作系统实现》文件管理（7-2）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T14:50:05+08:00">
-                2018-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/ORANGE-s的学习/" itemprop="url" rel="index">
-                    <span itemprop="name">ORANGE's的学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/03/10/《ORANGE-s-一个操作系统实现》文件管理（7-2）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.wcqwolflow.com/2018/03/10/《ORANGE-s-一个操作系统实现》文件管理（7-2）/" class="cy_cmt_count" data-xid="2018/03/10/《ORANGE-s-一个操作系统实现》文件管理（7-2）/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-             <span id="/2018/03/10/《ORANGE-s-一个操作系统实现》文件管理（7-2）/" class="leancloud_visitors" data-flag-title="《ORANGE-s-一个操作系统实现》文件管理（7-2）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="在硬盘上制作一个文件系统"><a href="#在硬盘上制作一个文件系统" class="headerlink" title="在硬盘上制作一个文件系统"></a>在硬盘上制作一个文件系统</h1>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/10/《ORANGE-s-一个操作系统实现》文件管理（7-2）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2170,7 +2173,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2192,7 +2195,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">81</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
