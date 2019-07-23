@@ -323,6 +323,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王超群">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://user-images.githubusercontent.com/35086262/49801818-34517a00-fd86-11e8-8655-6e9b5269e8ce.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang的宝库">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/" itemprop="url">《ORANGE-s-一个操作系统实现》保护模式（2-4）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-27T10:29:00+08:00">
+                2018-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/ORANGE-s的学习/" itemprop="url" rel="index">
+                    <span itemprop="name">ORANGE's的学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.wcqwolflow.com/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/" class="cy_cmt_count" data-xid="2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/" class="leancloud_visitors" data-flag-title="《ORANGE-s-一个操作系统实现》保护模式（2-4）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="突破512字节的限制"><a href="#突破512字节的限制" class="headerlink" title="突破512字节的限制"></a>突破512字节的限制</h1><p>前面我们的工作是完成了一个简陋的引导扇区，虽然感觉没做啥，但是我们实际上积累了很多代码，熟悉了保护模式。并且对存储管理、特权级控制等有了一个整体的认识<br>。下面，我们要想办法将自己的OS进入到保护模式，虽然进入保护模式不难，但是总会收到引导扇区512字节的限制，所以下面，我们再建立一个文件，将其通过引导扇区加载入内存，然后将控制权交给它。<br>首先，我们先理清楚一个问题，是不是被引导扇区加载到内存的就是操作系统的内核呢，我们先看看一个操作系统从开机到开始运行要经过一个怎样的过程：引导-&gt;加载内核入内存-&gt;跳入保护模式-&gt;开始执行内核。<br>所以，很明显，在内核开始执行前，不仅仅要加载内核，还有跳入保护模式等等，而这些工作都由引导扇区来做，很有可能不止512字节，所以我们把这个过程交给叫做Loader的模块来做。引导扇区负责把Loader加载到内存，并把控制权交给它，然后其他工作都由Loader来做，而它就没有512字节的限制了。</p>
+<h2 id="FAT12"><a href="#FAT12" class="headerlink" title="FAT12"></a>FAT12</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/27/《ORANGE-s-一个操作系统实现》保护模式（2-4）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/2018/02/25/财富之路-2018最容易赚钱的调查问卷平台/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1745,7 +1925,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1767,7 +1947,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
