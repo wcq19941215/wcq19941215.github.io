@@ -3,6 +3,37 @@
 
 
     
+  <url>
+    <loc>http://www.wcqwolflow.com/about/2021/09/05/%E5%85%B3%E4%BA%8ETensorflow%E3%80%81Pytorch%E3%80%81Ncnn%E4%B8%ADNCHW%E9%80%9A%E9%81%93%E7%9A%84%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2021-09-05T08:45:43.434Z</lastmod>
+    <data>
+        <display>
+        <title>关于Tensorflow、Pytorch、Ncnn中NCHW通道的总结</title>
+        <pubTime>2021-09-05T07:39:03.000Z</pubTime>
+        
+        <tag>Tenforflow通道</tag>
+         
+        <tag>Pytorh通道</tag>
+         
+        <tag>NCHW</tag>
+         
+        <tag>NHWC</tag>
+         
+        <tag>模型通道转换</tag>
+         
+         
+           
+             
+              <breadCrumb title="科研笔记" url="http://www.wcqwolflow.com/about/categories/%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0/"/>
+          
+             
+              <breadCrumb title="论文部分" url="http://www.wcqwolflow.com/about/categories/%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0/%E8%AE%BA%E6%96%87%E9%83%A8%E5%88%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://www.wcqwolflow.com/about/2019/07/23/LeetCode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%97%85%EF%BC%8816%EF%BC%89/</loc>

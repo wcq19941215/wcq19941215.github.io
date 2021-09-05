@@ -323,6 +323,215 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/about/2021/09/05/关于Tensorflow、Pytorch、Ncnn中NCHW通道的总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chaoqun Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://user-images.githubusercontent.com/35086262/49801818-34517a00-fd86-11e8-8655-6e9b5269e8ce.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang 's treasure house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/09/05/关于Tensorflow、Pytorch、Ncnn中NCHW通道的总结/" itemprop="url">关于Tensorflow、Pytorch、Ncnn中NCHW通道的总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-09-05T15:39:03+08:00">
+                2021-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科研笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">科研笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科研笔记/论文部分/" itemprop="url" rel="index">
+                    <span itemprop="name">论文部分</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2021/09/05/关于Tensorflow、Pytorch、Ncnn中NCHW通道的总结/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.wcqwolflow.com/about/2021/09/05/关于Tensorflow、Pytorch、Ncnn中NCHW通道的总结/" class="cy_cmt_count" data-xid="2021/09/05/关于Tensorflow、Pytorch、Ncnn中NCHW通道的总结/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2021/09/05/关于Tensorflow、Pytorch、Ncnn中NCHW通道的总结/" class="leancloud_visitors" data-flag-title="关于Tensorflow、Pytorch、Ncnn中NCHW通道的总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>目前深度学习训练和推理涉及到的输入数据通常为4-D，对应的通道格式主要有两种：</p>
+<ol>
+<li>NCHW</li>
+<li>NHWC </li>
+</ol>
+<p>其中各个字母代表的含义为：</p>
+<ul>
+<li>N - Batch</li>
+<li>C - Channel 特征图通道</li>
+<li>H - Height 特征图高度</li>
+<li>W - Width 特征图宽度</li>
+</ul>
+<p>各个框架和图像处理方式对图像数据要求如下：</p>
+<ul>
+<li>TensorFlow模型默认的输入格式为：RGB  NHWC </li>
+<li>Pytorch模型默认的输入格式为：RGB  NCHW </li>
+<li>ONNX模型默认的输入格式为：RGB  NCHW  fp32</li>
+<li>Caffe 的Blob通道顺序是：NCHW</li>
+<li>TensorRT中通道顺序：NCHW</li>
+<li>OpenCV默认数据格式为：BGR  HWC   uint8</li>
+</ul>
+<p>NCHW 则是 Nvidia cuDNN 默认格式，使用 GPU 加速时用 NCHW 格式速度会更快</p>
+<h2 id="一、基本原理"><a href="#一、基本原理" class="headerlink" title="一、基本原理"></a>一、基本原理</h2><p>如图所示，假定N = 2，C = 16，H = 5，W = 4，<br>无论逻辑表达上是几维的数据，在计算机中存储时都是按照1D来存储的。下面很可以很清楚的看到NCHW和NHWC格式的高位数据，存储为1D时候的样子：<br><img src="https://user-images.githubusercontent.com/35086262/132119924-a284a093-ed7b-44ab-9e17-75cd00133d59.png" alt="NCHWandNHWC"></p>
+<p>总的来说，无论是NCHW还是NHWC或者CHWN，在读取为1D时都是从后往前读，举例来说：</p>
+<ul>
+<li><p>对于NCHW格式的4D数据，首先取W方向数据；然后H方向；再C方向；最后N方向。<br>所以，序列化出1D数据为：<br>000 (W方向) 001 002 003，(H方向) 004 005 … 019，(C方向) 020 … 318 319，(N方向) 320 321 …</p>
+</li>
+<li><p>对于NHWC格式的4D数据，首先取C方向数据；然后W方向；再H方向；最后N方向。<br>所以，序列化出1D数据：<br>000 (C方向) 020 … 300，(W方向) 001 021 … 303，(H方向) 004 … 319，(N方向) 320 340 …</p>
+</li>
+</ul>
+<p>我们通常在输入一张256 * 256分辨率的rgb图像时，对应的4D数据为[N = 1, H=256.h, W=256, C=3],然后对应的1D数据的组织方式如下图所示：<br><img src="https://user-images.githubusercontent.com/35086262/132120513-0a0758d3-02cc-4d32-b2f4-bf226ec72f87.png" alt="Rgb_NCHW_NHWC"></p>
+<p>NCHW: RRRRRRRRRRGGGGGGGGGGBBBBBBBBBB</p>
+<p>NHWC: RBGRGBRGBRGBRGBRGBRGBRGBRGBRGB</p>
+<h2 id="二、java调用tensorflow-pb模型推理的简单运用"><a href="#二、java调用tensorflow-pb模型推理的简单运用" class="headerlink" title="二、java调用tensorflow pb模型推理的简单运用"></a>二、java调用tensorflow pb模型推理的简单运用</h2><p>第一种，若 Tensor.create(input) 输入的input是4维数组，那么按照tensorflow要求的NHWC的格式进行数据的组织即可：<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Imgproc.resize(src, dst, new Size(h, w)); // <span class="number">1</span>, h, w,<span class="number">3</span></span><br><span class="line">float input<span class="string">[]</span><span class="string">[]</span><span class="string">[]</span><span class="string">[]</span> = new float<span class="string">[1]</span><span class="string">[h]</span><span class="string">[w]</span><span class="string">[3]</span>;</span><br><span class="line">System.out.println(dst.rows());</span><br><span class="line">System.out.println(dst.cols());</span><br><span class="line">for (int i = <span class="number">0</span>; i &lt; dst.cols(); i++) &#123;</span><br><span class="line">    for (int j = <span class="number">0</span>; j &lt; dst.rows(); j++) &#123;</span><br><span class="line">        double<span class="string">[]</span> pixel = dst.get(j, i);</span><br><span class="line">        input<span class="string">[0]</span><span class="string">[i]</span><span class="string">[j]</span><span class="string">[0]</span> = (float) (<span class="number">255</span> - pixel<span class="string">[0]</span>);</span><br><span class="line">        input<span class="string">[0]</span><span class="string">[i]</span><span class="string">[j]</span><span class="string">[1]</span> = (float) (<span class="number">255</span> - pixel<span class="string">[1]</span>);</span><br><span class="line">        input<span class="string">[0]</span><span class="string">[i]</span><span class="string">[j]</span><span class="string">[2]</span> = (float) (<span class="number">255</span> - pixel<span class="string">[2]</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Tensor input_X = Tensor.create(input);</span><br></pre></td></tr></table></figure></p>
+<p>第二种，若 Tensor.create(input) 输入的input是1维数组，那么按照前面转1D数据的基本原理，将NHWC的格式进行转换后再组织即可：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Imgproc.resize(src, dst, new Size(h, w)); <span class="comment">// 1, h, w,3</span></span><br><span class="line"><span class="type">float</span> input[] = new <span class="type">float</span>[<span class="number">1</span> * h * w * <span class="number">3</span>];</span><br><span class="line">System.out.println(dst.rows());</span><br><span class="line">System.out.println(dst.cols());</span><br><span class="line">int index = <span class="number">0</span>；</span><br><span class="line">for (int i = <span class="number">0</span>; i &lt; dst.cols(); i++) &#123;</span><br><span class="line">    for (int j = <span class="number">0</span>; j &lt; dst.rows(); j++) &#123;</span><br><span class="line">        double[] pixel = dst.get(j, i);</span><br><span class="line">        input[index++] = (<span class="type">float</span>) (<span class="number">255</span> - pixel[<span class="number">0</span>]);</span><br><span class="line">        input[index++] = (<span class="type">float</span>) (<span class="number">255</span> - pixel[<span class="number">1</span>]);</span><br><span class="line">        input[index++] = (<span class="type">float</span>) (<span class="number">255</span> - pixel[<span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Tensor input_X = Tensor.create(shape = (<span class="number">1</span>,h,w,<span class="number">3</span>),input);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/about/2019/07/23/LeetCode刷题之旅（16）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1932,186 +2141,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.wcqwolflow.com/about/2018/10/26/LeetCode刷题之旅（10）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chaoqun Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://user-images.githubusercontent.com/35086262/49801818-34517a00-fd86-11e8-8655-6e9b5269e8ce.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wang 's treasure house">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/26/LeetCode刷题之旅（10）/" itemprop="url">LeetCode刷题之旅（10）--三数之和（中等题）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-26T20:13:07+08:00">
-                2018-10-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/LeetCode刷题之旅/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode刷题之旅</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/10/26/LeetCode刷题之旅（10）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.wcqwolflow.com/about/2018/10/26/LeetCode刷题之旅（10）/" class="cy_cmt_count" data-xid="2018/10/26/LeetCode刷题之旅（10）/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-             <span id="/2018/10/26/LeetCode刷题之旅（10）/" class="leancloud_visitors" data-flag-title="LeetCode刷题之旅（10）--三数之和（中等题）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>每天属于自己的时间，就是慢慢的刷题的时候，啥也不用想，沉浸在写出最佳程序的过程中，沉浸在自己阅读大牛代码，提升自我的过程中，那种满足感，真的很让人享受&lt;.&gt;</p>
-<h2 id="题目-三数之和"><a href="#题目-三数之和" class="headerlink" title="题目:三数之和"></a>题目:三数之和</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = <span class="number">0</span> ？找出所有满足条件且不重复的三元组。</span><br><span class="line"></span><br><span class="line">注意：答案中不可以包含重复的三元组。</span><br><span class="line"></span><br><span class="line">例如, 给定数组 nums = [<span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">-1</span>, <span class="number">-4</span>]，</span><br><span class="line"></span><br><span class="line">满足要求的三元组集合为：</span><br><span class="line">[</span><br><span class="line">  [<span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">2</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/26/LeetCode刷题之旅（10）/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2166,7 +2195,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2188,7 +2217,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
